@@ -34,16 +34,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
       <head>
-        <meta name="theme-color" content="#F5F4EF" />
+        <meta name="theme-color" content="#173F35" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
           rel="stylesheet"
         />
         <link rel="stylesheet" href="/styles-v2.css" />
       </head>
-      <body data-whatsapp-number="">
+      <body data-whatsapp-number="593989009150">
         {children}
         <script src="/script-v2.js" defer />
       </body>
