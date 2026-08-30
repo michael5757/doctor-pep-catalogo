@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.next/
+.vinext/
+.wrangler/
+.open-next/
+.DS_Store
+*.log
