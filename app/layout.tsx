@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 const title = "Doctor Pep | Catálogo y atención personalizada";
 const description =
-  "Revisa presentaciones, cuidados de conservación y consulta disponibilidad directamente por WhatsApp.";
+  "Explora el catálogo Doctor Pep, compara presentaciones y prepara una consulta personalizada por WhatsApp.";
 
 export const metadata: Metadata = {
   title,
