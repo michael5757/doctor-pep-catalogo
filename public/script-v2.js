@@ -137,8 +137,12 @@
         : "Añadir " + data.name + " " + data.presentations[0] + " a la lista"
     );
 
+    const availability = document.createElement("span");
+    availability.className = "availability-tag";
+    availability.innerHTML = '<i aria-hidden="true"></i> Disponibilidad por confirmar';
+
     actions.append(viewButton, addButton);
-    card.appendChild(actions);
+    card.append(availability, actions);
   }
 
   sourceCards.forEach(enhanceCard);
@@ -203,6 +207,8 @@
   const clearConsultationButton = $("#clearConsultation");
   const listTrigger = $("#listTrigger");
   const listTriggerCount = $("#listTriggerCount");
+  const mobileListTrigger = $("#mobileListTrigger");
+  const mobileListCount = $("#mobileListCount");
   let consultation = [];
   let drawerTrigger = null;
   let clearConfirmationTimer = 0;
@@ -299,9 +305,16 @@
       whatsappCount.hidden = total === 0;
     }
     if (listTriggerCount) listTriggerCount.textContent = String(total);
+    if (mobileListCount) mobileListCount.textContent = String(total);
     if (listTrigger) {
       listTrigger.classList.toggle("has-items", total > 0);
       listTrigger.setAttribute(
+        "aria-label",
+        "Abrir mi lista, " + total + (total === 1 ? " producto" : " productos")
+      );
+    }
+    if (mobileListTrigger) {
+      mobileListTrigger.setAttribute(
         "aria-label",
         "Abrir mi lista, " + total + (total === 1 ? " producto" : " productos")
       );
@@ -469,6 +482,11 @@
   if (listTrigger) {
     listTrigger.addEventListener("click", function () {
       openConsultationDrawer(listTrigger);
+    });
+  }
+  if (mobileListTrigger) {
+    mobileListTrigger.addEventListener("click", function () {
+      openConsultationDrawer(mobileListTrigger);
     });
   }
   if (consultationClose && consultationDrawer) {
@@ -708,6 +726,10 @@
 
   /* ---------- Búsqueda y filtros ---------- */
   const catalogSearch = $("#catalogSearch");
+  const heroCatalogSearch = $("#heroCatalogSearch");
+  const heroSearchForm = $("#heroSearchForm");
+  const quickSearchButtons = $$("[data-quick-search]");
+  const mobileSearchTrigger = $("#mobileSearchTrigger");
   const clearSearch = $("#clearSearch");
   const resetCatalog = $("#resetCatalog");
   const resultCount = $("#catalogResultCount");
@@ -776,6 +798,7 @@
   function resetCatalogFilters() {
     activeCategory = "all";
     if (catalogSearch) catalogSearch.value = "";
+    if (heroCatalogSearch) heroCatalogSearch.value = "";
     filterChips.forEach(function (chip) {
       const active = chip.dataset.categoryFilter === "all";
       chip.classList.toggle("is-active", active);
@@ -787,6 +810,7 @@
 
   if (catalogSearch) {
     catalogSearch.addEventListener("input", function () {
+      if (heroCatalogSearch) heroCatalogSearch.value = catalogSearch.value;
       const visible = applyCatalogFilters();
       window.clearTimeout(searchTrackingTimer);
       searchTrackingTimer = window.setTimeout(function () {
@@ -797,9 +821,56 @@
       }, 500);
     });
   }
+  if (heroCatalogSearch) {
+    heroCatalogSearch.addEventListener("input", function () {
+      if (catalogSearch) catalogSearch.value = heroCatalogSearch.value;
+      applyCatalogFilters();
+    });
+  }
+  if (heroSearchForm) {
+    heroSearchForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (catalogSearch && heroCatalogSearch) {
+        catalogSearch.value = heroCatalogSearch.value;
+      }
+      const visible = applyCatalogFilters();
+      $("#catalogo-completo").scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
+      window.setTimeout(function () {
+        if (catalogSearch) catalogSearch.focus({ preventScroll: true });
+      }, prefersReducedMotion ? 0 : 450);
+      trackEvent("hero_search", {
+        query_length: heroCatalogSearch.value.trim().length,
+        result_count: visible,
+      });
+    });
+  }
+  quickSearchButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const value = button.dataset.quickSearch || "";
+      if (heroCatalogSearch) heroCatalogSearch.value = value;
+      if (catalogSearch) catalogSearch.value = value;
+      applyCatalogFilters();
+      heroSearchForm.requestSubmit();
+    });
+  });
+  if (mobileSearchTrigger) {
+    mobileSearchTrigger.addEventListener("click", function () {
+      $("#catalogo-completo").scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
+      window.setTimeout(function () {
+        if (catalogSearch) catalogSearch.focus({ preventScroll: true });
+      }, prefersReducedMotion ? 0 : 450);
+    });
+  }
   if (clearSearch) {
     clearSearch.addEventListener("click", function () {
       catalogSearch.value = "";
+      if (heroCatalogSearch) heroCatalogSearch.value = "";
       applyCatalogFilters();
       catalogSearch.focus();
     });

@@ -59,14 +59,25 @@
             <span class="hero-location"><i aria-hidden="true"></i> Atención en Ecuador</span>
           </div>
           <h1 class="hero-title reveal">Péptidos, fórmulas y accesorios <em>sin perderte.</em></h1>
-          <p class="hero-sub reveal">Busca por producto o concentración, selecciona una presentación y prepara tu lista para consultar disponibilidad.</p>
-          <div class="hero-actions reveal">
-            <a href="#catalogo-completo" class="btn btn-outline-light">Buscar un producto <span class="btn-arrow">↓</span></a>
-          </div>
+          <p class="hero-sub reveal">Encuentra una presentación, revisa sus datos y prepara una sola consulta para confirmar disponibilidad.</p>
+          <form class="hero-search reveal" id="heroSearchForm" role="search">
+            <label for="heroCatalogSearch">¿Qué estás buscando?</label>
+            <div class="hero-search-field">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 4.1 4.1"/></svg>
+              <input id="heroCatalogSearch" type="search" placeholder="Ej. NAD, Tirzepatide o 10 mg" autocomplete="off" />
+              <button type="submit">Encontrar</button>
+            </div>
+            <div class="hero-quick-searches" aria-label="Búsquedas rápidas">
+              <span>Accesos rápidos</span>
+              <button type="button" data-quick-search="Tirzepatide">Tirzepatide</button>
+              <button type="button" data-quick-search="NAD">NAD</button>
+              <button type="button" data-quick-search="BPC-157">BPC-157</button>
+            </div>
+          </form>
           <ul class="hero-trust reveal" aria-label="Ventajas de la atención">
-            <li><span aria-hidden="true">✓</span> Catálogo ordenado</li>
-            <li><span aria-hidden="true">✓</span> Presentaciones claras</li>
-            <li><span aria-hidden="true">✓</span> Un solo mensaje</li>
+            <li><span aria-hidden="true">✓</span> Atención en Ecuador</li>
+            <li><span aria-hidden="true">✓</span> Conservación 2–8 °C</li>
+            <li><span aria-hidden="true">✓</span> Confirmación antes del pedido</li>
           </ul>
         </div>
 
@@ -76,6 +87,10 @@
                  srcset="assets/hero-editorial-720.webp 720w, assets/hero-editorial-1280.webp 1280w"
                  sizes="(max-width: 700px) 92vw, (max-width: 1100px) 48vw, 560px"
                  alt="Mesa de laboratorio con viales y libreta" width="1280" height="853" fetchpriority="high" />
+            <figcaption>
+              <span>Catálogo organizado</span>
+              <strong>36 opciones para consultar</strong>
+            </figcaption>
           </figure>
         </div>
       </div>
@@ -459,6 +474,11 @@
         <span class="dialog-category" id="dialogCategory"></span>
         <h2 id="dialogTitle"></h2>
         <p class="dialog-description" id="dialogDescription"></p>
+        <ul class="dialog-facts" aria-label="Información general de la consulta">
+          <li><span aria-hidden="true"></span><strong>Disponibilidad</strong> por confirmar</li>
+          <li><span aria-hidden="true"></span><strong>Conservación</strong> 2–8 °C</li>
+          <li><span aria-hidden="true"></span><strong>Atención</strong> personalizada</li>
+        </ul>
         <form id="dialogForm">
           <fieldset class="dialog-options">
             <legend>Elige una presentación</legend>
@@ -549,6 +569,18 @@
     <span id="toastMessage"></span>
     <button type="button" id="toastOpenList">Ver lista</button>
   </div>
+
+  <nav class="mobile-dock" aria-label="Acciones rápidas">
+    <button type="button" id="mobileSearchTrigger">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 4.1 4.1"/></svg>
+      <span>Buscar</span>
+    </button>
+    <button type="button" id="mobileListTrigger">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+      <span>Mi lista</span>
+      <strong id="mobileListCount" aria-hidden="true">0</strong>
+    </button>
+  </nav>
 
   <a href="https://wa.me/593989009150?text=Hola%2C%20quisiera%20consultar%20la%20disponibilidad%20del%20cat%C3%A1logo%20Doctor%20Pep."
      class="whatsapp-float whatsapp-link" target="_blank" rel="noopener noreferrer" aria-label="Consultar por WhatsApp">

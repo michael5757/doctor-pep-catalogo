@@ -47,6 +47,6 @@ for (const asset of [
   );
 }
 await cp(
-  resolve(projectRoot, "assets", "og-doctor-pep-v2.png"),
+  resolve(projectRoot, "assets", "og-doctor-pep-v3.png"),
   resolve(projectRoot, "public", "og.png")
 );

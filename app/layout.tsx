@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og.png",
-        width: 1732,
-        height: 908,
+        width: 1731,
+        height: 909,
         alt: "Doctor Pep — Catálogo y atención personalizada",
       },
     ],
