@@ -33,6 +33,6 @@ await cp(resolve(projectRoot, "assets"), resolve(projectRoot, "public", "assets"
   force: true,
 });
 await cp(
-  resolve(projectRoot, "assets", "og-doctor-pep.png"),
+  resolve(projectRoot, "assets", "og-doctor-pep-v2.png"),
   resolve(projectRoot, "public", "og.png")
 );

@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og.png",
-        width: 1740,
-        height: 912,
+        width: 1732,
+        height: 908,
         alt: "Doctor Pep — Catálogo y atención personalizada",
       },
     ],
@@ -34,7 +34,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
       <head>
-        <meta name="theme-color" content="#173F35" />
+        <meta name="theme-color" content="#071F54" />
+        <link rel="icon" type="image/webp" href="/assets/doctor-pep-logo.webp" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
