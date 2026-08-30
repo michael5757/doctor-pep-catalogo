@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Doctor Pep | Catálogo y atención personalizada</title>
   <meta name="description" content="Explora el catálogo Doctor Pep, compara presentaciones y prepara una consulta personalizada por WhatsApp." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#071F54" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_EC" />
+  <meta property="og:site_name" content="Doctor Pep" />
   <meta property="og:title" content="Doctor Pep | Catálogo y atención personalizada" />
   <meta property="og:description" content="Explora productos, compara presentaciones y prepara tu consulta con Doctor Pep." />
   <meta name="twitter:card" content="summary_large_image" />
@@ -17,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles-v2.css" />
+  <link rel="stylesheet" href="styles-v3.css" />
 </head>
 <body data-whatsapp-number="593989009150">
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -33,11 +35,14 @@
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
         <a href="#inicio" class="nav-link">Inicio</a>
-        <a href="#indice" class="nav-link">Categorías</a>
         <a href="#catalogo-completo" class="nav-link">Catálogo</a>
         <a href="#como-comprar" class="nav-link">Cómo comprar</a>
         <a href="#preguntas" class="nav-link">Preguntas</a>
       </nav>
+      <button type="button" class="list-trigger" id="listTrigger" aria-haspopup="dialog" aria-controls="consultationDrawer">
+        <span>Mi lista</span>
+        <strong id="listTriggerCount" aria-hidden="true">0</strong>
+      </button>
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
@@ -50,109 +55,30 @@
       <div class="hero-inner">
         <div class="hero-content">
           <div class="hero-eyebrow reveal">
-            <span>Catálogo 2026</span>
+            <span>Catálogo Doctor Pep</span>
             <span class="hero-location"><i aria-hidden="true"></i> Atención en Ecuador</span>
           </div>
-          <h1 class="hero-title reveal">Encuentra la presentación que <em>estás buscando.</em></h1>
-          <p class="hero-sub reveal">Explora el catálogo Doctor Pep, compara formatos y prepara tu consulta de manera simple, clara y ordenada.</p>
+          <h1 class="hero-title reveal">Péptidos, fórmulas y accesorios <em>sin perderte.</em></h1>
+          <p class="hero-sub reveal">Busca por producto o concentración, selecciona una presentación y prepara tu lista para consultar disponibilidad.</p>
           <div class="hero-actions reveal">
-            <a href="#catalogo-completo" class="btn btn-outline-light">Ver catálogo <span class="btn-arrow">↓</span></a>
+            <a href="#catalogo-completo" class="btn btn-outline-light">Buscar un producto <span class="btn-arrow">↓</span></a>
           </div>
           <ul class="hero-trust reveal" aria-label="Ventajas de la atención">
-            <li><span aria-hidden="true">✓</span> Busca por nombre</li>
-            <li><span aria-hidden="true">✓</span> Compara formatos</li>
-            <li><span aria-hidden="true">✓</span> Arma tu consulta</li>
+            <li><span aria-hidden="true">✓</span> Catálogo ordenado</li>
+            <li><span aria-hidden="true">✓</span> Presentaciones claras</li>
+            <li><span aria-hidden="true">✓</span> Un solo mensaje</li>
           </ul>
         </div>
 
-        <div class="hero-gallery reveal" aria-label="Catálogo y entorno de laboratorio">
+        <div class="hero-gallery reveal">
           <figure class="hero-main-image">
-            <img src="assets/hero-editorial-v2.png"
-                 alt="Mesa de laboratorio cálida con viales y libreta de consulta" width="1536" height="1024" fetchpriority="high" />
+            <img src="assets/hero-editorial-1280.webp"
+                 srcset="assets/hero-editorial-720.webp 720w, assets/hero-editorial-1280.webp 1280w"
+                 sizes="(max-width: 700px) 92vw, (max-width: 1100px) 48vw, 560px"
+                 alt="Mesa de laboratorio con viales y libreta" width="1280" height="853" fetchpriority="high" />
           </figure>
-          <figure class="hero-detail-image">
-            <!-- Fotografía: Julia Koblitz / Unsplash -->
-            <img src="assets/hero-lab.jpg" alt="Detalle de un frasco en un entorno clínico" width="1200" height="900" />
-          </figure>
-          <div class="hero-brand-mark">
-            <img src="assets/doctor-pep-logo.webp" alt="Logo oficial de Doctor Pep" width="640" height="640" />
-          </div>
-          <div class="hero-note">
-            <span class="hero-note-dot" aria-hidden="true"></span>
-            <div>
-              <small>Consulta organizada</small>
-              <strong>Presentaciones claras</strong>
-            </div>
-          </div>
         </div>
       </div>
-    </section>
-
-    <!-- ===== Índice ===== -->
-    <section class="section index-section" id="indice">
-      <div class="section-head reveal">
-        <span class="section-kicker">Explora por categoría</span>
-        <h2>Un catálogo más fácil de recorrer.</h2>
-        <p>Entra por el objetivo que buscas, compara presentaciones y consulta disponibilidad sin perderte entre términos técnicos.</p>
-      </div>
-      <div class="index-grid">
-        <a href="#metabolismo" class="index-card index-card-visual reveal" style="--i:0">
-          <span class="index-photo"><img src="assets/hero-editorial-v2.png" alt="Viales sobre una mesa de laboratorio" width="1536" height="1024" loading="lazy" /></span>
-          <span class="index-shade" aria-hidden="true"></span>
-          <span class="index-num">01</span>
-          <span class="index-content"><h3>Metabolismo &amp; control de peso</h3><p>Formatos y presentaciones de la categoría.</p><span class="index-more">Explorar <b>→</b></span></span>
-        </a>
-        <a href="#energia" class="index-card index-card-visual reveal" style="--i:1">
-          <span class="index-photo"><img src="assets/vitality-editorial-v2.png" alt="Rutina de recuperación y bienestar después del ejercicio" width="1536" height="1024" loading="lazy" /></span>
-          <span class="index-shade" aria-hidden="true"></span>
-          <span class="index-num">02</span>
-          <span class="index-content"><h3>Vitalidad &amp; recuperación</h3><p>Energía, rendimiento y recuperación.</p><span class="index-more">Explorar <b>→</b></span></span>
-        </a>
-        <a href="#antienvejecimiento" class="index-card index-card-visual reveal" style="--i:2">
-          <span class="index-photo"><img src="assets/wellness-editorial-v2.png" alt="Bodegón de cuidado con frasco ámbar y materiales naturales" width="1536" height="1024" loading="lazy" /></span>
-          <span class="index-shade" aria-hidden="true"></span>
-          <span class="index-num">03</span>
-          <span class="index-content"><h3>Bienestar &amp; cuidado</h3><p>Longevidad, piel y cuidado integral.</p><span class="index-more">Explorar <b>→</b></span></span>
-        </a>
-        <a href="#accesorios" class="index-card index-card-visual reveal" style="--i:3">
-          <span class="index-photo"><img src="assets/hero-lab.jpg" alt="Material de laboratorio y frasco clínico" width="1200" height="900" loading="lazy" /></span>
-          <span class="index-shade" aria-hidden="true"></span>
-          <span class="index-num">04</span>
-          <span class="index-content"><h3>Agua &amp; accesorios</h3><p>Bac Water, jeringas y complementos.</p><span class="index-more">Explorar <b>→</b></span></span>
-        </a>
-        <a href="#informacion" class="index-card index-card-info reveal" style="--i:4">
-          <span class="index-num">Guía</span>
-          <span class="index-content"><span class="info-mini-icon" aria-hidden="true">i</span><h3>Antes de realizar una consulta</h3><p>Revisa conservación, formatos e información responsable.</p><span class="index-more">Leer información <b>→</b></span></span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ===== Catálogo ===== -->
-    <section class="catalog-intro" id="catalogo">
-      <div class="section-head reveal">
-        <span class="section-kicker">Catálogo Doctor Pep</span>
-        <h2>Productos organizados para elegir mejor</h2>
-        <p>Descubre opciones destacadas, revisa cada presentación y añade tus productos a una consulta antes de escribir.</p>
-      </div>
-      <div class="catalog-note reveal">
-        <div class="catalog-note-copy">
-          <span>Una experiencia más rápida</span>
-          <p>Usa el buscador, filtra por categoría y abre la ficha de cada producto. La disponibilidad se confirma antes de cerrar el pedido.</p>
-        </div>
-        <a href="#catalogo-completo" class="btn">Buscar un producto <span aria-hidden="true">↓</span></a>
-      </div>
-    </section>
-
-    <!-- ===== Selección destacada ===== -->
-    <section class="section featured-section" aria-labelledby="destacados-title">
-      <div class="section-head section-head-split reveal">
-        <div>
-          <span class="section-kicker">Selección Doctor Pep</span>
-          <h2 id="destacados-title">Productos destacados</h2>
-        </div>
-        <p>Una entrada rápida a algunas de las presentaciones más representativas del catálogo.</p>
-      </div>
-      <div class="featured-grid" id="featuredGrid" aria-live="polite"></div>
     </section>
 
     <!-- ===== Buscador y filtros ===== -->
@@ -190,19 +116,12 @@
 
     <!-- 01 · Metabolismo -->
     <section class="section category category-cobalt" id="metabolismo">
-      <div class="category-intro-grid reveal">
-        <div class="category-head">
-          <span class="cat-num">01</span>
-          <div>
-            <span class="category-label">Colección</span>
-            <h2>Metabolismo y control de peso</h2>
-            <p>Compara las presentaciones de esta categoría y consulta disponibilidad directamente con nuestro equipo.</p>
-          </div>
+      <div class="category-head reveal">
+        <div>
+          <h2>Metabolismo y control de peso</h2>
+          <p>Compara las presentaciones de esta categoría y consulta disponibilidad directamente con nuestro equipo.</p>
         </div>
-        <figure class="category-editorial">
-          <img src="assets/hero-editorial-v2.png" alt="Viales genéricos y libreta en una mesa de laboratorio" width="1536" height="1024" loading="lazy" />
-          <figcaption>Información organizada para una consulta más clara.</figcaption>
-        </figure>
+        <span class="category-count">2 productos</span>
       </div>
       <div class="feature-grid">
         <article class="feature-card tilt-card reveal" style="--i:0">
@@ -237,19 +156,12 @@
 
     <!-- 02 · Energía y masa muscular -->
     <section class="section category category-navy" id="energia">
-      <div class="category-intro-grid category-intro-reverse reveal">
-        <div class="category-head">
-          <span class="cat-num">02</span>
-          <div>
-            <span class="category-label">Colección</span>
-            <h2>Vitalidad, rendimiento y recuperación</h2>
-            <p>Una selección organizada para revisar formatos y conocer la información general de cada opción.</p>
-          </div>
+      <div class="category-head reveal">
+        <div>
+          <h2>Vitalidad, rendimiento y recuperación</h2>
+          <p>Una selección organizada para revisar formatos y conocer la información general de cada opción.</p>
         </div>
-        <figure class="category-editorial">
-          <img src="assets/vitality-editorial-v2.png" alt="Persona ajustando su calzado después de una rutina de ejercicio" width="1536" height="1024" loading="lazy" />
-          <figcaption>Bienestar cotidiano, sin perder la información importante.</figcaption>
-        </figure>
+        <span class="category-count">11 productos</span>
       </div>
       <div class="product-grid">
         <article class="product-card tilt-card reveal" style="--i:0">
@@ -312,19 +224,12 @@
 
     <!-- 03 · Antienvejecimiento -->
     <section class="section category category-turquoise" id="antienvejecimiento">
-      <div class="category-intro-grid reveal">
-        <div class="category-head">
-          <span class="cat-num">03</span>
-          <div>
-            <span class="category-label">Colección</span>
-            <h2>Bienestar, longevidad y cuidado</h2>
-            <p>Presentaciones asociadas al bienestar integral, cuidado de la piel y acompañamiento de distintos objetivos.</p>
-          </div>
+      <div class="category-head reveal">
+        <div>
+          <h2>Bienestar, longevidad y cuidado</h2>
+          <p>Presentaciones asociadas al bienestar integral, cuidado de la piel y acompañamiento de distintos objetivos.</p>
         </div>
-        <figure class="category-editorial">
-          <img src="assets/wellness-editorial-v2.png" alt="Frasco ámbar de cuidado junto a cerámica y elementos naturales" width="1536" height="1024" loading="lazy" />
-          <figcaption>Una estética más humana para una elección más tranquila.</figcaption>
-        </figure>
+        <span class="category-count">13 productos</span>
       </div>
       <div class="product-grid">
         <article class="product-card tilt-card reveal" style="--i:0">
@@ -397,19 +302,12 @@
 
     <!-- 04 · Agua bacteriostática y accesorios -->
     <section class="section category category-cobalt" id="accesorios">
-      <div class="category-intro-grid category-intro-reverse reveal">
-        <div class="category-head">
-          <span class="cat-num">04</span>
-          <div>
-            <span class="category-label">Complementos</span>
-            <h2>Agua bacteriostática y accesorios</h2>
-            <p>Formatos complementarios y accesorios disponibles para consulta.</p>
-          </div>
+      <div class="category-head reveal">
+        <div>
+          <h2>Agua bacteriostática y accesorios</h2>
+          <p>Formatos complementarios y accesorios disponibles para consulta.</p>
         </div>
-        <figure class="category-editorial">
-          <img src="assets/hero-lab.jpg" alt="Frasco y material en un entorno clínico" width="1200" height="900" loading="lazy" />
-          <figcaption>Confirma siempre el formato antes de realizar un pedido.</figcaption>
-        </figure>
+        <span class="category-count">10 artículos</span>
       </div>
 
       <h3 class="sub-heading reveal">Agua bacteriostática <span>(Bac Water)</span></h3>
@@ -471,107 +369,44 @@
       </div>
     </section>
 
-    <!-- ===== Mi consulta ===== -->
-    <section class="section consultation-section" id="mi-consulta" aria-labelledby="consultation-title">
-      <div class="consultation-shell reveal">
-        <div class="consultation-heading">
-          <div>
-            <span class="section-kicker">Tu selección</span>
-            <h2 id="consultation-title">Prepara tu consulta</h2>
-            <p>Añade productos y presentaciones. Cuando esté lista, el único botón de WhatsApp —abajo— enviará el resumen.</p>
-          </div>
-          <span class="consultation-total" id="consultationTotal">0 productos</span>
-        </div>
-        <div class="consultation-empty" id="consultationEmpty">
-          <span class="consultation-empty-icon" aria-hidden="true">+</span>
-          <div>
-            <strong>Aún no has añadido productos</strong>
-            <p>Explora el catálogo y usa “Añadir a consulta” para crear tu lista.</p>
-          </div>
-        </div>
-        <ul class="consultation-list" id="consultationList" aria-label="Productos añadidos a la consulta"></ul>
-        <p class="consultation-status sr-only" id="consultationStatus" role="status" aria-live="polite"></p>
-      </div>
-    </section>
-
     <!-- ===== Cómo comprar ===== -->
     <section class="section buying-section" id="como-comprar" aria-labelledby="buying-title">
       <div class="section-head section-head-split reveal">
         <div>
-          <span class="section-kicker">Simple y acompañado</span>
           <h2 id="buying-title">Cómo preparar tu pedido</h2>
         </div>
-        <p>El catálogo organiza tu consulta; los detalles finales se confirman directamente antes de cerrar el pedido.</p>
+        <p>Busca, selecciona y envía tu lista desde el único botón de WhatsApp.</p>
       </div>
       <ol class="buying-steps">
         <li class="buying-step reveal" style="--i:0">
-          <span>01</span>
-          <div><h3>Explora</h3><p>Busca por nombre o recorre las categorías.</p></div>
+          <span aria-hidden="true">1</span>
+          <div><h3>Busca</h3><p>Escribe un nombre, concentración o elige una categoría.</p></div>
         </li>
         <li class="buying-step reveal" style="--i:1">
-          <span>02</span>
-          <div><h3>Compara</h3><p>Abre la ficha y revisa las presentaciones disponibles en el catálogo.</p></div>
+          <span aria-hidden="true">2</span>
+          <div><h3>Selecciona</h3><p>Elige presentación y cantidad antes de añadir.</p></div>
         </li>
         <li class="buying-step reveal" style="--i:2">
-          <span>03</span>
-          <div><h3>Selecciona</h3><p>Añade productos y cantidades a tu lista de consulta.</p></div>
+          <span aria-hidden="true">3</span>
+          <div><h3>Revisa</h3><p>Abre “Mi lista” para editar, eliminar o vaciar productos.</p></div>
         </li>
         <li class="buying-step reveal" style="--i:3">
-          <span>04</span>
+          <span aria-hidden="true">4</span>
           <div><h3>Confirma</h3><p>Usa el botón flotante para consultar disponibilidad, entrega y pago.</p></div>
         </li>
       </ol>
-    </section>
-
-    <!-- ===== Datos de compra ===== -->
-    <section class="commerce-info" aria-labelledby="commerce-title">
-      <div class="commerce-info-inner">
-        <div class="commerce-info-copy reveal">
-          <span class="section-kicker">Antes de confirmar</span>
-          <h2 id="commerce-title">Todo lo importante, sin letras pequeñas</h2>
-          <p>La información variable se confirma para cada pedido. Así evitamos mostrar datos desactualizados.</p>
-        </div>
-        <div class="commerce-info-grid">
-          <article class="commerce-info-card reveal" style="--i:0">
-            <span aria-hidden="true">01</span><h3>Disponibilidad</h3><p>Se confirma antes de cerrar el pedido.</p>
-          </article>
-          <article class="commerce-info-card reveal" style="--i:1">
-            <span aria-hidden="true">02</span><h3>Conservación</h3><p>Mantener en refrigeración entre 2 °C y 8 °C.</p>
-          </article>
-          <article class="commerce-info-card reveal" style="--i:2">
-            <span aria-hidden="true">03</span><h3>Entrega y pago</h3><p>Cobertura, costo y método se confirman por WhatsApp.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Información importante ===== -->
-    <section class="section info-section" id="informacion">
-      <div class="section-head reveal">
-        <span class="section-kicker">Antes de consultar</span>
-        <h2>Información importante</h2>
-        <p>Conservación, alcance del catálogo y recomendaciones generales.</p>
-      </div>
-      <div class="info-grid">
-        <article class="info-card tilt-card reveal" style="--i:0">
-          <span class="info-icon info-cobalt">⬡</span>
-          <h3>Consulta la ficha</h3>
-          <p>Solicita la información disponible de la presentación que te interesa antes de decidir.</p>
+      <div class="purchase-facts reveal" id="informacion">
+        <article>
+          <h3>Disponibilidad</h3>
+          <p>Se confirma antes de cerrar el pedido.</p>
         </article>
-        <article class="info-card tilt-card reveal" style="--i:1">
-          <span class="info-icon info-turquoise">⬢</span>
-          <h3>Verifica el formato</h3>
-          <p>Confirma concentración, contenido y disponibilidad del producto seleccionado.</p>
+        <article>
+          <h3>Conservación</h3>
+          <p>Mantener en refrigeración entre 2 °C y 8 °C.</p>
         </article>
-        <article class="info-card tilt-card reveal" style="--i:2">
-          <span class="info-icon info-cobalt">◈</span>
-          <h3>Revisa el empaque</h3>
-          <p>Comprueba que el envase y su cierre se encuentren íntegros al recibirlo.</p>
-        </article>
-        <article class="info-card tilt-card reveal" style="--i:3">
-          <span class="info-icon info-turquoise">❄</span>
-          <h3>Conservar en refrigeración</h3>
-          <p>Mantener entre 2°C y 8°C para preservar su estabilidad.</p>
+        <article>
+          <h3>Entrega y pago</h3>
+          <p>Cobertura, costo y método se confirman por WhatsApp.</p>
         </article>
       </div>
       <div class="legal-note reveal">
@@ -638,6 +473,36 @@
         <p class="dialog-note">La disponibilidad y los datos finales se confirman antes de cerrar el pedido.</p>
       </div>
     </dialog>
+
+    <!-- ===== Panel de lista ===== -->
+    <dialog class="consultation-drawer" id="consultationDrawer" aria-labelledby="consultation-title">
+      <div class="consultation-shell">
+        <div class="consultation-heading">
+          <div>
+            <span class="drawer-eyebrow">Tu selección</span>
+            <h2 id="consultation-title">Mi lista</h2>
+          </div>
+          <button type="button" class="dialog-close" id="consultationClose" aria-label="Cerrar mi lista">×</button>
+        </div>
+        <p class="consultation-intro">Revisa presentaciones y cantidades antes de abrir WhatsApp.</p>
+        <div class="consultation-empty" id="consultationEmpty">
+          <span class="consultation-empty-icon" aria-hidden="true">+</span>
+          <div>
+            <strong>Tu lista está vacía</strong>
+            <p>Añade productos desde el catálogo.</p>
+          </div>
+        </div>
+        <ul class="consultation-list" id="consultationList" aria-label="Productos añadidos a la lista"></ul>
+        <div class="consultation-footer">
+          <p>La lista se guarda únicamente en este dispositivo. Al abrir WhatsApp, su contenido se incluirá en el mensaje.</p>
+          <div class="consultation-footer-actions">
+            <span class="consultation-total" id="consultationTotal">0 productos</span>
+            <button type="button" class="clear-list" id="clearConsultation" hidden>Vaciar lista</button>
+          </div>
+        </div>
+        <p class="consultation-status sr-only" id="consultationStatus" role="status" aria-live="polite"></p>
+      </div>
+    </dialog>
   </main>
 
   <!-- ===== Pie de página ===== -->
@@ -679,6 +544,11 @@
       <p>© 2026 Doctor Pep · BioPeptix.</p>
     </div>
   </footer>
+
+  <div class="catalog-toast" id="catalogToast" role="status" aria-live="polite" hidden>
+    <span id="toastMessage"></span>
+    <button type="button" id="toastOpenList">Ver lista</button>
+  </div>
 
   <a href="https://wa.me/593989009150?text=Hola%2C%20quisiera%20consultar%20la%20disponibilidad%20del%20cat%C3%A1logo%20Doctor%20Pep."
      class="whatsapp-float whatsapp-link" target="_blank" rel="noopener noreferrer" aria-label="Consultar por WhatsApp">

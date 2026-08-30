@@ -6,11 +6,22 @@ const description =
   "Explora el catálogo Doctor Pep, compara presentaciones y prepara una consulta personalizada por WhatsApp.";
 
 export const metadata: Metadata = {
+  applicationName: "Doctor Pep",
   title,
   description,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
   openGraph: {
     type: "website",
     locale: "es_EC",
+    siteName: "Doctor Pep",
     title,
     description,
     images: [
@@ -42,7 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
           rel="stylesheet"
         />
-        <link rel="stylesheet" href="/styles-v2.css" />
+        <link rel="stylesheet" href="/styles-v3.css" />
       </head>
       <body data-whatsapp-number="593989009150">
         {children}
