@@ -4,8 +4,10 @@ import type { ReactNode } from "react";
 const title = "Doctor Pep | Catálogo y atención personalizada";
 const description =
   "Explora el catálogo Doctor Pep, compara presentaciones y prepara una consulta personalizada por WhatsApp.";
+const siteUrl = "https://doctor-pep-catalogo.gremori57.chatgpt.site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   applicationName: "Doctor Pep",
   title,
   description,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/og.png",
+        url: `${siteUrl}/og.png`,
         width: 1731,
         height: 909,
         alt: "Doctor Pep — Catálogo y atención personalizada",
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og.png"],
+    images: [`${siteUrl}/og.png`],
   },
 };
 
