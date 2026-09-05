@@ -18,8 +18,9 @@
   <link rel="icon" type="image/webp" href="assets/doctor-pep-logo.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles-v3.css" />
+  <link rel="stylesheet" href="styles-storefront.css" />
 </head>
 <body data-whatsapp-number="593989009150">
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -58,8 +59,8 @@
             <span>Catálogo Doctor Pep</span>
             <span class="hero-location"><i aria-hidden="true"></i> Atención en Ecuador</span>
           </div>
-          <h1 class="hero-title reveal">Péptidos, fórmulas y accesorios <em>sin perderte.</em></h1>
-          <p class="hero-sub reveal">Encuentra una presentación, revisa sus datos y prepara una sola consulta para confirmar disponibilidad.</p>
+          <h1 class="hero-title reveal">Conoce el catálogo.<br /><em>Encuentra tu producto.</em></h1>
+          <p class="hero-sub reveal">Péptidos, fórmulas y accesorios. Explora las presentaciones y prepara tu consulta con Doctor Pep.</p>
           <form class="hero-search reveal" id="heroSearchForm" role="search">
             <label for="heroCatalogSearch">¿Qué estás buscando?</label>
             <div class="hero-search-field">
@@ -83,13 +84,14 @@
 
         <div class="hero-gallery reveal">
           <figure class="hero-main-image">
-            <img src="assets/hero-editorial-1280.webp"
-                 srcset="assets/hero-editorial-720.webp 720w, assets/hero-editorial-1280.webp 1280w"
+            <img src="assets/placeholders/hero-1280.webp"
+                 srcset="assets/placeholders/hero-720.webp 720w, assets/placeholders/hero-1280.webp 1280w"
                  sizes="(max-width: 700px) 92vw, (max-width: 1100px) 48vw, 560px"
-                 alt="Mesa de laboratorio con viales y libreta" width="1280" height="853" fetchpriority="high" />
+                 alt="Composición ilustrativa de viales y envases sin marca" width="1280" height="853" fetchpriority="high" />
             <figcaption>
-              <span>Catálogo organizado</span>
-              <strong>36 opciones para consultar</strong>
+              <span>DOCTOR PEP / CATÁLOGO</span>
+              <strong>Péptidos. Fórmulas. Accesorios.</strong>
+              <small>Composición ilustrativa</small>
             </figcaption>
           </figure>
         </div>
@@ -102,7 +104,7 @@
         <div class="catalog-tools-copy reveal">
           <span class="section-kicker">Catálogo completo</span>
           <h2 id="catalog-tools-title">Encuentra lo que necesitas</h2>
-          <p>Busca por nombre, presentación o categoría.</p>
+          <p>Busca por nombre, presentación o categoría. Las imágenes son ilustrativas; el envase final puede variar.</p>
         </div>
         <div class="catalog-search-wrap reveal">
           <label for="catalogSearch">Buscar en el catálogo</label>
@@ -140,6 +142,10 @@
       </div>
       <div class="feature-grid">
         <article class="feature-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <div class="fc-top">
             <span class="monogram">TZ</span>
             <span class="fc-tag">Péptido GLP-1 / GIP</span>
@@ -154,6 +160,10 @@
           </div>
         </article>
         <article class="feature-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <div class="fc-top">
             <span class="monogram">RT</span>
             <span class="fc-tag">Péptido GLP-1 / GIP</span>
@@ -180,56 +190,100 @@
       </div>
       <div class="product-grid">
         <article class="product-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>MOTS-C</h3>
           <p>Apoya la salud mitocondrial y la producción de energía celular.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>BPC-157</h3>
           <p>Conocido por su apoyo a la recuperación y la reparación de tejidos.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>TB-500</h3>
           <p>Promueve la recuperación, la flexibilidad y el rendimiento físico.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:3">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge combo">5 + 5 mg</span>
           <h3>CJC 1295 NO DAC + IPAMORELIN</h3>
           <p>Combinación secretagoga para apoyar el eje de la hormona de crecimiento.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:4">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>TESAMORELIN</h3>
           <p>Estimula la secreción natural de hormona de crecimiento.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:5">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>IPAMORELIN</h3>
           <p>Apoya el metabolismo y la composición corporal.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:6">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>PT-141</h3>
           <p>Orientado al rendimiento y el bienestar sexual.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:7">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>KISS PEPTIN</h3>
           <p>Apoya el eje reproductivo y el equilibrio hormonal.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:8">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>SS-31</h3>
           <p>Protege y optimiza la función mitocondrial.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:9">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>ARA-290</h3>
           <p>Apoya la protección neuronal y la recuperación metabólica.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:10">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">1500 mg</span>
           <h3>GLUTATHIONE</h3>
           <p>El antioxidante maestro para la defensa celular y la desintoxicación.</p>
@@ -248,66 +302,118 @@
       </div>
       <div class="product-grid">
         <article class="product-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">100 mg</span>
           <h3>GHK-CU</h3>
           <p>Regeneración de la piel, colágeno y reparación celular.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>EPITALON</h3>
           <p>Relacionado con la regulación del ritmo biológico y la longevidad.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">500 mg</span>
           <h3>NAD</h3>
           <p>Impulsa la energía celular y apoya la reparación del ADN.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:3">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>DSIP</h3>
           <p>Apoya el sueño profundo y la recuperación nocturna.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:4">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>KPV</h3>
           <p>Propiedades antiinflamatorias y apoyo inmunológico.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:5">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>SEMAX</h3>
           <p>Apoyo cognitivo, enfoque y neuroprotección.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:6">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>SELANK</h3>
           <p>Equilibrio emocional y reducción de la ansiedad.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:7">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">30 ml</span>
           <h3>SERUM GHK-CU</h3>
           <p>Suero cosmético para el cuidado y rejuvenecimiento de la piel.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:8">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>SELANK SPRAY NASAL</h3>
           <p>Formato nasal para el equilibrio emocional y la calma.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:9">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>SEMAX SPRAY</h3>
           <p>Formato nasal para el enfoque y el rendimiento mental.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:10">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">80 mg</span>
           <h3>KLOW</h3>
           <p>Fórmula combinada para el cuidado de la piel.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:11">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">70 mg</span>
           <h3>GLOW</h3>
           <p>Fórmula combinada para luminosidad y firmeza.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:12">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 mg</span>
           <h3>5 AMINO-1MQ</h3>
           <p>Apoya el metabolismo celular y la longevidad.</p>
@@ -328,16 +434,28 @@
       <h3 class="sub-heading reveal">Agua bacteriostática <span>(Bac Water)</span></h3>
       <div class="product-grid small">
         <article class="product-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="water">
+            <img src="assets/placeholders/water.webp" alt="Vial con líquido transparente, imagen ilustrativa del envase." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">3 ml</span>
           <h3>BAC WATER</h3>
           <p>Frasco de agua bacteriostática para reconstitución.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="water">
+            <img src="assets/placeholders/water.webp" alt="Vial con líquido transparente, imagen ilustrativa del envase." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">10 ml</span>
           <h3>BAC WATER</h3>
           <p>Frasco de agua bacteriostática para reconstitución.</p>
         </article>
         <article class="product-card tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="water">
+            <img src="assets/placeholders/water.webp" alt="Vial con líquido transparente, imagen ilustrativa del envase." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="pc-badge">30 ml</span>
           <h3>BAC WATER</h3>
           <p>Frasco de agua bacteriostática para reconstitución.</p>
@@ -347,36 +465,64 @@
       <h3 class="sub-heading reveal">Accesorios</h3>
       <div class="accessory-grid">
         <div class="accessory tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="syringe">
+            <img src="assets/placeholders/syringe.webp" alt="Jeringa genérica ilustrativa." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="acc-icon">3 ml</span>
           <h4>Jeringa 3 ml</h4>
           <span class="acc-cat">Inyección</span>
         </div>
         <div class="accessory tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="syringe">
+            <img src="assets/placeholders/syringe.webp" alt="Jeringa genérica ilustrativa." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="acc-icon">100</span>
           <h4>Jeringuilla 100 und.</h4>
           <span class="acc-cat">Insumo</span>
         </div>
         <div class="accessory tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="wipe">
+            <img src="assets/placeholders/wipe.webp" alt="Sobre y toallita genéricos ilustrativos." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="acc-icon">Prep</span>
           <h4>Alcohol pre pad</h4>
           <span class="acc-cat">Higiene</span>
         </div>
         <div class="accessory tilt-card reveal" style="--i:3">
+          <figure class="product-photo" data-image-kind="pen">
+            <img src="assets/placeholders/pen.webp" alt="Aplicador genérico ilustrativo." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="acc-icon">Pen</span>
           <h4>Pen Peptide</h4>
           <span class="acc-cat">Aplicador</span>
         </div>
         <div class="accessory tilt-card reveal" style="--i:4">
+          <figure class="product-photo" data-image-kind="cartridge">
+            <img src="assets/placeholders/cartridge.webp" alt="Cartucho genérico ilustrativo." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="acc-icon">Cart.</span>
           <h4>Cartucho</h4>
           <span class="acc-cat">Repuesto</span>
         </div>
         <div class="accessory tilt-card reveal" style="--i:5">
+          <figure class="product-photo" data-image-kind="needle">
+            <img src="assets/placeholders/needle.webp" alt="Aguja para aplicador con capuchón, imagen ilustrativa." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="acc-icon">Pen</span>
           <h4>Aguja Pen</h4>
           <span class="acc-cat">Inyección</span>
         </div>
         <div class="accessory tilt-card reveal" style="--i:6">
+          <figure class="product-photo" data-image-kind="roller">
+            <img src="assets/placeholders/roller.webp" alt="Rodillo dérmico genérico ilustrativo." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
           <span class="acc-icon">Skin</span>
           <h4>Derma Roller</h4>
           <span class="acc-cat">Estética</span>
@@ -471,6 +617,10 @@
     <dialog class="product-dialog" id="productDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
       <div class="dialog-shell">
         <button type="button" class="dialog-close" id="dialogClose" aria-label="Cerrar ficha de producto">×</button>
+        <figure class="dialog-product-photo" id="dialogProductPhoto">
+          <img id="dialogProductImage" alt="" width="640" height="640" />
+          <figcaption>Imagen ilustrativa · el envase final puede variar</figcaption>
+        </figure>
         <span class="dialog-category" id="dialogCategory"></span>
         <h2 id="dialogTitle"></h2>
         <p class="dialog-description" id="dialogDescription"></p>

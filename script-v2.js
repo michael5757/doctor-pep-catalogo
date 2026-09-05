@@ -70,6 +70,7 @@
     const section = card.closest(".category");
     const category = card.dataset.category || (section ? section.id : "catalogo");
     const nameElement = $("h3, h4", card);
+    const productImage = $(".product-photo img", card);
     const descriptionElement =
       $(".fc-desc", card) || $("p", card) || $(".acc-cat", card);
     let presentations = $$(".pres", card).map(function (item) {
@@ -98,6 +99,9 @@
           ? descriptionElement.textContent.trim()
           : "Consulta la información disponible de esta presentación."),
       category: category,
+      image: productImage ? productImage.getAttribute("src") : "",
+      imageAlt: productImage ? productImage.alt : "",
+      imageIllustrative: Boolean($(".product-photo figcaption", card)),
       categoryLabel: categoryNames[category] || "Catálogo Doctor Pep",
       presentations: presentations.length
         ? presentations
@@ -348,6 +352,17 @@
 
       const product = document.createElement("div");
       product.className = "consultation-product";
+      const source = sourceDataForItem(item);
+      if (source.image) {
+        const thumbnail = document.createElement("img");
+        thumbnail.className = "consultation-thumbnail";
+        thumbnail.src = source.image;
+        thumbnail.alt = "";
+        thumbnail.width = 64;
+        thumbnail.height = 64;
+        thumbnail.loading = "lazy";
+        product.appendChild(thumbnail);
+      }
       const name = document.createElement("strong");
       name.textContent = item.name;
       const meta = document.createElement("span");
@@ -578,6 +593,14 @@
     dialogTitle.textContent = data.name;
     dialogCategory.textContent = data.categoryLabel;
     dialogDescription.textContent = data.description;
+    const dialogImage = $("#dialogProductImage");
+    const dialogPhoto = $("#dialogProductPhoto");
+    if (dialogPhoto) dialogPhoto.hidden = !data.image;
+    if (dialogPhoto) $("figcaption", dialogPhoto).hidden = !data.imageIllustrative;
+    if (dialogImage && data.image) {
+      dialogImage.src = data.image;
+      dialogImage.alt = data.imageAlt || "Imagen ilustrativa del tipo de producto";
+    }
     dialogPresentations.textContent = "";
 
     data.presentations.forEach(function (presentation, index) {

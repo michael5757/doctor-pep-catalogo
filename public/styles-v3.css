@@ -4,7 +4,7 @@
   --navy-2: #0b3a83;
   --blue: #087bc8;
   --cyan: #5fd2f2;
-  --paper: #f7f6f2;
+  --paper: #f5f7fa;
   --paper-2: #eef4f8;
   --surface: #ffffff;
   --ink: #10244f;
@@ -14,7 +14,7 @@
   --line-strong: #bbc7d4;
   --whatsapp: #116548;
   --white: #ffffff;
-  --font-head: "Fraunces", Georgia, serif;
+  --font-head: "DM Sans", Arial, sans-serif;
   --font-body: "DM Sans", Arial, sans-serif;
   --content: 1180px;
   --radius: 14px;
@@ -284,14 +284,12 @@ picture {
   position: relative;
   padding: 112px 28px 62px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 76% 28%, rgba(95, 210, 242, 0.17), transparent 25rem),
-    linear-gradient(135deg, #fbfaf6 0%, #f3f6f4 56%, #eaf3f8 100%);
+  background: #edf3f9;
   border-bottom: 1px solid var(--line);
 }
 
 .hero::before {
-  content: "";
+  content: none;
   position: absolute;
   right: -250px;
   bottom: -290px;
@@ -348,12 +346,12 @@ picture {
 }
 
 .hero-title {
-  max-width: 11.5ch;
+  max-width: 16ch;
   color: var(--navy);
   font-family: var(--font-head);
-  font-size: clamp(3.15rem, 5.4vw, 5.35rem);
-  font-weight: 500;
-  line-height: 0.98;
+  font-size: clamp(2.8rem, 4.6vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.04;
   letter-spacing: -0.05em;
 }
 

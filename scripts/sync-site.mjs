@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -27,6 +27,10 @@ await cp(
   resolve(projectRoot, "public", "styles-v3.css")
 );
 await cp(
+  resolve(projectRoot, "styles-storefront.css"),
+  resolve(projectRoot, "public", "styles-storefront.css")
+);
+await cp(
   resolve(projectRoot, "script-v2.js"),
   resolve(projectRoot, "public", "script-v2.js")
 );
@@ -44,6 +48,15 @@ for (const asset of [
   await cp(
     resolve(projectRoot, "assets", asset),
     resolve(publicAssetsRoot, asset)
+  );
+}
+const placeholderRoot = resolve(projectRoot, "assets", "placeholders");
+await mkdir(resolve(publicAssetsRoot, "placeholders"), { recursive: true });
+for (const filename of await readdir(placeholderRoot)) {
+  if (!filename.endsWith(".webp")) continue;
+  await cp(
+    resolve(placeholderRoot, filename),
+    resolve(publicAssetsRoot, "placeholders", filename)
   );
 }
 await cp(
