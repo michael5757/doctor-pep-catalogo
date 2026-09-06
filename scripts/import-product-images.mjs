@@ -15,7 +15,7 @@ const destination = fileURLToPath(new URL('../assets/products/', import.meta.url
 await mkdir(destination, { recursive: true });
 let imported = 0;
 for (const item of manifest) {
-  if (item.status !== 'ready') continue;
+  if (!['ready', 'generated'].includes(item.status)) continue;
   if (!allowed.has(item.filename) || basename(item.filename) !== item.filename) throw new Error('Unexpected image target');
   const output = resolve(destination, item.filename);
   try { await access(output); continue; } catch {}
