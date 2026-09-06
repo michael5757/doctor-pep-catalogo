@@ -26,7 +26,7 @@ for (const match of matches.reverse()) {
   }
   block = block.replace(/(<(?:article|div) class="[^"]+")/, `$1 data-product-id="${product.id}" data-default-presentation="${escape(first)}"`);
   block = block.replace(/(<img src=")[^"]+/, `$1${product.images[first]}`);
-  block = block.replace(/alt="[^"]*"/, `alt="${escape(product.name + ' · ' + first + ' · imagen ilustrativa')}"`);
+  block = block.replace(/alt="[^"]*"/, `alt="${escape(product.name + ' · ' + first)}"`);
   const tag = { tirzepatide: 'Acción GIP / GLP-1', retatrutide: 'Triple acción en investigación' }[product.id];
   if (tag) block = block.replace(/(<span class="fc-tag">)[^<]+/, `$1${tag}`);
   if (product.evidence === 'Accesorio') block = block.replace(/(<span class="acc-icon">)[^<]+/, `$1${escape(first)}`);
@@ -44,7 +44,7 @@ const publicCatalog = Object.fromEntries(Object.entries(catalog).map(([id, produ
 html = html.replace('<!-- CATALOG_DATA -->', `<script id="catalogData" type="application/json">${JSON.stringify({products: publicCatalog, featuredProductIds}).replaceAll('<', '\\u003c')}</script>`);
 html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">' + ['tirzepatide','serum-ghk-cu','selank-spray-nasal'].map((id,index) => {
   const product = catalog[id]; const presentation = product.presentations[0];
-  return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · imagen ilustrativa" width="640" height="640" ${index ? 'decoding="async"' : 'fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
+  return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · ${escape(presentation)}" width="640" height="640" ${index ? 'decoding="async"' : 'fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
 }).join('') + '</div>');
 await writeFile(resolve(projectRoot, 'index.html'), html.replace('href="/videos"', 'href="videos.html"'), 'utf8');
 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<script src="script-v2\.js"><\/script>\s*<\/body>/i);

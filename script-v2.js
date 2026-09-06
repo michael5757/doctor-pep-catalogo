@@ -149,7 +149,7 @@
           $$('button', holder).forEach(b => b.setAttribute('aria-pressed', String(b === button)));
           const img = $('.product-photo img', card);
           img.src = imageFor(data, presentation);
-          img.alt = data.name + ' · ' + presentation + ' · imagen ilustrativa';
+          img.alt = data.name + ' · ' + presentation;
         });
         holder.append(button);
       });
@@ -655,7 +655,7 @@
     const presentation = $("input[name='presentation']:checked", dialogPresentations)?.value || activeProduct.presentations[0];
     const img = $('#dialogProductImage');
     img.src = imageFor(activeProduct, presentation);
-    img.alt = activeProduct.name + ' · ' + presentation + ' · imagen ilustrativa';
+    img.alt = activeProduct.name + ' · ' + presentation;
     $('#selectionSummary').textContent = activeProduct.name + ' · ' + presentation + ' · ' + (dialogQuantity.value || '1') + ' envase(s)';
     replacePageUrl(productUrl(activeProduct, presentation));
   }
@@ -706,10 +706,11 @@
     const dialogImage = $("#dialogProductImage");
     const dialogPhoto = $("#dialogProductPhoto");
     if (dialogPhoto) dialogPhoto.hidden = !data.image;
-    if (dialogPhoto) $("figcaption", dialogPhoto).hidden = !data.imageIllustrative;
+    const dialogCaption = dialogPhoto ? $("figcaption", dialogPhoto) : null;
+    if (dialogCaption) dialogCaption.hidden = true;
     if (dialogImage && data.image) {
       dialogImage.src = data.image;
-      dialogImage.alt = data.imageAlt || "Imagen ilustrativa del tipo de producto";
+      dialogImage.alt = data.imageAlt || "Imagen del tipo de producto";
     }
     dialogPresentations.textContent = "";
 

@@ -125,7 +125,7 @@ dialog .whatsapp-float { position: sticky; margin: 16px 0 0 auto; width: fit-con
 .hero-gallery-note { font-size: .75rem; line-height: 1.5; }
 .product-photo { background: #fff; }
 .product-photo img { aspect-ratio: 1; object-fit: contain; padding: 16px 16px 28px; }
-.product-photo figcaption { background: #fff; border: 0; bottom: 4px; left: 12px; font-size: .75rem; }
+.product-photo figcaption, .dialog-product-photo figcaption { display: none; }
 .feature-card .product-photo { display: grid; align-content: center; }
 .feature-card .product-photo img { height: 320px; padding: 20px 8px 28px; }
 .product-card h3 { min-height: 2.6em; overflow-wrap: anywhere; }
