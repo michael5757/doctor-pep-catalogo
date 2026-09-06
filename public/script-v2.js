@@ -1,5 +1,6 @@
 (function () {
   "use strict";
+  if (!document.getElementById('catalogo-completo')) return;
 
   const $ = (selector, context) => (context || document).querySelector(selector);
   const $$ = (selector, context) =>
@@ -64,6 +65,10 @@
     ".category .feature-card, .category .product-card, .category .accessory"
   );
   const categorySections = $$(".category");
+  const editorial = JSON.parse($('#catalogData')?.textContent || '{"products":{}}');
+  const canonicalPresentation = value => String(value || '').replace(/\s*ml$/i, ' ml');
+  const productRecord = name => editorial.products[slug(name)] || {};
+  const imageFor = (data, presentation) => productRecord(data.name).images?.[canonicalPresentation(presentation)] || data.image;
 
   function getCardData(card) {
     if (!card) return null;
@@ -89,12 +94,17 @@
       }
     }
 
+    const record = productRecord(card.dataset.productName || nameElement?.textContent.trim());
+    if (record.presentations && record.name !== 'BAC WATER') presentations = record.presentations;
+    presentations = presentations.map(canonicalPresentation);
     return {
+      id: record.id,
+      selectedPresentation: card.dataset.selectedPresentation || card.dataset.defaultPresentation || presentations[0],
       name:
         card.dataset.productName ||
         (nameElement ? nameElement.textContent.trim() : "Producto"),
       description:
-        card.dataset.productDescription ||
+        record.summary || card.dataset.productDescription ||
         (descriptionElement
           ? descriptionElement.textContent.trim()
           : "Consulta la información disponible de esta presentación."),
@@ -116,6 +126,28 @@
     card.dataset.productDescription = data.description;
     card.dataset.category = data.category;
     card.dataset.presentations = JSON.stringify(data.presentations);
+    if (data.presentations.length > 1) {
+      const holder = $('.fc-presentations', card) || document.createElement('div');
+      holder.classList.add('variant-preview');
+      holder.setAttribute('role', 'group');
+      holder.setAttribute('aria-label', 'Presentaciones de ' + data.name);
+      holder.replaceChildren();
+      data.presentations.forEach(presentation => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = presentation;
+        button.setAttribute('aria-pressed', String(data.selectedPresentation === presentation));
+        button.addEventListener('click', () => {
+          card.dataset.selectedPresentation = presentation;
+          $$('button', holder).forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+          const img = $('.product-photo img', card);
+          img.src = imageFor(data, presentation);
+          img.alt = data.name + ' · ' + presentation + ' · imagen ilustrativa';
+        });
+        holder.append(button);
+      });
+      if (!holder.parentNode) card.append(holder);
+    }
 
     if ($(".card-actions", card)) return;
     const actions = document.createElement("div");
@@ -147,6 +179,10 @@
 
     actions.append(viewButton, addButton);
     card.append(availability, actions);
+    const indicator = document.createElement('span');
+    indicator.className = 'selection-indicator';
+    indicator.hidden = true;
+    card.append(indicator);
   }
 
   sourceCards.forEach(enhanceCard);
@@ -257,11 +293,11 @@
           return {
             id: slug(item.name + "-" + item.presentation),
             name: String(item.name),
-            presentation: String(item.presentation),
+            presentation: canonicalPresentation(item.presentation),
             presentations: sourceData.presentations,
             categoryKey: sourceData.category,
             categoryLabel: sourceData.categoryLabel,
-            quantity: Math.min(99, Math.max(1, Number(item.quantity) || 1)),
+            quantity: Math.min(99, Math.max(1, Math.floor(Number(item.quantity)) || 1)),
           };
         });
     } catch (_error) {
@@ -339,6 +375,7 @@
         : "Disminuir cantidad de ") + item.name
     );
     if (action === "decrease" && item.quantity <= 1) button.disabled = true;
+    if (action === "increase" && item.quantity >= 99) button.disabled = true;
     return button;
   }
 
@@ -356,7 +393,7 @@
       if (source.image) {
         const thumbnail = document.createElement("img");
         thumbnail.className = "consultation-thumbnail";
-        thumbnail.src = source.image;
+        thumbnail.src = imageFor(source, item.presentation);
         thumbnail.alt = "";
         thumbnail.width = 64;
         thumbnail.height = 64;
@@ -415,6 +452,14 @@
       clearConsultationButton.hidden = consultation.length === 0;
     }
     updateWhatsappFloat();
+    sourceCards.forEach(card => {
+      const data = getCardData(card);
+      const count = consultation.filter(item => item.name === data.name && data.presentations.includes(item.presentation)).reduce((total, item) => total + item.quantity, 0);
+      card.classList.toggle('is-selected', count > 0);
+      const indicator = $('.selection-indicator', card);
+      indicator.hidden = !count;
+      indicator.textContent = '✓ En tu lista · ' + count + (count === 1 ? ' envase' : ' envases');
+    });
     saveConsultation();
   }
 
@@ -427,7 +472,7 @@
   }
 
   function addToConsultation(data, presentation, quantity) {
-    const safeQuantity = Math.min(99, Math.max(1, Number(quantity) || 1));
+    const safeQuantity = Math.min(99, Math.max(1, Math.floor(Number(quantity)) || 1));
     const id = slug(data.name + "-" + presentation);
     const existing = consultation.find(function (item) {
       return item.id === id;
@@ -456,7 +501,7 @@
     });
     if (!current) return;
     const newId = slug(data.name + "-" + presentation);
-    const safeQuantity = Math.min(99, Math.max(1, Number(quantity) || 1));
+    const safeQuantity = Math.min(99, Math.max(1, Math.floor(Number(quantity)) || 1));
     consultation = consultation.filter(function (item) {
       return item.id !== oldId;
     });
@@ -488,6 +533,8 @@
     if (!consultationDrawer || consultationDrawer.open) return;
     drawerTrigger = trigger || listTrigger;
     consultationDrawer.showModal();
+    // Move the single WhatsApp link into the active modal so it remains usable.
+    if (whatsappFloat) $('.consultation-footer', consultationDrawer).append(whatsappFloat);
     window.setTimeout(function () {
       if (consultationClose) consultationClose.focus();
     }, 0);
@@ -512,6 +559,7 @@
       if (event.target === consultationDrawer) consultationDrawer.close();
     });
     consultationDrawer.addEventListener("close", function () {
+      if (whatsappFloat) document.body.append(whatsappFloat);
       if (drawerTrigger && document.contains(drawerTrigger)) drawerTrigger.focus();
       drawerTrigger = null;
     });
@@ -582,10 +630,67 @@
   let dialogMode = "add";
   let editingItemId = null;
   let reopenDrawerAfterDialog = false;
+  let previousProductUrl = null;
+
+  function productUrl(data, presentation) {
+    const url = new URL(location.href);
+    url.searchParams.set('producto', data.id || slug(data.name));
+    url.searchParams.set('presentacion', presentation);
+    return url;
+  }
+  function syncProductSelection() {
+    if (!activeProduct) return;
+    const presentation = $("input[name='presentation']:checked", dialogPresentations)?.value || activeProduct.presentations[0];
+    const img = $('#dialogProductImage');
+    img.src = imageFor(activeProduct, presentation);
+    img.alt = activeProduct.name + ' · ' + presentation + ' · imagen ilustrativa';
+    $('#selectionSummary').textContent = activeProduct.name + ' · ' + presentation + ' · ' + (dialogQuantity.value || '1') + ' envase(s)';
+    history.replaceState(history.state, '', productUrl(activeProduct, presentation));
+  }
+  function renderProductDetails(data) {
+    const record = productRecord(data.name);
+    const container = $('#productDetails');
+    container.replaceChildren();
+    const label = document.createElement('span');
+    label.className = 'evidence-label';
+    label.textContent = record.evidence || 'Información por confirmar';
+    container.append(label);
+    const addSection = (title, paragraphs, open = false) => {
+      const detail = document.createElement('details');
+      detail.open = open;
+      const summary = document.createElement('summary');
+      summary.textContent = title;
+      detail.append(summary);
+      paragraphs.filter(Boolean).forEach(text => { const p = document.createElement('p'); p.textContent = text; detail.append(p); });
+      container.append(detail);
+      return detail;
+    };
+    addSection('Qué es y qué sabemos', [record.detail], true);
+    if (record.evidence !== 'Accesorio') addSection('Beneficios y límites de la evidencia', [
+      ...(record.benefits || []),
+      record.benefits?.length ? 'Estos datos pertenecen a los estudios citados, no a una verificación del producto ofrecido.' : 'No se han verificado beneficios clínicos para esta presentación. No se atribuyen resultados terapéuticos a la imagen ni al nombre comercial.',
+      'La documentación del fabricante y el registro local de este envase no han sido verificados. Las referencias extranjeras no acreditan su autorización en Ecuador.'
+    ]);
+    addSection('Presentación y datos por confirmar', [
+      'Opciones del catálogo: ' + data.presentations.join(' · ') + '.',
+      record.evidence === 'Accesorio' ? 'Las imágenes no permiten deducir medidas, compatibilidad ni contenido del paquete.' : 'Los mg indican contenido declarado, no una dosis ni el tamaño del frasco. Los ml indican volumen. No se calcula cantidad por aplicación ni concentración sin una ficha técnica.',
+      'Confirmar fabricante, etiqueta, composición, contenido e instrucciones antes del pedido.'
+    ]);
+    addSection('Precauciones y conservación', [record.caution, record.storage,
+      record.evidence === 'Accesorio' ? '' : 'No iniciar, combinar o ajustar tratamientos a partir de este catálogo. Consulta a un profesional de salud.'
+    ]);
+    const refs = addSection('Fuentes de consulta', [record.sources?.length ? 'Revisión editorial: 5 de septiembre de 2026. Fuentes sobre ingredientes y medicamentos de referencia; no son certificados del producto.' : 'Pendiente de recibir la ficha técnica del fabricante. No se inventan fuentes o especificaciones.']);
+    (record.sources || []).forEach(([title, url]) => {
+      const p = document.createElement('p'); const a = document.createElement('a');
+      a.href = url; a.textContent = title + ' ↗'; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      p.append(a); refs.append(p);
+    });
+  }
 
   function showProductDialog(data, trigger, options) {
     const settings = options || {};
     activeProduct = data;
+    previousProductUrl = location.href;
     dialogTrigger = settings.returnFocus || trigger || null;
     dialogMode = settings.mode || "add";
     editingItemId = settings.itemId || null;
@@ -610,8 +715,8 @@
       input.type = "radio";
       input.name = "presentation";
       input.value = presentation;
-      input.checked = settings.presentation
-        ? settings.presentation === presentation
+      input.checked = settings.presentation || data.selectedPresentation
+        ? canonicalPresentation(settings.presentation || data.selectedPresentation) === presentation
         : index === 0;
       const text = document.createElement("span");
       text.textContent = presentation;
@@ -619,6 +724,8 @@
       dialogPresentations.appendChild(option);
     });
     dialogQuantity.value = String(settings.quantity || 1);
+    renderProductDetails(data);
+    syncProductSelection();
     dialogAddButton.textContent =
       dialogMode === "edit" ? "Guardar cambios" : "Añadir a mi lista";
     productDialog.showModal();
@@ -647,6 +754,12 @@
       if (event.target === productDialog) productDialog.close();
     });
     productDialog.addEventListener("close", function () {
+      if (previousProductUrl) {
+        const url = new URL(previousProductUrl);
+        url.searchParams.delete('producto'); url.searchParams.delete('presentacion');
+        history.replaceState(history.state, '', url);
+      }
+      previousProductUrl = null;
       const shouldReopen = reopenDrawerAfterDialog;
       const focusTarget = dialogTrigger;
       activeProduct = null;
@@ -663,6 +776,8 @@
   }
 
   if (dialogForm) {
+    dialogForm.addEventListener('change', syncProductSelection);
+    dialogQuantity.addEventListener('input', syncProductSelection);
     dialogForm.addEventListener("submit", function (event) {
       event.preventDefault();
       if (!activeProduct) return;
@@ -786,7 +901,8 @@
       );
       const categoryMatches =
         activeCategory === "all" || data.category === activeCategory;
-      const searchMatches = !query || haystack.includes(query);
+      const compact = value => value.replace(/[^a-z0-9]/g, '');
+      const searchMatches = !query || haystack.includes(query) || compact(haystack).includes(compact(query));
       const visible = categoryMatches && searchMatches;
       card.hidden = !visible;
       if (visible) visibleCount += 1;
@@ -815,6 +931,7 @@
         sourceCards.length +
         (visibleCount === 1 ? " resultado" : " resultados");
     }
+    try { sessionStorage.setItem('doctorPepBrowse', JSON.stringify({query: catalogSearch?.value || '', category: activeCategory})); } catch {}
     return visibleCount;
   }
 
@@ -911,6 +1028,15 @@
       trackEvent("category_filter", { result_count: visible });
     });
   });
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('doctorPepBrowse') || 'null');
+    if (saved && !new URL(location.href).searchParams.has('producto')) {
+      catalogSearch.value = saved.query || '';
+      if (heroCatalogSearch) heroCatalogSearch.value = catalogSearch.value;
+      activeCategory = filterChips.some(c => c.dataset.categoryFilter === saved.category) ? saved.category : 'all';
+      filterChips.forEach(c => { const on = c.dataset.categoryFilter === activeCategory; c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', String(on)); });
+    }
+  } catch {}
   applyCatalogFilters();
 
   if (whatsappFloat) {
@@ -925,7 +1051,8 @@
   const navLinks = $$(".nav-link");
   const navSections = navLinks
     .map(function (link) {
-      return $(link.getAttribute("href"));
+      const href = link.getAttribute('href');
+      return href?.startsWith('#') ? $(href) : null;
     })
     .filter(Boolean);
 
@@ -998,7 +1125,8 @@
       const link = event.target.closest(".nav-link");
       if (!link) return;
       closeMenu(false);
-      const target = $(link.getAttribute("href"));
+      const href = link.getAttribute('href');
+      const target = href?.startsWith('#') ? $(href) : null;
       if (target && mobileNavigation.matches) {
         target.setAttribute("tabindex", "-1");
         window.setTimeout(function () {
@@ -1045,5 +1173,62 @@
     revealElements.forEach(function (element) {
       revealObserver.observe(element);
     });
+  }
+  /* Image zoom and presentation-specific sharing. */
+  const imageDialog = $('#imageDialog');
+  $('#zoomProduct')?.addEventListener('click', () => {
+    const source = $('#dialogProductImage');
+    $('#largeProductImage').src = source.src;
+    $('#largeProductImage').alt = source.alt;
+    $('#largeProductCaption').textContent = source.alt;
+    imageDialog.showModal();
+    $('#closeImage').focus();
+  });
+  $('#closeImage')?.addEventListener('click', () => imageDialog.close());
+  imageDialog?.addEventListener('click', event => { if (event.target === imageDialog) imageDialog.close(); });
+  imageDialog?.addEventListener('close', () => $('#zoomProduct').focus({preventScroll: true}));
+  $('#shareProduct')?.addEventListener('click', async () => {
+    const button = $('#shareProduct');
+    try { await navigator.clipboard.writeText(location.href); button.textContent = 'Enlace copiado ✓'; }
+    catch {
+      let field = $('#productLinkFallback');
+      if (!field) { field = document.createElement('input'); field.id = 'productLinkFallback'; field.readOnly = true; field.setAttribute('aria-label', 'Enlace para copiar'); button.after(field); }
+      field.value = location.href; field.focus(); field.select();
+      button.textContent = 'Selecciona y copia el enlace';
+    }
+  });
+  productDialog?.addEventListener('close', () => {
+    $('#shareProduct').textContent = 'Copiar enlace de esta presentación ↗';
+    $('#productLinkFallback')?.remove();
+  });
+  // Optional owner-selected priorities are applied inside existing categories only.
+  const priority = editorial.featuredProductIds || [];
+  $$('.feature-grid, .product-grid, .accessory-grid').forEach(grid => {
+    const children = [...grid.children];
+    children.sort((a, b) => {
+      const rank = el => { const i = priority.indexOf(el.dataset.productId); return i < 0 ? Infinity : i; };
+      return rank(a) - rank(b);
+    }).forEach(child => grid.append(child));
+  });
+  window.addEventListener('pagehide', () => {
+    try { sessionStorage.setItem('doctorPepScroll', String(window.scrollY)); } catch {}
+  });
+  const initialUrl = new URL(location.href);
+  const requestedId = initialUrl.searchParams.get('producto');
+  if (requestedId) {
+    const presentation = canonicalPresentation(initialUrl.searchParams.get('presentacion'));
+    const matches = sourceCards.filter(card => getCardData(card).id === requestedId);
+    const card = matches.find(c => getCardData(c).presentations.includes(presentation)) || matches[0];
+    if (card) {
+      const data = getCardData(card);
+      setCategoryCollapsed(card.closest('.category'), false);
+      openProductDialog(data, $('[data-card-action="view"]', card), {presentation: data.presentations.includes(presentation) ? presentation : data.presentations[0]});
+    }
+  } else if (!location.hash) {
+    try { const position = Number(sessionStorage.getItem('doctorPepScroll')); if (position) requestAnimationFrame(() => window.scrollTo({top: position, behavior: 'instant'})); } catch {}
+  }
+  if (initialUrl.searchParams.get('lista') === '1') {
+    openConsultationDrawer(listTrigger);
+    const clean = new URL(location.href); clean.searchParams.delete('lista'); history.replaceState(history.state, '', clean);
   }
 })();

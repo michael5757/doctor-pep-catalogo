@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${siteUrl}/og.png`,
-        width: 1731,
-        height: 909,
-        alt: "Doctor Pep — Catálogo y atención personalizada",
+        width: 1200,
+        height: 630,
+        alt: "Doctor Pep — Conoce, compara y consulta",
       },
     ],
   },
@@ -57,6 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <link rel="stylesheet" href="/styles-v3.css" />
         <link rel="stylesheet" href="/styles-storefront.css" />
+        <link rel="stylesheet" href="/styles-refinement.css" />
       </head>
       <body data-whatsapp-number="593989009150">
         {children}

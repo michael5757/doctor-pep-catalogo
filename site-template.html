@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Pep | Catálogo y atención personalizada</title>
+  <meta name="description" content="Explora el catálogo Doctor Pep, compara presentaciones y prepara una consulta personalizada por WhatsApp." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#071F54" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_EC" />
+  <meta property="og:site_name" content="Doctor Pep" />
+  <meta property="og:title" content="Doctor Pep | Catálogo y atención personalizada" />
+  <meta property="og:description" content="Explora productos, compara presentaciones y prepara tu consulta con Doctor Pep." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Doctor Pep | Catálogo y atención personalizada" />
+  <meta name="twitter:description" content="Explora productos, compara presentaciones y prepara tu consulta con Doctor Pep." />
+  <link rel="icon" type="image/webp" href="assets/doctor-pep-logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles-v3.css" />
+  <link rel="stylesheet" href="styles-storefront.css" />
+  <link rel="stylesheet" href="styles-refinement.css" />
+</head>
+<body data-whatsapp-number="593989009150">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ===== Barra de navegación ===== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#inicio" class="brand">
+        <span class="brand-icon brand-logo" aria-hidden="true">
+          <img src="assets/doctor-pep-logo.webp" alt="" width="640" height="640" />
+        </span>
+        <span class="brand-text">DOCTOR <strong>PEP</strong></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#catalogo-completo" class="nav-link">Catálogo</a>
+        <a href="/videos" class="nav-link">Videos</a>
+        <a href="#como-comprar" class="nav-link">Cómo comprar</a>
+        <a href="#preguntas" class="nav-link">Preguntas</a>
+      </nav>
+      <button type="button" class="list-trigger" id="listTrigger" aria-haspopup="dialog" aria-controls="consultationDrawer">
+        <span>Mi lista</span>
+        <strong id="listTriggerCount" aria-hidden="true">0</strong>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Portada ===== -->
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-eyebrow reveal">
+            <span>Catálogo Doctor Pep</span>
+            <span class="hero-location"><i aria-hidden="true"></i> Atención en Ecuador</span>
+          </div>
+          <h1 class="hero-title reveal">Conoce el producto.<br /><em>Elige la presentación.</em></h1>
+          <p class="hero-sub reveal">Conoce cada producto, compara sus presentaciones y reúne tus consultas en una sola lista.</p>
+          <form class="hero-search reveal" id="heroSearchForm" role="search">
+            <label for="heroCatalogSearch">¿Qué estás buscando?</label>
+            <div class="hero-search-field">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 4.1 4.1"/></svg>
+              <input id="heroCatalogSearch" type="search" placeholder="Ej. NAD, Tirzepatide o 10 mg" autocomplete="off" />
+              <button type="submit">Encontrar</button>
+            </div>
+            <div class="hero-quick-searches" aria-label="Búsquedas rápidas">
+              <span>Accesos rápidos</span>
+              <button type="button" data-quick-search="Tirzepatide">Tirzepatide</button>
+              <button type="button" data-quick-search="NAD">NAD</button>
+              <button type="button" data-quick-search="BPC-157">BPC-157</button>
+            </div>
+          </form>
+          <ul class="hero-trust reveal" aria-label="Ventajas de la atención">
+            <li><span aria-hidden="true">✓</span> Atención en Ecuador</li>
+            <li><span aria-hidden="true">✓</span> Presentaciones para comparar</li>
+            <li><span aria-hidden="true">✓</span> Confirmación antes del pedido</li>
+          </ul>
+        </div>
+
+        <div class="hero-gallery reveal">
+          <!-- HERO_PRODUCTS -->
+          <p class="hero-gallery-note">Imágenes ilustrativas · envases y dimensiones de referencia</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Buscador y filtros ===== -->
+    <section class="catalog-tools" id="catalogo-completo" aria-labelledby="catalog-tools-title">
+      <div class="catalog-tools-inner">
+        <div class="catalog-tools-copy reveal">
+          <span class="section-kicker">Catálogo completo</span>
+          <h2 id="catalog-tools-title">Encuentra lo que necesitas</h2>
+          <p>Busca por nombre, presentación o categoría. Las imágenes son ilustrativas; el envase final puede variar.</p>
+        </div>
+        <div class="catalog-search-wrap reveal">
+          <label for="catalogSearch">Buscar en el catálogo</label>
+          <div class="catalog-search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 4.1 4.1"/></svg>
+            <input id="catalogSearch" type="search" placeholder="Ej. NAD, 10 mg o accesorios" autocomplete="off" />
+            <button type="button" id="clearSearch" class="clear-search" aria-label="Limpiar búsqueda" hidden>×</button>
+          </div>
+        </div>
+        <div class="catalog-filter-row reveal" role="group" aria-label="Filtrar por categoría">
+          <button type="button" class="filter-chip is-active" data-category-filter="all" aria-pressed="true">Todo</button>
+          <button type="button" class="filter-chip" data-category-filter="metabolismo" aria-pressed="false">Metabolismo</button>
+          <button type="button" class="filter-chip" data-category-filter="energia" aria-pressed="false">Vitalidad</button>
+          <button type="button" class="filter-chip" data-category-filter="antienvejecimiento" aria-pressed="false">Bienestar</button>
+          <button type="button" class="filter-chip" data-category-filter="accesorios" aria-pressed="false">Agua y accesorios</button>
+        </div>
+        <p class="catalog-result-count" id="catalogResultCount" role="status" aria-live="polite"></p>
+        <div class="catalog-empty" id="catalogEmpty" hidden>
+          <span aria-hidden="true">⌕</span>
+          <h3>No encontramos coincidencias</h3>
+          <p>Prueba con otro nombre, formato o categoría.</p>
+          <button type="button" class="btn" id="resetCatalog">Ver todo el catálogo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 · Metabolismo -->
+    <section class="section category category-cobalt" id="metabolismo">
+      <div class="category-head reveal">
+        <div>
+          <h2>Metabolismo y control de peso</h2>
+          <p>Compara las presentaciones de esta categoría y consulta disponibilidad directamente con nuestro equipo.</p>
+        </div>
+        <span class="category-count">2 productos</span>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <div class="fc-top">
+            <span class="monogram">TZ</span>
+            <span class="fc-tag">Péptido GLP-1 / GIP</span>
+          </div>
+          <h3>TIRZEPATIDE</h3>
+          <p class="fc-desc">Péptido que actúa sobre múltiples hormonas incretinas para apoyar el metabolismo, el control de la glucosa y la pérdida de peso.</p>
+          <div class="fc-presentations">
+            <span class="pres pres-outline">10 mg</span>
+            <span class="pres pres-cobalt">15 mg</span>
+            <span class="pres pres-turquoise">20 mg</span>
+            <span class="pres pres-cobalt">30 mg</span>
+          </div>
+        </article>
+        <article class="feature-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <div class="fc-top">
+            <span class="monogram">RT</span>
+            <span class="fc-tag">Péptido GLP-1 / GIP</span>
+          </div>
+          <h3>RETATRUTIDE</h3>
+          <p class="fc-desc">Péptido de acción dual que apoya el control del apetito, la glucosa y la pérdida de peso.</p>
+          <div class="fc-presentations">
+            <span class="pres pres-outline">10 mg</span>
+            <span class="pres pres-turquoise">20 mg</span>
+            <span class="pres pres-cobalt">30 mg</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 02 · Energía y masa muscular -->
+    <section class="section category category-navy" id="energia">
+      <div class="category-head reveal">
+        <div>
+          <h2>Vitalidad, rendimiento y recuperación</h2>
+          <p>Una selección organizada para revisar formatos y conocer la información general de cada opción.</p>
+        </div>
+        <span class="category-count">11 productos</span>
+      </div>
+      <div class="product-grid">
+        <article class="product-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>MOTS-C</h3>
+          <p>Apoya la salud mitocondrial y la producción de energía celular.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>BPC-157</h3>
+          <p>Conocido por su apoyo a la recuperación y la reparación de tejidos.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>TB-500</h3>
+          <p>Promueve la recuperación, la flexibilidad y el rendimiento físico.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:3">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge combo">5 + 5 mg</span>
+          <h3>CJC 1295 NO DAC + IPAMORELIN</h3>
+          <p>Combinación secretagoga para apoyar el eje de la hormona de crecimiento.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:4">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>TESAMORELIN</h3>
+          <p>Estimula la secreción natural de hormona de crecimiento.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:5">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>IPAMORELIN</h3>
+          <p>Apoya el metabolismo y la composición corporal.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:6">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>PT-141</h3>
+          <p>Orientado al rendimiento y el bienestar sexual.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:7">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>KISS PEPTIN</h3>
+          <p>Apoya el eje reproductivo y el equilibrio hormonal.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:8">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>SS-31</h3>
+          <p>Protege y optimiza la función mitocondrial.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:9">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>ARA-290</h3>
+          <p>Apoya la protección neuronal y la recuperación metabólica.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:10">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">1500 mg</span>
+          <h3>GLUTATHIONE</h3>
+          <p>El antioxidante maestro para la defensa celular y la desintoxicación.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 03 · Antienvejecimiento -->
+    <section class="section category category-turquoise" id="antienvejecimiento">
+      <div class="category-head reveal">
+        <div>
+          <h2>Bienestar, longevidad y cuidado</h2>
+          <p>Presentaciones asociadas al bienestar integral, cuidado de la piel y acompañamiento de distintos objetivos.</p>
+        </div>
+        <span class="category-count">13 productos</span>
+      </div>
+      <div class="product-grid">
+        <article class="product-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">100 mg</span>
+          <h3>GHK-CU</h3>
+          <p>Regeneración de la piel, colágeno y reparación celular.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>EPITALON</h3>
+          <p>Relacionado con la regulación del ritmo biológico y la longevidad.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">500 mg</span>
+          <h3>NAD</h3>
+          <p>Impulsa la energía celular y apoya la reparación del ADN.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:3">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>DSIP</h3>
+          <p>Apoya el sueño profundo y la recuperación nocturna.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:4">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>KPV</h3>
+          <p>Propiedades antiinflamatorias y apoyo inmunológico.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:5">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>SEMAX</h3>
+          <p>Apoyo cognitivo, enfoque y neuroprotección.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:6">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>SELANK</h3>
+          <p>Equilibrio emocional y reducción de la ansiedad.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:7">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">30 ml</span>
+          <h3>SERUM GHK-CU</h3>
+          <p>Suero cosmético para el cuidado y rejuvenecimiento de la piel.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:8">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>SELANK SPRAY NASAL</h3>
+          <p>Formato nasal para el equilibrio emocional y la calma.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:9">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>SEMAX SPRAY</h3>
+          <p>Formato nasal para el enfoque y el rendimiento mental.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:10">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">80 mg</span>
+          <h3>KLOW</h3>
+          <p>Fórmula combinada para el cuidado de la piel.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:11">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">70 mg</span>
+          <h3>GLOW</h3>
+          <p>Fórmula combinada para luminosidad y firmeza.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:12">
+          <figure class="product-photo" data-image-kind="vial">
+            <img src="assets/placeholders/vial.webp" alt="Envase genérico ilustrativo; no es una fotografía del producto." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 mg</span>
+          <h3>5 AMINO-1MQ</h3>
+          <p>Apoya el metabolismo celular y la longevidad.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 04 · Agua bacteriostática y accesorios -->
+    <section class="section category category-cobalt" id="accesorios">
+      <div class="category-head reveal">
+        <div>
+          <h2>Agua bacteriostática y accesorios</h2>
+          <p>Formatos complementarios y accesorios disponibles para consulta.</p>
+        </div>
+        <span class="category-count">10 artículos</span>
+      </div>
+
+      <h3 class="sub-heading reveal">Agua bacteriostática <span>(Bac Water)</span></h3>
+      <div class="product-grid small">
+        <article class="product-card tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="water">
+            <img src="assets/placeholders/water.webp" alt="Vial con líquido transparente, imagen ilustrativa del envase." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">3 ml</span>
+          <h3>BAC WATER</h3>
+          <p>Frasco de agua bacteriostática para reconstitución.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="water">
+            <img src="assets/placeholders/water.webp" alt="Vial con líquido transparente, imagen ilustrativa del envase." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">10 ml</span>
+          <h3>BAC WATER</h3>
+          <p>Frasco de agua bacteriostática para reconstitución.</p>
+        </article>
+        <article class="product-card tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="water">
+            <img src="assets/placeholders/water.webp" alt="Vial con líquido transparente, imagen ilustrativa del envase." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="pc-badge">30 ml</span>
+          <h3>BAC WATER</h3>
+          <p>Frasco de agua bacteriostática para reconstitución.</p>
+        </article>
+      </div>
+
+      <h3 class="sub-heading reveal">Accesorios</h3>
+      <div class="accessory-grid">
+        <div class="accessory tilt-card reveal" style="--i:0">
+          <figure class="product-photo" data-image-kind="syringe">
+            <img src="assets/placeholders/syringe.webp" alt="Jeringa genérica ilustrativa." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="acc-icon">3 ml</span>
+          <h4>Jeringa 3 ml</h4>
+          <span class="acc-cat">Inyección</span>
+        </div>
+        <div class="accessory tilt-card reveal" style="--i:1">
+          <figure class="product-photo" data-image-kind="syringe">
+            <img src="assets/placeholders/syringe.webp" alt="Jeringa genérica ilustrativa." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="acc-icon">100</span>
+          <h4>Jeringuilla 100 und.</h4>
+          <span class="acc-cat">Insumo</span>
+        </div>
+        <div class="accessory tilt-card reveal" style="--i:2">
+          <figure class="product-photo" data-image-kind="wipe">
+            <img src="assets/placeholders/wipe.webp" alt="Sobre y toallita genéricos ilustrativos." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="acc-icon">Prep</span>
+          <h4>Alcohol pre pad</h4>
+          <span class="acc-cat">Higiene</span>
+        </div>
+        <div class="accessory tilt-card reveal" style="--i:3">
+          <figure class="product-photo" data-image-kind="pen">
+            <img src="assets/placeholders/pen.webp" alt="Aplicador genérico ilustrativo." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="acc-icon">Pen</span>
+          <h4>Pen Peptide</h4>
+          <span class="acc-cat">Aplicador</span>
+        </div>
+        <div class="accessory tilt-card reveal" style="--i:4">
+          <figure class="product-photo" data-image-kind="cartridge">
+            <img src="assets/placeholders/cartridge.webp" alt="Cartucho genérico ilustrativo." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="acc-icon">Cart.</span>
+          <h4>Cartucho</h4>
+          <span class="acc-cat">Repuesto</span>
+        </div>
+        <div class="accessory tilt-card reveal" style="--i:5">
+          <figure class="product-photo" data-image-kind="needle">
+            <img src="assets/placeholders/needle.webp" alt="Aguja para aplicador con capuchón, imagen ilustrativa." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="acc-icon">Pen</span>
+          <h4>Aguja Pen</h4>
+          <span class="acc-cat">Inyección</span>
+        </div>
+        <div class="accessory tilt-card reveal" style="--i:6">
+          <figure class="product-photo" data-image-kind="roller">
+            <img src="assets/placeholders/roller.webp" alt="Rodillo dérmico genérico ilustrativo." width="640" height="640" loading="lazy" decoding="async" />
+            <figcaption>Imagen ilustrativa</figcaption>
+          </figure>
+          <span class="acc-icon">Skin</span>
+          <h4>Derma Roller</h4>
+          <span class="acc-cat">Estética</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Cómo comprar ===== -->
+    <section class="section buying-section" id="como-comprar" aria-labelledby="buying-title">
+      <div class="section-head section-head-split reveal">
+        <div>
+          <h2 id="buying-title">Cómo preparar tu pedido</h2>
+        </div>
+        <p>Busca, selecciona y envía tu lista desde el único botón de WhatsApp.</p>
+      </div>
+      <ol class="buying-steps">
+        <li class="buying-step reveal" style="--i:0">
+          <span aria-hidden="true">1</span>
+          <div><h3>Busca</h3><p>Escribe un nombre, concentración o elige una categoría.</p></div>
+        </li>
+        <li class="buying-step reveal" style="--i:1">
+          <span aria-hidden="true">2</span>
+          <div><h3>Selecciona</h3><p>Elige presentación y cantidad antes de añadir.</p></div>
+        </li>
+        <li class="buying-step reveal" style="--i:2">
+          <span aria-hidden="true">3</span>
+          <div><h3>Revisa</h3><p>Abre “Mi lista” para editar, eliminar o vaciar productos.</p></div>
+        </li>
+        <li class="buying-step reveal" style="--i:3">
+          <span aria-hidden="true">4</span>
+          <div><h3>Confirma</h3><p>Usa el botón flotante para consultar disponibilidad, entrega y pago.</p></div>
+        </li>
+      </ol>
+      <div class="purchase-facts reveal" id="informacion">
+        <article>
+          <h3>Disponibilidad</h3>
+          <p>Se confirma antes de cerrar el pedido.</p>
+        </article>
+        <article>
+          <h3>Conservación</h3>
+          <p>Consulta las condiciones específicas del fabricante para cada presentación.</p>
+        </article>
+        <article>
+          <h3>Entrega y pago</h3>
+          <p>Cobertura, costo y método se confirman por WhatsApp.</p>
+        </article>
+      </div>
+      <div class="legal-note reveal">
+        <span class="legal-icon">!</span>
+        <p><strong>Información responsable:</strong> este catálogo no reemplaza una valoración ni una indicación médica. Los productos señalados como de investigación no están presentados como tratamiento.</p>
+      </div>
+    </section>
+
+    <!-- ===== Preguntas frecuentes ===== -->
+    <section class="section faq-section" id="preguntas" aria-labelledby="faq-title">
+      <div class="section-head section-head-split reveal">
+        <div>
+          <span class="section-kicker">Respuestas claras</span>
+          <h2 id="faq-title">Preguntas frecuentes</h2>
+        </div>
+        <p>Lo esencial antes de enviar tu consulta a Doctor Pep.</p>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>¿Los productos mostrados están disponibles?</summary>
+          <p>El catálogo presenta las opciones y formatos de referencia. La disponibilidad se confirma antes de cerrar cada pedido.</p>
+        </details>
+        <details>
+          <summary>¿Cómo elijo una presentación?</summary>
+          <p>Abre la ficha del producto, selecciona el formato que te interesa y añádelo a tu lista. La consulta no genera una compra automática.</p>
+        </details>
+        <details>
+          <summary>¿Realizan entregas?</summary>
+          <p>La cobertura, el costo y las condiciones de entrega se confirman directamente por WhatsApp según cada pedido.</p>
+        </details>
+        <details>
+          <summary>¿Qué métodos de pago aceptan?</summary>
+          <p>El método de pago se informa y confirma durante la atención por WhatsApp.</p>
+        </details>
+        <details>
+          <summary>¿Cómo deben conservarse los productos?</summary>
+          <p>No todos requieren las mismas condiciones. Confirma la temperatura, la protección de la luz y el plazo de conservación en la etiqueta del fabricante; pueden cambiar después de abrir el envase.</p>
+        </details>
+        <details>
+          <summary>¿Este catálogo reemplaza una indicación médica?</summary>
+          <p>No. El catálogo es informativo y no reemplaza una valoración ni una indicación médica.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ===== Ficha de producto ===== -->
+    <dialog class="product-dialog" id="productDialog" aria-labelledby="dialogTitle" aria-describedby="dialogDescription">
+      <div class="dialog-shell">
+        <button type="button" class="dialog-close" id="dialogClose" aria-label="Cerrar ficha de producto">×</button>
+        <figure class="dialog-product-photo" id="dialogProductPhoto">
+          <button type="button" id="zoomProduct" aria-label="Ampliar imagen del producto"><img id="dialogProductImage" alt="" width="640" height="640" /><span>Ampliar imagen ↗</span></button>
+          <figcaption>Imagen ilustrativa · el envase final puede variar</figcaption>
+        </figure>
+        <span class="dialog-category" id="dialogCategory"></span>
+        <h2 id="dialogTitle"></h2>
+        <p class="dialog-description" id="dialogDescription"></p>
+        <ul class="dialog-facts" aria-label="Información general de la consulta">
+          <li><span aria-hidden="true"></span><strong>Disponibilidad</strong> por confirmar</li>
+          <li><span aria-hidden="true"></span><strong>Imagen</strong> ilustrativa</li>
+          <li><span aria-hidden="true"></span><strong>Atención</strong> personalizada</li>
+        </ul>
+        <form id="dialogForm">
+          <fieldset class="dialog-options">
+            <legend>Elige una presentación</legend>
+            <div class="presentation-options" id="dialogPresentations"></div>
+          </fieldset>
+          <label class="quantity-field" for="dialogQuantity">
+            <span>Cantidad</span>
+            <input id="dialogQuantity" name="quantity" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" />
+          </label>
+          <p id="selectionSummary" class="selection-summary" role="status" aria-live="polite"></p>
+          <button type="submit" class="btn dialog-add">Añadir a consulta</button>
+        </form>
+        <p class="dialog-note">La cantidad indica envases, no una dosis. La disponibilidad se confirma antes del pedido.</p>
+        <div id="productDetails" class="product-details"></div>
+        <button type="button" id="shareProduct" class="share-product">Copiar enlace de esta presentación ↗</button>
+      </div>
+    </dialog>
+
+    <!-- ===== Panel de lista ===== -->
+    <dialog class="consultation-drawer" id="consultationDrawer" aria-labelledby="consultation-title">
+      <div class="consultation-shell">
+        <div class="consultation-heading">
+          <div>
+            <span class="drawer-eyebrow">Tu selección</span>
+            <h2 id="consultation-title">Mi lista</h2>
+          </div>
+          <button type="button" class="dialog-close" id="consultationClose" aria-label="Cerrar mi lista">×</button>
+        </div>
+        <p class="consultation-intro">Revisa presentaciones y cantidades antes de abrir WhatsApp.</p>
+        <div class="consultation-empty" id="consultationEmpty">
+          <span class="consultation-empty-icon" aria-hidden="true">+</span>
+          <div>
+            <strong>Tu lista está vacía</strong>
+            <p>Añade productos desde el catálogo.</p>
+          </div>
+        </div>
+        <ul class="consultation-list" id="consultationList" aria-label="Productos añadidos a la lista"></ul>
+        <div class="consultation-footer">
+          <p>La lista se guarda únicamente en este dispositivo. Al abrir WhatsApp, su contenido se incluirá en el mensaje.</p>
+          <div class="consultation-footer-actions">
+            <span class="consultation-total" id="consultationTotal">0 productos</span>
+            <button type="button" class="clear-list" id="clearConsultation" hidden>Vaciar lista</button>
+          </div>
+        </div>
+        <p class="consultation-status sr-only" id="consultationStatus" role="status" aria-live="polite"></p>
+      </div>
+    </dialog>
+    <dialog id="imageDialog" class="image-dialog" aria-label="Imagen ampliada del producto">
+      <button type="button" id="closeImage" class="dialog-close" aria-label="Cerrar imagen ampliada">×</button>
+      <img id="largeProductImage" alt="" width="1024" height="1024" />
+      <p id="largeProductCaption"></p>
+      <p>Imagen ilustrativa. No representa el envase definitivo ni sus dimensiones exactas.</p>
+    </dialog>
+  </main>
+
+  <!-- ===== Pie de página ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <span class="brand-icon brand-logo footer-logo" aria-hidden="true">
+            <img src="assets/doctor-pep-logo.webp" alt="" width="640" height="640" loading="lazy" />
+          </span>
+          <div>
+            <strong>Doctor Pep</strong>
+            <span>Catálogo BioPeptix · atención personalizada</span>
+          </div>
+        </div>
+        <p>Consulta presentaciones y disponibilidad directamente con nuestro equipo.</p>
+      </div>
+      <div class="footer-column">
+        <span class="footer-label">Contacto</span>
+        <span class="footer-phone">+593 98 900 9150</span>
+        <a href="#catalogo-completo">Ver catálogo</a>
+        <a href="#como-comprar">Cómo comprar</a>
+        <a href="#informacion">Información importante</a>
+      </div>
+      <div class="footer-column footer-socials">
+        <span class="footer-label">Síguenos</span>
+        <a class="footer-social-link" href="https://www.instagram.com/doctor.pep.26?igsh=OTlqNzY5YmN3a3Jk" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram de Doctor Pep">
+          <span class="footer-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
+          <span><strong>@doctor.pep.26</strong></span>
+        </a>
+        <a class="footer-social-link" href="https://www.tiktok.com/@doctor.pep.26?_r=1&amp;_t=ZS-98mDLC5Y5Qr" target="_blank" rel="noopener noreferrer" aria-label="Abrir TikTok de Doctor Pep">
+          <span class="footer-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 4v10.1a4.8 4.8 0 1 1-4.1-4.7v3.2a1.8 1.8 0 1 0 1.1 1.6V4h3Z"/><path d="M14.5 4c.6 2.5 2.2 3.9 5 4.1v3c-2-.1-3.7-.8-5-2"/></svg></span>
+          <span><strong>@doctor.pep.26</strong></span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Catálogo informativo · Imágenes ilustrativas · No sustituye una indicación médica</p>
+      <p>© 2026 Doctor Pep · BioPeptix.</p>
+    </div>
+  </footer>
+
+  <div class="catalog-toast" id="catalogToast" role="status" aria-live="polite" hidden>
+    <span id="toastMessage"></span>
+    <button type="button" id="toastOpenList">Ver lista</button>
+  </div>
+
+  <nav class="mobile-dock" aria-label="Acciones rápidas">
+    <button type="button" id="mobileSearchTrigger">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 4.1 4.1"/></svg>
+      <span>Buscar</span>
+    </button>
+    <button type="button" id="mobileListTrigger">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+      <span>Mi lista</span>
+      <strong id="mobileListCount" aria-hidden="true">0</strong>
+    </button>
+  </nav>
+
+  <a href="https://wa.me/593989009150?text=Hola%2C%20quisiera%20consultar%20la%20disponibilidad%20del%20cat%C3%A1logo%20Doctor%20Pep."
+     class="whatsapp-float whatsapp-link" target="_blank" rel="noopener noreferrer" aria-label="Consultar por WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.04 3A12.8 12.8 0 0 0 5.02 22.3L3.3 28.58l6.43-1.68A12.8 12.8 0 1 0 16.04 3Zm0 23.43c-1.91 0-3.79-.51-5.42-1.48l-.39-.23-3.81 1 1.02-3.71-.25-.4a10.6 10.6 0 1 1 8.85 4.82Zm5.82-7.95c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.58a9.55 9.55 0 0 1-1.76-2.19c-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.15 3.09 1.31 3.3c.16.21 2.26 3.45 5.47 4.84.76.33 1.36.53 1.82.67.77.24 1.46.21 2.01.13.61-.09 1.89-.77 2.15-1.52.27-.75.27-1.39.19-1.52-.08-.14-.29-.21-.61-.37Z"/>
+    </svg>
+    <span class="whatsapp-label">WhatsApp</span>
+    <span class="whatsapp-count" id="whatsappCount" aria-hidden="true" hidden>0</span>
+  </a>
+  <!-- CATALOG_DATA -->
+  <script src="script-v2.js"></script>
+</body>
+</html>
