@@ -2,7 +2,7 @@
 
 Estas imágenes son maquetas ilustrativas, no fotografías de existencias ni etiquetas verificadas del fabricante.
 
-- Una imagen por producto y presentación. Los nombres de archivo coinciden con `data/catalog.mjs`.
+- Una imagen por producto y presentación. Las 41 presentaciones visibles del catálogo tienen una imagen propia; los nombres de archivo coinciden con `data/catalog.mjs`.
 - Nombres y contenidos se muestran como identificadores del catálogo, no como instrucciones de dosificación.
 - Las proporciones, colores y envases son conceptuales; no acreditan dimensiones o compatibilidad reales.
 - Las imágenes iniciales de TIRZEPATIDE 10 mg y NAD 500 mg se conservan sin modificación.

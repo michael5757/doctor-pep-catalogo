@@ -296,6 +296,9 @@
           return item && item.name && item.presentation;
         })
         .map(function (item) {
+          if (slug(item.name) === 'jeringuilla-100-und') {
+            item = Object.assign({}, item, { name: 'Jeringuilla 10 ml', presentation: '10 ml' });
+          }
           const sourceData = sourceDataForItem(item);
           return {
             id: slug(item.name + "-" + item.presentation),
@@ -1234,7 +1237,7 @@
     openProductDialog(getCardData(card), link);
   }));
   const initialParams = pageParams(initialUrl);
-  const requestedId = initialParams.get('producto');
+  const requestedId = initialParams.get('producto') === 'jeringuilla-100-und' ? 'jeringuilla-10-ml' : initialParams.get('producto');
   if (requestedId) {
     const presentation = canonicalPresentation(initialParams.get('presentacion'));
     const matches = sourceCards.filter(card => getCardData(card).id === requestedId);

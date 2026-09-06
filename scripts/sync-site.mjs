@@ -42,7 +42,7 @@ const publicCatalog = Object.fromEntries(Object.entries(catalog).map(([id, produ
   benefits: product.benefits, benefitsTitle: product.benefitsTitle, note: product.note,
 }]));
 html = html.replace('<!-- CATALOG_DATA -->', `<script id="catalogData" type="application/json">${JSON.stringify({products: publicCatalog, featuredProductIds}).replaceAll('<', '\\u003c')}</script>`);
-html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">' + ['tirzepatide','nad','bpc-157'].map((id,index) => {
+html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">' + ['tirzepatide','serum-ghk-cu','selank-spray-nasal'].map((id,index) => {
   const product = catalog[id]; const presentation = product.presentations[0];
   return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · imagen ilustrativa" width="640" height="640" ${index ? 'decoding="async"' : 'fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
 }).join('') + '</div>');

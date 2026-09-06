@@ -1,6 +1,6 @@
 # Imágenes temporales del catálogo Doctor Pep
 
-La portada y las 36 tarjetas utilizan imágenes ilustrativas. Son referencias del tipo de envase o accesorio, no fotografías de unidades en venta ni evidencia de su composición, marca, concentración o disponibilidad.
+La portada y las 36 tarjetas utilizan imágenes ilustrativas. Las 41 presentaciones del catálogo ya cuentan con un recurso propio en `assets/products/`; son referencias visuales del tipo de envase o accesorio, no fotografías de unidades en venta ni evidencia de su composición, marca, concentración o disponibilidad.
 
 ## Dirección visual y referencias de internet
 
@@ -11,27 +11,20 @@ Se investigaron fotografías de Pexels y Wikimedia Commons, pero las candidatas 
 
 ## Archivos que consume el sitio
 
-Los archivos se encuentran en `assets/placeholders/`. El proceso de sincronización copia únicamente WebP a `public/assets/placeholders/`.
+Las tarjetas del catálogo consumen los WebP de `assets/products/`, con nombres derivados del producto y la presentación. El proceso de sincronización los copia a `public/assets/products/`. Los recursos genéricos de `assets/placeholders/` se conservan únicamente como respaldo para la maqueta original.
 
 | Archivo | Ubicación y uso |
 | --- | --- |
-| `hero-1280.webp`, `hero-720.webp` | Portada, dos tamaños de la misma composición |
-| `vial.webp` | Péptidos y fórmulas, compartido temporalmente |
-| `water.webp` | Agua bacteriostática, distintos formatos |
-| `syringe.webp` | Jeringa y jeringuilla |
-| `pen.webp` | Aplicador Pen Peptide |
-| `cartridge.webp` | Cartucho |
-| `wipe.webp` | Alcohol pre pad |
-| `roller.webp` | Derma Roller |
-| `needle.webp` | Aguja Pen |
+| `assets/products/*.webp` | Una imagen por producto y presentación, con texto identificativo cuando hace falta distinguir formatos |
+| `assets/placeholders/hero-1280.webp`, `hero-720.webp` | Recursos genéricos heredados de la maqueta; la portada actual usa los activos editoriales de `assets/` |
 
 ## Reemplazo por fotografías propias
 
-1. Guardar las fotos definitivas en `assets/placeholders/` como WebP, preferentemente con encuadre cuadrado y al menos 640 × 640 px. Se puede utilizar otro nombre por producto, por ejemplo `bpc-157-real.webp`.
-2. En `index.html`, localizar la tarjeta por su nombre y cambiar el `src` de la imagen dentro de `figure.product-photo`. Ajustar `alt`, `width` y `height` a la nueva fotografía. Una foto compartida no debe reemplazarse globalmente si corresponde solo a un producto.
+1. Guardar cada foto definitiva en `assets/products/` como WebP, preferentemente con encuadre cuadrado y al menos 640 × 640 px. Usar el patrón `producto-presentacion.webp`, por ejemplo `bpc-157-10-mg.webp`.
+2. Actualizar la ruta correspondiente en `data/catalog.mjs`; no editar manualmente `index.html`, `public/` ni `app/site-body.generated.ts`. Una foto compartida no debe reemplazarse globalmente si corresponde solo a un producto.
 3. Quitar “Imagen ilustrativa” únicamente de las tarjetas con fotografía propia confirmada. La ficha y la miniatura de Mi lista leen automáticamente la imagen de la tarjeta.
-4. Para la portada, actualizar también `srcset` y la leyenda si se reemplaza por una fotografía propia.
-5. Ejecutar el flujo habitual de sincronización y compilación. No editar manualmente `public/` ni `app/site-body.generated.ts`.
+4. Para la portada, actualizar también el recurso editorial de `assets/` y la leyenda si se reemplaza por una fotografía propia.
+5. Ejecutar el flujo habitual de sincronización y compilación.
 
 ## Prompts de generación
 

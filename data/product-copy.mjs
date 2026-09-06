@@ -160,12 +160,12 @@ export const productCopy = {
     'Sirve para medir o administrar líquidos en procedimientos compatibles con su diseño y especificaciones.',
     ['Capacidad de 3 ml para identificar fácilmente el formato.', 'Manejo manual del émbolo para desplazar el líquido.'],
     'Características principales', 'Consulta el tipo de conexión y si la presentación incluye aguja.'),
-  'jeringuilla-100-und': copy(
-    'Completa tu selección con la jeringuilla adecuada para tu procedimiento.',
-    'Es una jeringuilla identificada en el catálogo con la referencia «100 und.».',
-    'Se utiliza para medir o administrar líquidos de acuerdo con su capacidad y tipo de escala.',
-    ['Formato de jeringuilla para manejo de líquidos.', 'Selección según la capacidad y escala que necesites.'],
-    'Características principales', 'Consulta si «100 und.» corresponde al paquete o a la escala de la referencia.'),
+  'jeringuilla-10-ml': copy(
+    'Capacidad de 10 ml para medir y manejar líquidos con un formato práctico.',
+    'Es una jeringuilla con capacidad de 10 ml, formada por un cuerpo graduado y un émbolo de accionamiento manual.',
+    'Sirve para medir, extraer o administrar líquidos en procedimientos compatibles con sus especificaciones.',
+    ['Capacidad de 10 ml claramente identificada.', 'Cuerpo graduado para visualizar el volumen.', 'Émbolo manual para controlar el desplazamiento del líquido.'],
+    'Características principales', 'Los 10 ml corresponden a la capacidad de la jeringuilla. Consulta el tipo de conexión y si incluye aguja.'),
   'alcohol-pre-pad': copy(
     'Preparación de la piel en un práctico formato de toallita con alcohol.',
     'Es una toallita de preparación impregnada con alcohol.',
