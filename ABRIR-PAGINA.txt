@@ -1,0 +1,15 @@
+DOCTOR PEP - VERSION PARA ABRIR DESDE TUS ARCHIVOS
+
+Haz doble clic en index.html. No necesitas instalar ni iniciar un servidor.
+La opción Videos abre videos.html, que también puedes abrir con doble clic.
+
+Conserva esta carpeta completa: index.html, videos.html, los archivos de estilos,
+script-v2.js y las carpetas assets y local. Si mueves la página, copia toda
+la carpeta; index.html por sí solo no contiene las imágenes ni los estilos.
+
+El catálogo, sus imágenes y las fichas se cargan desde la carpeta.
+WhatsApp y las publicaciones de TikTok e Instagram necesitan internet.
+La reproducción de publicaciones también depende de la plataforma original.
+
+En la versión local, el botón de copiar de una ficha copia el nombre y la
+presentación del producto, no una dirección privada de tu computadora.

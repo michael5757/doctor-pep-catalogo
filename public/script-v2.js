@@ -5,6 +5,13 @@
   const $ = (selector, context) => (context || document).querySelector(selector);
   const $$ = (selector, context) =>
     Array.from((context || document).querySelectorAll(selector));
+  const isLocalFile = location.protocol === 'file:';
+  const pageParams = (url = new URL(location.href)) =>
+    isLocalFile && url.hash.startsWith('#?') ? new URLSearchParams(url.hash.slice(2)) : url.searchParams;
+  function replacePageUrl(url) {
+    // Some local browsers restrict History API calls. Never let that break a fiche.
+    try { history.replaceState(history.state, '', url); } catch (_error) {}
+  }
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -634,8 +641,10 @@
 
   function productUrl(data, presentation) {
     const url = new URL(location.href);
-    url.searchParams.set('producto', data.id || slug(data.name));
-    url.searchParams.set('presentacion', presentation);
+    const params = isLocalFile ? new URLSearchParams() : url.searchParams;
+    params.set('producto', data.id || slug(data.name));
+    params.set('presentacion', presentation);
+    if (isLocalFile) url.hash = '?' + params.toString();
     return url;
   }
   function syncProductSelection() {
@@ -645,16 +654,12 @@
     img.src = imageFor(activeProduct, presentation);
     img.alt = activeProduct.name + ' · ' + presentation + ' · imagen ilustrativa';
     $('#selectionSummary').textContent = activeProduct.name + ' · ' + presentation + ' · ' + (dialogQuantity.value || '1') + ' envase(s)';
-    history.replaceState(history.state, '', productUrl(activeProduct, presentation));
+    replacePageUrl(productUrl(activeProduct, presentation));
   }
   function renderProductDetails(data) {
     const record = productRecord(data.name);
     const container = $('#productDetails');
     container.replaceChildren();
-    const label = document.createElement('span');
-    label.className = 'evidence-label';
-    label.textContent = record.evidence || 'Información por confirmar';
-    container.append(label);
     const addSection = (title, paragraphs, open = false) => {
       const detail = document.createElement('details');
       detail.open = open;
@@ -665,26 +670,23 @@
       container.append(detail);
       return detail;
     };
-    addSection('Qué es y qué sabemos', [record.detail], true);
-    if (record.evidence !== 'Accesorio') addSection('Beneficios y límites de la evidencia', [
-      ...(record.benefits || []),
-      record.benefits?.length ? 'Estos datos pertenecen a los estudios citados, no a una verificación del producto ofrecido.' : 'No se han verificado beneficios clínicos para esta presentación. No se atribuyen resultados terapéuticos a la imagen ni al nombre comercial.',
-      'La documentación del fabricante y el registro local de este envase no han sido verificados. Las referencias extranjeras no acreditan su autorización en Ecuador.'
-    ]);
-    addSection('Presentación y datos por confirmar', [
+    addSection('Qué es', [record.what], true);
+    addSection('Para qué sirve', [record.usage], true);
+    if (record.benefits?.length) {
+      const benefits = addSection(record.benefitsTitle || 'Beneficios', [], true);
+      benefits.className = 'product-benefits';
+      const list = document.createElement('ul');
+      record.benefits.forEach(text => {
+        const item = document.createElement('li');
+        item.textContent = text;
+        list.append(item);
+      });
+      benefits.append(list);
+    }
+    addSection('Presentación e información de uso', [
       'Opciones del catálogo: ' + data.presentations.join(' · ') + '.',
-      record.evidence === 'Accesorio' ? 'Las imágenes no permiten deducir medidas, compatibilidad ni contenido del paquete.' : 'Los mg indican contenido declarado, no una dosis ni el tamaño del frasco. Los ml indican volumen. No se calcula cantidad por aplicación ni concentración sin una ficha técnica.',
-      'Confirmar fabricante, etiqueta, composición, contenido e instrucciones antes del pedido.'
+      record.note,
     ]);
-    addSection('Precauciones y conservación', [record.caution, record.storage,
-      record.evidence === 'Accesorio' ? '' : 'No iniciar, combinar o ajustar tratamientos a partir de este catálogo. Consulta a un profesional de salud.'
-    ]);
-    const refs = addSection('Fuentes de consulta', [record.sources?.length ? 'Revisión editorial: 5 de septiembre de 2026. Fuentes sobre ingredientes y medicamentos de referencia; no son certificados del producto.' : 'Pendiente de recibir la ficha técnica del fabricante. No se inventan fuentes o especificaciones.']);
-    (record.sources || []).forEach(([title, url]) => {
-      const p = document.createElement('p'); const a = document.createElement('a');
-      a.href = url; a.textContent = title + ' ↗'; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      p.append(a); refs.append(p);
-    });
   }
 
   function showProductDialog(data, trigger, options) {
@@ -756,8 +758,12 @@
     productDialog.addEventListener("close", function () {
       if (previousProductUrl) {
         const url = new URL(previousProductUrl);
-        url.searchParams.delete('producto'); url.searchParams.delete('presentacion');
-        history.replaceState(history.state, '', url);
+        if (isLocalFile) {
+          if (url.hash.startsWith('#?')) url.hash = '';
+        } else {
+          url.searchParams.delete('producto'); url.searchParams.delete('presentacion');
+        }
+        replacePageUrl(url);
       }
       previousProductUrl = null;
       const shouldReopen = reopenDrawerAfterDialog;
@@ -1030,7 +1036,7 @@
   });
   try {
     const saved = JSON.parse(sessionStorage.getItem('doctorPepBrowse') || 'null');
-    if (saved && !new URL(location.href).searchParams.has('producto')) {
+    if (saved && !pageParams().has('producto')) {
       catalogSearch.value = saved.query || '';
       if (heroCatalogSearch) heroCatalogSearch.value = catalogSearch.value;
       activeCategory = filterChips.some(c => c.dataset.categoryFilter === saved.category) ? saved.category : 'all';
@@ -1189,16 +1195,19 @@
   imageDialog?.addEventListener('close', () => $('#zoomProduct').focus({preventScroll: true}));
   $('#shareProduct')?.addEventListener('click', async () => {
     const button = $('#shareProduct');
-    try { await navigator.clipboard.writeText(location.href); button.textContent = 'Enlace copiado ✓'; }
+    const value = isLocalFile
+      ? activeProduct.name + ' · ' + $("input[name='presentation']:checked", dialogPresentations).value
+      : location.href;
+    try { await navigator.clipboard.writeText(value); button.textContent = isLocalFile ? 'Referencia copiada ✓' : 'Enlace copiado ✓'; }
     catch {
       let field = $('#productLinkFallback');
-      if (!field) { field = document.createElement('input'); field.id = 'productLinkFallback'; field.readOnly = true; field.setAttribute('aria-label', 'Enlace para copiar'); button.after(field); }
-      field.value = location.href; field.focus(); field.select();
-      button.textContent = 'Selecciona y copia el enlace';
+      if (!field) { field = document.createElement('input'); field.id = 'productLinkFallback'; field.readOnly = true; field.setAttribute('aria-label', 'Texto para copiar'); button.after(field); }
+      field.value = value; field.focus(); field.select();
+      button.textContent = 'Selecciona y copia el texto';
     }
   });
   productDialog?.addEventListener('close', () => {
-    $('#shareProduct').textContent = 'Copiar enlace de esta presentación ↗';
+    $('#shareProduct').textContent = isLocalFile ? 'Copiar nombre y presentación' : 'Copiar enlace de esta presentación ↗';
     $('#productLinkFallback')?.remove();
   });
   // Optional owner-selected priorities are applied inside existing categories only.
@@ -1214,9 +1223,20 @@
     try { sessionStorage.setItem('doctorPepScroll', String(window.scrollY)); } catch {}
   });
   const initialUrl = new URL(location.href);
-  const requestedId = initialUrl.searchParams.get('producto');
+  if (isLocalFile) $('#shareProduct').textContent = 'Copiar nombre y presentación';
+  // Hero links open the same fiche without navigating away from the local file.
+  $$('[data-product-link]').forEach(link => link.addEventListener('click', event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const card = sourceCards.find(item => getCardData(item).id === link.dataset.productLink);
+    if (!card) return;
+    event.preventDefault();
+    setCategoryCollapsed(card.closest('.category'), false);
+    openProductDialog(getCardData(card), link);
+  }));
+  const initialParams = pageParams(initialUrl);
+  const requestedId = initialParams.get('producto');
   if (requestedId) {
-    const presentation = canonicalPresentation(initialUrl.searchParams.get('presentacion'));
+    const presentation = canonicalPresentation(initialParams.get('presentacion'));
     const matches = sourceCards.filter(card => getCardData(card).id === requestedId);
     const card = matches.find(c => getCardData(c).presentations.includes(presentation)) || matches[0];
     if (card) {
@@ -1227,8 +1247,11 @@
   } else if (!location.hash) {
     try { const position = Number(sessionStorage.getItem('doctorPepScroll')); if (position) requestAnimationFrame(() => window.scrollTo({top: position, behavior: 'instant'})); } catch {}
   }
-  if (initialUrl.searchParams.get('lista') === '1') {
+  if (initialParams.get('lista') === '1') {
     openConsultationDrawer(listTrigger);
-    const clean = new URL(location.href); clean.searchParams.delete('lista'); history.replaceState(history.state, '', clean);
+    const clean = new URL(location.href);
+    if (isLocalFile) { if (clean.hash.startsWith('#?')) clean.hash = ''; }
+    else clean.searchParams.delete('lista');
+    replacePageUrl(clean);
   }
 })();

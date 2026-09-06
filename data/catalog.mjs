@@ -1,4 +1,5 @@
 // Editorial data, not manufacturer labeling. Reviewed 2026-09-05.
+import { productCopy } from './product-copy.mjs';
 export const slug = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 export const sources = {
   safety: ['FDA · límites de seguridad de sustancias para formulación', 'https://www.fda.gov/drugs/human-drug-compounding/certain-bulk-drug-substances-use-compounding-may-present-significant-safety-risks'],
@@ -50,11 +51,15 @@ const rows = [
   ['Aguja Pen', ['Medidas por confirmar'], 'Aguja para pen; calibre y longitud por confirmar.', 'Accesorio', 'Solicitar calibre, longitud, conexión, cantidad y modelos compatibles.', [], 'No seleccionar por la apariencia de la imagen. Consultar la especificación del fabricante.', []],
   ['Derma Roller', ['Medidas por confirmar'], 'Rodillo dérmico; longitud de agujas y material por confirmar.', 'Accesorio', 'No se han confirmado longitud, número de agujas, material o accesorios incluidos.', [], 'Las medidas y condiciones de higiene importan; seguir la documentación profesional y del fabricante.', []],
 ];
-export const catalog = Object.fromEntries(rows.map(([name,presentations,summary,evidence,detail,benefits,caution,refs]) => [slug(name), {
+export const catalog = Object.fromEntries(rows.map(([name,presentations,summary,evidence,detail,benefits,caution,refs]) => {
+  if (!productCopy[slug(name)]) throw new Error(`Missing consumer copy for ${name}`);
+  return [slug(name), {
   id: slug(name), name, presentations, summary, evidence, detail, benefits, caution,
   sources: refs.map(key => sources[key]), reviewed: '2026-09-05',
   storage: 'Condiciones de este envase pendientes de confirmar: temperatura, luz y plazo una vez abierto. Solicita la etiqueta o ficha técnica del fabricante.',
   images: Object.fromEntries(presentations.map(p => [p, `/assets/products/${slug(name)}-${slug(p)}.webp`])),
-}]));
+  ...productCopy[slug(name)],
+}];
+}));
 // Owner-selected priority, never interpreted as sales/popularity rankings.
 export const featuredProductIds = [];

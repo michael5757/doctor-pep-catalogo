@@ -51,7 +51,8 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 .product-details p, .product-details li { font-size: 1rem; line-height: 1.65; color: #40536a; margin: 0 0 14px; }
 .product-details ul { padding-left: 22px; }
 .product-details a { color: #164fae; text-decoration: underline; text-underline-offset: 3px; }
-.evidence-label { font-size: .875rem; color: #71450f; background: #fff4dc; display: inline-block; padding: 7px 10px; border-radius: 4px; margin-bottom: 14px; }
+.product-details .product-benefits { background: #f2f7fd; padding: 0 16px; }
+.product-benefits li::marker { color: #174fba; }
 .share-product { background: none; color: #174fba; border: 1px solid #bed0e9; border-radius: 5px; padding: 12px; min-height: 44px; font: inherit; margin-top: 22px; width: 100%; cursor: pointer; }
 .image-dialog { width: min(900px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 54px 24px 24px; border: none; border-radius: 8px; }
 .image-dialog::backdrop { background: #071830cc; }

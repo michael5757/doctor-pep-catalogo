@@ -8,7 +8,7 @@ const publicRoot = resolve(projectRoot, "public");
 const publicAssetsRoot = resolve(publicRoot, "assets");
 let html = await readFile(resolve(projectRoot, "site-template.html"), "utf8");
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
-const imageExists = async path => { try { await access(resolve(publicRoot, '..', path.slice(1))); return true; } catch { return false; } };
+const imageExists = async path => { try { await access(resolve(projectRoot, path.replace(/^\/+/, ''))); return true; } catch { return false; } };
 // Catalog imagery and editorial copy have one source for SSR and interaction.
 const cardPattern = /<(article|div) class="(?:feature-card|product-card|accessory)(?=[\s"])[\s\S]*?<h[34]>([^<]+)<\/h[34]>/g;
 const matches = [...html.matchAll(cardPattern)];
@@ -21,23 +21,32 @@ for (const match of matches.reverse()) {
   const fallback = block.match(/<img src="([^"]+)"/)?.[1];
   for (const presentation of product.presentations) {
     if (!await imageExists(product.images[presentation])) product.images[presentation] = '/' + fallback;
+    // Relative assets work both beside index.html (file://) and on the web.
+    product.images[presentation] = product.images[presentation].replace(/^\/+/, '');
   }
   block = block.replace(/(<(?:article|div) class="[^"]+")/, `$1 data-product-id="${product.id}" data-default-presentation="${escape(first)}"`);
   block = block.replace(/(<img src=")[^"]+/, `$1${product.images[first]}`);
   block = block.replace(/alt="[^"]*"/, `alt="${escape(product.name + ' · ' + first + ' · imagen ilustrativa')}"`);
+  const tag = { tirzepatide: 'Acción GIP / GLP-1', retatrutide: 'Triple acción en investigación' }[product.id];
+  if (tag) block = block.replace(/(<span class="fc-tag">)[^<]+/, `$1${tag}`);
   if (product.evidence === 'Accesorio') block = block.replace(/(<span class="acc-icon">)[^<]+/, `$1${escape(first)}`);
   html = html.slice(0, match.index) + block + html.slice(match.index + match[0].length);
 }
 // Replace legacy promotional descriptions without changing the hand-authored layout.
 html = html.replace(/(<h([34])>([^<]+)<\/h\2>\s*<(?:p(?: class="fc-desc")?|span class="acc-cat")>)([\s\S]*?)(<\/(?:p|span)>)/g,
   (all, prefix, level, name, old, suffix) => catalog[slug(name)] ? prefix + escape(catalog[slug(name)].summary) + suffix : all);
-html = html.replace('<!-- CATALOG_DATA -->', `<script id="catalogData" type="application/json">${JSON.stringify({products: catalog, featuredProductIds}).replaceAll('<', '\\u003c')}</script>`);
+// Publish only the storefront fields, not internal research notes or references.
+const publicCatalog = Object.fromEntries(Object.entries(catalog).map(([id, product]) => [id, {
+  id, name: product.name, presentations: product.presentations, images: product.images,
+  summary: product.summary, what: product.what, usage: product.usage,
+  benefits: product.benefits, benefitsTitle: product.benefitsTitle, note: product.note,
+}]));
+html = html.replace('<!-- CATALOG_DATA -->', `<script id="catalogData" type="application/json">${JSON.stringify({products: publicCatalog, featuredProductIds}).replaceAll('<', '\\u003c')}</script>`);
 html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">' + ['tirzepatide','nad','bpc-157'].map((id,index) => {
   const product = catalog[id]; const presentation = product.presentations[0];
-  return `<figure><a href="/?producto=${id}&presentacion=${encodeURIComponent(presentation)}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · imagen ilustrativa" width="640" height="640" ${index ? 'decoding="async"' : 'fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
+  return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · imagen ilustrativa" width="640" height="640" ${index ? 'decoding="async"' : 'fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
 }).join('') + '</div>');
-html = html.replace(/(<span class="fc-tag">)[^<]+(?=<\/span>[\s\S]*?<h3>RETATRUTIDE<\/h3>)/, '$1En investigación');
-await writeFile(resolve(projectRoot, 'index.html'), html, 'utf8');
+await writeFile(resolve(projectRoot, 'index.html'), html.replace('href="/videos"', 'href="videos.html"'), 'utf8');
 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<script src="script-v2\.js"><\/script>\s*<\/body>/i);
 
 if (!bodyMatch) {
@@ -99,3 +108,4 @@ await cp(
   resolve(projectRoot, "assets", "og-doctor-pep-social.png"),
   resolve(projectRoot, "public", "og.png")
 );
+await import('./build-local-videos.mjs');
