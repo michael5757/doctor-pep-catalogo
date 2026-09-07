@@ -3,7 +3,7 @@ import { readFile, access } from 'node:fs/promises';
 import { Script, runInNewContext } from 'node:vm';
 
 const root = new URL('../', import.meta.url);
-for (const name of ['index.html', 'videos.html']) {
+for (const name of ['index.html', 'videos.html', 'privacidad.html']) {
   const url = new URL(name, root);
   const html = await readFile(url, 'utf8');
   for (const [, value] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
@@ -21,9 +21,11 @@ for (const product of Object.values(products)) {
     await access(new URL(image, root));
   }
 }
-assert.ok(html.includes('href="videos.html"'));
+assert.ok(!html.includes('class="nav-link">Redes y videos</a>'), 'La pestaña de redes no debe aparecer en el menú principal');
+assert.ok(html.includes('href="privacidad.html"'));
 const hosted = await readFile(new URL('app/site-body.generated.ts', root), 'utf8');
-assert.ok(hosted.includes('href=\\"/videos\\"'), 'Preserve the hosted video route');
+assert.ok(!hosted.includes('class=\\"nav-link\\">Redes y videos</a>'), 'La pestaña de redes no debe aparecer en el menú alojado');
+assert.ok(hosted.includes('href=\\"/privacidad\\"'), 'Preserve the hosted privacy route');
 const script = await readFile(new URL('script-v2.js', root), 'utf8');
 new Script(script);
 new Script(await readFile(new URL('local/videos.js', root), 'utf8'));

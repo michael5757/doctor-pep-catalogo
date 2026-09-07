@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://doctor-pep-catalogo.gremori57.chatgpt.site/sitemap.xml

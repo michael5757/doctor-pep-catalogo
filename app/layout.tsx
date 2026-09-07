@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-
-const title = "Doctor Pep | Catálogo y atención personalizada";
-const description =
-  "Explora el catálogo Doctor Pep, compara presentaciones y prepara una consulta personalizada por WhatsApp.";
-const siteUrl = "https://doctor-pep-catalogo.gremori57.chatgpt.site";
+import { analyticsSettings, baseUrl, siteConfig, structuredData } from '../data/site-config.mjs';
+import { metadataFor, safeJson } from '../data/seo.mjs';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  ...(metadataFor('home') as Metadata),
+  metadataBase: new URL(baseUrl(true)),
   applicationName: "Doctor Pep",
-  title,
-  description,
+  verification: siteConfig.googleVerification ? { google: siteConfig.googleVerification } : undefined,
   robots: {
     index: true,
     follow: true,
@@ -19,27 +16,6 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
     },
-  },
-  openGraph: {
-    type: "website",
-    locale: "es_EC",
-    siteName: "Doctor Pep",
-    title,
-    description,
-    images: [
-      {
-        url: `${siteUrl}/og.png`,
-        width: 1200,
-        height: 630,
-        alt: "Doctor Pep — Conoce, compara y consulta",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: [`${siteUrl}/og.png`],
   },
 };
 
@@ -58,10 +34,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="stylesheet" href="/styles-v3.css" />
         <link rel="stylesheet" href="/styles-storefront.css" />
         <link rel="stylesheet" href="/styles-refinement.css" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson(structuredData(true)) }} />
       </head>
       <body data-whatsapp-number="593989009150">
         {children}
         <script src="/script-v2.js" defer />
+        <script src="/analytics.js" data-config={JSON.stringify(analyticsSettings())} defer />
       </body>
     </html>
   );

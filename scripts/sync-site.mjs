@@ -46,7 +46,7 @@ html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">'
   const product = catalog[id]; const presentation = product.presentations[0];
   return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · ${escape(presentation)}" width="640" height="640" ${index ? 'decoding="async"' : 'fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
 }).join('') + '</div>');
-await writeFile(resolve(projectRoot, 'index.html'), html.replace('href="/videos"', 'href="videos.html"'), 'utf8');
+await writeFile(resolve(projectRoot, 'index.html'), html.replaceAll('href="/videos"', 'href="videos.html"').replaceAll('href="/privacidad"', 'href="privacidad.html"'), 'utf8');
 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<script src="script-v2\.js"><\/script>\s*<\/body>/i);
 
 if (!bodyMatch) {
@@ -86,6 +86,7 @@ for (const asset of [
   "doctor-pep-logo.webp",
   "hero-editorial-720.webp",
   "hero-editorial-1280.webp",
+  "og-doctor-pep-social.png",
 ]) {
   await cp(
     resolve(projectRoot, "assets", asset),
@@ -108,4 +109,5 @@ await cp(
   resolve(projectRoot, "assets", "og-doctor-pep-social.png"),
   resolve(projectRoot, "public", "og.png")
 );
+await import('./build-visibility.mjs');
 await import('./build-local-videos.mjs');

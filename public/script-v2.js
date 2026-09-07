@@ -7,7 +7,7 @@
     Array.from((context || document).querySelectorAll(selector));
   const isLocalFile = location.protocol === 'file:';
   const pageParams = (url = new URL(location.href)) =>
-    isLocalFile && url.hash.startsWith('#?') ? new URLSearchParams(url.hash.slice(2)) : url.searchParams;
+    url.hash.startsWith('#?') ? new URLSearchParams(url.hash.slice(2)) : url.searchParams;
   function replacePageUrl(url) {
     // Some local browsers restrict History API calls. Never let that break a fiche.
     try { history.replaceState(history.state, '', url); } catch (_error) {}
@@ -1199,19 +1199,20 @@
   imageDialog?.addEventListener('close', () => $('#zoomProduct').focus({preventScroll: true}));
   $('#shareProduct')?.addEventListener('click', async () => {
     const button = $('#shareProduct');
-    const value = isLocalFile
-      ? activeProduct.name + ' · ' + $("input[name='presentation']:checked", dialogPresentations).value
+    const selectedPresentation = $("input[name='presentation']:checked", dialogPresentations)?.value || activeProduct?.presentations?.[0];
+    const value = activeProduct && selectedPresentation
+      ? productUrl(activeProduct, selectedPresentation).href
       : location.href;
     try { await navigator.clipboard.writeText(value); button.textContent = isLocalFile ? 'Referencia copiada ✓' : 'Enlace copiado ✓'; }
     catch {
       let field = $('#productLinkFallback');
       if (!field) { field = document.createElement('input'); field.id = 'productLinkFallback'; field.readOnly = true; field.setAttribute('aria-label', 'Texto para copiar'); button.after(field); }
       field.value = value; field.focus(); field.select();
-      button.textContent = 'Selecciona y copia el texto';
+      button.textContent = 'Selecciona y copia el enlace';
     }
   });
   productDialog?.addEventListener('close', () => {
-    $('#shareProduct').textContent = isLocalFile ? 'Copiar nombre y presentación' : 'Copiar enlace de esta presentación ↗';
+    $('#shareProduct').textContent = 'Copiar enlace';
     $('#productLinkFallback')?.remove();
   });
   // Optional owner-selected priorities are applied inside existing categories only.
@@ -1227,7 +1228,7 @@
     try { sessionStorage.setItem('doctorPepScroll', String(window.scrollY)); } catch {}
   });
   const initialUrl = new URL(location.href);
-  if (isLocalFile) $('#shareProduct').textContent = 'Copiar nombre y presentación';
+  if (isLocalFile) $('#shareProduct').textContent = 'Copiar enlace';
   // Hero links open the same fiche without navigating away from the local file.
   $$('[data-product-link]').forEach(link => link.addEventListener('click', event => {
     if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
