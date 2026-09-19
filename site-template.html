@@ -49,6 +49,7 @@
         <a href="#catalogo-completo" class="nav-link">Catálogo</a>
         <a href="#como-comprar" class="nav-link">Cómo comprar</a>
         <a href="#preguntas" class="nav-link">Preguntas</a>
+        <a href="/videos" class="nav-link nav-link-page">Videos</a>
       </nav>
       <button type="button" class="list-trigger" id="listTrigger" aria-haspopup="dialog" aria-controls="consultationDrawer">
         <span>Mi lista</span>
@@ -71,7 +72,7 @@
           </div>
           <h1 class="hero-title reveal">Péptidos y cuidado.<br /><em>Conoce cada opción.</em></h1>
           <p class="hero-sub reveal">Péptidos, sérums, sprays y accesorios. Encuentra tu presentación y habla directamente con Doctor Pep.</p>
-          <div class="hero-links reveal"><a class="hero-catalog-link" href="#catalogo-completo">Explorar productos <span aria-hidden="true">↗</span></a><a href="#como-comprar">Cómo comprar</a></div>
+          <div class="hero-links reveal"><a class="hero-catalog-link" href="#catalogo-completo">Ver catálogo <span aria-hidden="true">↗</span></a><a href="#como-comprar">Cómo comprar</a></div>
           <form class="hero-search reveal" id="heroSearchForm" role="search">
             <label for="heroCatalogSearch">¿Qué estás buscando?</label>
             <div class="hero-search-field">
@@ -124,6 +125,21 @@
           <button type="button" class="filter-chip" data-category-filter="energia" aria-pressed="false">Vitalidad</button>
           <button type="button" class="filter-chip" data-category-filter="antienvejecimiento" aria-pressed="false">Bienestar</button>
           <button type="button" class="filter-chip" data-category-filter="accesorios" aria-pressed="false">Agua y accesorios</button>
+        </div>
+        <div class="catalog-secondary-controls reveal">
+          <label class="catalog-select-field" for="catalogPresentation">
+            <span>Presentación</span>
+            <select id="catalogPresentation"><option value="all">Todas las presentaciones</option></select>
+          </label>
+          <label class="catalog-select-field" for="catalogSort">
+            <span>Ordenar</span>
+            <select id="catalogSort">
+              <option value="editorial">Recomendados</option>
+              <option value="az">Nombre A–Z</option>
+              <option value="za">Nombre Z–A</option>
+            </select>
+          </label>
+          <button type="button" class="catalog-reset-controls" id="resetCatalogControls">Limpiar filtros</button>
         </div>
         <p class="catalog-result-count" id="catalogResultCount" role="status" aria-live="polite"></p>
         <div class="catalog-empty" id="catalogEmpty" hidden>
@@ -638,12 +654,21 @@
             <legend>Elige una presentación</legend>
             <div class="presentation-options" id="dialogPresentations"></div>
           </fieldset>
-          <label class="quantity-field" for="dialogQuantity">
-            <span>Cantidad</span>
-            <input id="dialogQuantity" name="quantity" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" />
-          </label>
-          <p id="selectionSummary" class="selection-summary" role="status" aria-live="polite"></p>
-          <button type="submit" class="btn dialog-add">Añadir a consulta</button>
+          <div class="dialog-purchase-row">
+            <label class="quantity-field" for="dialogQuantity">
+              <span>Cantidad</span>
+              <span class="dialog-quantity-stepper">
+                <button type="button" id="dialogDecrease" aria-label="Disminuir cantidad">−</button>
+                <input id="dialogQuantity" name="quantity" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" />
+                <button type="button" id="dialogIncrease" aria-label="Aumentar cantidad">+</button>
+              </span>
+            </label>
+            <p id="selectionSummary" class="selection-summary" role="status" aria-live="polite"></p>
+          </div>
+          <div class="dialog-sticky-actions">
+            <button type="submit" class="btn dialog-add">Añadir a consulta</button>
+            <span>Disponibilidad y entrega se confirman antes del pedido.</span>
+          </div>
         </form>
         <p class="dialog-note">La cantidad indica envases, no una dosis. La disponibilidad se confirma antes del pedido.</p>
         <div id="productDetails" class="product-details"></div>
@@ -676,6 +701,7 @@
             <span class="consultation-total" id="consultationTotal">0 productos</span>
             <button type="button" class="clear-list" id="clearConsultation" hidden>Vaciar lista</button>
           </div>
+          <a id="consultationWhatsapp" class="consultation-whatsapp" href="https://wa.me/593989009150" target="_blank" rel="noopener noreferrer" aria-disabled="true">Enviar lista por WhatsApp</a>
         </div>
         <p class="consultation-status sr-only" id="consultationStatus" role="status" aria-live="polite"></p>
       </div>
