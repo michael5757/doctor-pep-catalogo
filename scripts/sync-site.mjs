@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile, access } from "node:fs/pro
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { catalog, slug, featuredProductIds } from '../data/catalog.mjs';
+import { transform } from 'esbuild';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const publicRoot = resolve(projectRoot, "public");
@@ -38,13 +39,13 @@ html = html.replace(/(<h([34])>([^<]+)<\/h\2>\s*<(?:p(?: class="fc-desc")?|span 
 // Publish only the storefront fields, not internal research notes or references.
 const publicCatalog = Object.fromEntries(Object.entries(catalog).map(([id, product]) => [id, {
   id, name: product.name, presentations: product.presentations, images: product.images,
-  summary: product.summary, what: product.what, usage: product.usage,
+  what: product.what, usage: product.usage,
   benefits: product.benefits, benefitsTitle: product.benefitsTitle, note: product.note,
 }]));
 html = html.replace('<!-- CATALOG_DATA -->', `<script id="catalogData" type="application/json">${JSON.stringify({products: publicCatalog, featuredProductIds}).replaceAll('<', '\\u003c')}</script>`);
 html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">' + ['tirzepatide','serum-ghk-cu','selank-spray-nasal'].map((id,index) => {
   const product = catalog[id]; const presentation = product.presentations[0];
-  return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · ${escape(presentation)}" width="640" height="640" ${index ? 'decoding="async"' : 'fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
+  return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · ${escape(presentation)}" width="640" height="640" ${index ? 'loading="lazy" decoding="async" fetchpriority="low"' : 'decoding="async" fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
 }).join('') + '</div>');
 await writeFile(resolve(projectRoot, 'index.html'), html.replaceAll('href="/videos"', 'href="videos.html"').replaceAll('href="/privacidad"', 'href="privacidad.html"'), 'utf8');
 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<script src="script-v2\.js"><\/script>\s*<\/body>/i);
@@ -63,19 +64,24 @@ await writeFile(
   "utf8"
 );
 
-await cp(
-  resolve(projectRoot, "styles-v3.css"),
-  resolve(projectRoot, "public", "styles-v3.css")
-);
-await cp(
-  resolve(projectRoot, "styles-storefront.css"),
-  resolve(projectRoot, "public", "styles-storefront.css")
-);
-await cp(resolve(projectRoot, 'styles-refinement.css'), resolve(publicRoot, 'styles-refinement.css'));
-await cp(
-  resolve(projectRoot, "script-v2.js"),
-  resolve(projectRoot, "public", "script-v2.js")
-);
+// CSS is bundled by Vite; the interactive runtime is minified below for hosting.
+// Root files remain the single source of truth for the file:// build.
+for (const stalePublicFile of [
+  'styles-v3.css',
+  'styles-storefront.css',
+  'styles-refinement.css',
+  'script-v2.js',
+]) {
+  await rm(resolve(publicRoot, stalePublicFile), { force: true });
+}
+const runtimeSource = await readFile(resolve(projectRoot, 'script-v2.js'), 'utf8');
+const runtimeBundle = await transform(runtimeSource, {
+  minify: true,
+  target: 'es2020',
+  legalComments: 'none',
+});
+await writeFile(resolve(publicRoot, 'script-v2.min.js'), runtimeBundle.code, 'utf8');
+// analytics.js is published by build-visibility.mjs, keeping that concern in one place.
 if (dirname(publicAssetsRoot) !== publicRoot) {
   throw new Error("La carpeta pública de recursos no es segura.");
 }

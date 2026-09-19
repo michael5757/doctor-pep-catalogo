@@ -33,6 +33,8 @@
       .trim();
   }
 
+  const compactSearch = value => String(value || "").replace(/[^a-z0-9]/g, "");
+
   function slug(value) {
     return normalizeText(value)
       .replace(/[^a-z0-9]+/g, "-")
@@ -111,7 +113,7 @@
         card.dataset.productName ||
         (nameElement ? nameElement.textContent.trim() : "Producto"),
       description:
-        record.summary || card.dataset.productDescription ||
+        card.dataset.productDescription ||
         (descriptionElement
           ? descriptionElement.textContent.trim()
           : "Consulta la información disponible de esta presentación."),
@@ -133,6 +135,10 @@
     card.dataset.productDescription = data.description;
     card.dataset.category = data.category;
     card.dataset.presentations = JSON.stringify(data.presentations);
+    card.dataset.searchIndex = normalizeText(
+      [data.name, data.description, data.categoryLabel].concat(data.presentations).join(" ")
+    );
+    card.dataset.searchIndexCompact = compactSearch(card.dataset.searchIndex);
     if (data.presentations.length > 1) {
       const holder = $('.fc-presentations', card) || document.createElement('div');
       holder.classList.add('variant-preview');
@@ -901,18 +907,17 @@
 
   function applyCatalogFilters() {
     const query = normalizeText(catalogSearch ? catalogSearch.value : "");
+    const compactQuery = compactSearch(query);
     let visibleCount = 0;
     sourceCards.forEach(function (card) {
       const data = getCardData(card);
-      const haystack = normalizeText(
-        [data.name, data.description, data.categoryLabel]
-          .concat(data.presentations)
-          .join(" ")
-      );
+      const haystack = card.dataset.searchIndex || "";
       const categoryMatches =
         activeCategory === "all" || data.category === activeCategory;
-      const compact = value => value.replace(/[^a-z0-9]/g, '');
-      const searchMatches = !query || haystack.includes(query) || compact(haystack).includes(compact(query));
+      const searchMatches =
+        !query ||
+        haystack.includes(query) ||
+        (compactQuery && (card.dataset.searchIndexCompact || "").includes(compactQuery));
       const visible = categoryMatches && searchMatches;
       card.hidden = !visible;
       if (visible) visibleCount += 1;
@@ -1084,8 +1089,17 @@
     });
   }
 
-  window.addEventListener("scroll", updateScrollState, { passive: true });
-  window.addEventListener("resize", updateScrollState, { passive: true });
+  let scrollFrame = 0;
+  function scheduleScrollState() {
+    if (scrollFrame) return;
+    scrollFrame = window.requestAnimationFrame(function () {
+      scrollFrame = 0;
+      updateScrollState();
+    });
+  }
+
+  window.addEventListener("scroll", scheduleScrollState, { passive: true });
+  window.addEventListener("resize", scheduleScrollState, { passive: true });
   updateScrollState();
 
   const menuToggle = $("#menuToggle");

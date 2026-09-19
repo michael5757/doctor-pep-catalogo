@@ -7,6 +7,7 @@
   <meta name="description" content="Explora el catálogo Doctor Pep, compara presentaciones y prepara una consulta personalizada por WhatsApp." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="theme-color" content="#071F54" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_EC" />
   <meta property="og:site_name" content="Doctor Pep" />
@@ -31,6 +32,7 @@
   <link rel="stylesheet" href="styles-refinement.css" />
 </head>
 <body data-whatsapp-number="593989009150">
+  <a class="skip-link" href="#main-content">Saltar al contenido</a>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <!-- ===== Barra de navegación ===== -->
@@ -52,13 +54,13 @@
         <span>Mi lista</span>
         <strong id="listTriggerCount" aria-hidden="true">0</strong>
       </button>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- ===== Portada ===== -->
     <section class="hero" id="inicio">
       <div class="hero-inner">

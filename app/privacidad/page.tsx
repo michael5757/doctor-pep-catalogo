@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { metadataFor } from '../../data/seo.mjs';
 
 export const metadata = metadataFor('privacy') as Metadata;
+export const dynamic = 'force-static';
 
 export default function PrivacyPage() {
   return <main className="privacy-page">
