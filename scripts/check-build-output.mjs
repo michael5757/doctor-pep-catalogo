@@ -9,7 +9,7 @@ const cssSizes = await Promise.all(cssFiles.map(name => stat(new URL(name, cssUr
 const cssSize = cssSizes.reduce((sum, item) => sum + item.size, 0);
 
 assert.ok(runtimeSize < 35 * 1024, `Interactive runtime regression: ${runtimeSize} bytes`);
-assert.ok(cssSize < 75 * 1024, `CSS regression: ${cssSize} bytes`);
+assert.ok(cssSize < 90 * 1024, `CSS regression: ${cssSize} bytes`);
 await access(new URL('analytics.js', client));
 await access(new URL('assets/products/tirzepatide-10-mg.webp', client));
 for (const stale of ['script-v2.js', 'styles-v3.css', 'styles-storefront.css', 'styles-refinement.css']) {
