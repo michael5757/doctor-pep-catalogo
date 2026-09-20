@@ -44,7 +44,7 @@ await writeFile(new URL('../videos.html', import.meta.url), `<!doctype html>
   <link rel="icon" href="assets/doctor-ecupep-logo-oficial.png" />
   <link rel="stylesheet" href="styles-v3.css" />
   <link rel="stylesheet" href="styles-storefront.css" />
-  <link rel="stylesheet" href="styles-refinement.css" />
+  <link rel="stylesheet" href="styles-refinement.css?v=20260920-logo-oficial" />
 </head>
 <body>
   <div id="videosRoot"><div class="videos-shell">
