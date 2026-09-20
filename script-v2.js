@@ -18,6 +18,15 @@
   ).matches;
   const mobileNavigation = window.matchMedia("(max-width: 1080px)");
   const mobileCatalog = window.matchMedia("(max-width: 760px)");
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const lowPowerDevice =
+    mobileCatalog.matches ||
+    (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+    (navigator.deviceMemory && navigator.deviceMemory <= 4);
+  const richMotion = !prefersReducedMotion && finePointer && !lowPowerDevice;
+  document.documentElement.classList.add(
+    prefersReducedMotion ? "motion-reduced" : richMotion ? "motion-rich" : "motion-lite"
+  );
   const categoryNames = {
     metabolismo: "Metabolismo y control de peso",
     energia: "Vitalidad, rendimiento y recuperación",
@@ -342,6 +351,24 @@
     );
   }
 
+  let whatsappAttentionShown = false;
+
+  function pulseElement(element, className) {
+    if (!element || prefersReducedMotion) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+    window.setTimeout(function () {
+      element.classList.remove(className);
+    }, 700);
+  }
+
+  function pulseListCounters() {
+    pulseElement(listTriggerCount, "motion-pop");
+    pulseElement(mobileListCount, "motion-pop");
+    pulseElement(whatsappCount, "motion-pop");
+  }
+
   function updateWhatsappFloat() {
     if (!whatsappFloat) return;
     const total = consultation.reduce(function (sum, item) {
@@ -512,6 +539,11 @@
       });
     }
     renderConsultation();
+    pulseListCounters();
+    if (!whatsappAttentionShown && whatsappFloat) {
+      whatsappAttentionShown = true;
+      pulseElement(whatsappFloat, "motion-attention");
+    }
     announceConsultation(data.name + " fue añadido a tu lista.");
     showToast(data.name + " fue añadido a tu lista.");
     trackEvent("list_add", { item_count: consultation.length });
@@ -674,7 +706,16 @@
     const presentation = $("input[name='presentation']:checked", dialogPresentations)?.value || activeProduct.presentations[0];
     const quantity = setDialogQuantity(dialogQuantity.value);
     const img = $('#dialogProductImage');
-    img.src = imageFor(activeProduct, presentation);
+    const nextImage = imageFor(activeProduct, presentation);
+    if (img.src !== new URL(nextImage, location.href).href) {
+      if (!prefersReducedMotion) img.classList.add("is-swapping");
+      const finishSwap = function () {
+        img.classList.remove("is-swapping");
+      };
+      img.addEventListener("load", finishSwap, { once: true });
+      img.src = nextImage;
+      if (img.complete) requestAnimationFrame(finishSwap);
+    }
     img.alt = activeProduct.name + ' · ' + presentation;
     $('#selectionSummary').textContent = activeProduct.name + ' · ' + presentation + ' · ' + quantity + (quantity === 1 ? ' envase' : ' envases');
     replacePageUrl(productUrl(activeProduct, presentation));
@@ -754,7 +795,20 @@
     syncProductSelection();
     dialogAddButton.textContent =
       dialogMode === "edit" ? "Guardar cambios" : "Añadir a mi lista";
+    if (!prefersReducedMotion && trigger) {
+      const rect = trigger.closest(".feature-card, .product-card, .accessory")?.getBoundingClientRect() || trigger.getBoundingClientRect();
+      const originX = Math.max(0, Math.min(100, ((rect.left + rect.width / 2) / window.innerWidth) * 100));
+      const originY = Math.max(0, Math.min(100, ((rect.top + rect.height / 2) / window.innerHeight) * 100));
+      productDialog.style.setProperty("--dialog-origin-x", originX + "%");
+      productDialog.style.setProperty("--dialog-origin-y", originY + "%");
+      productDialog.classList.remove("motion-dialog-open");
+    }
     productDialog.showModal();
+    if (!prefersReducedMotion) {
+      requestAnimationFrame(function () {
+        productDialog.classList.add("motion-dialog-open");
+      });
+    }
     const firstOption = $("input[name='presentation']:checked", dialogPresentations);
     window.setTimeout(function () {
       (firstOption || dialogClose).focus();
@@ -1078,6 +1132,7 @@
         sort: activeSort,
       }));
     } catch {}
+    animateVisibleCatalogCards();
     return visibleCount;
   }
 
@@ -1342,6 +1397,159 @@
       closeMenu(false);
     });
   }
+
+  /* ---------- Motion premium ---------- */
+  const motionCards = $$(".feature-card, .product-card, .accessory");
+  const motionSections = $$(".category-head, .buying-card, .faq-list details, .footer-main");
+  motionCards.forEach(function (card, index) {
+    card.classList.add("motion-card");
+    card.style.setProperty("--motion-index", String(index % 8));
+  });
+  motionSections.forEach(function (element, index) {
+    element.classList.add("motion-section");
+    element.style.setProperty("--motion-index", String(index % 6));
+  });
+
+  function animateVisibleCatalogCards() {
+    if (prefersReducedMotion) return;
+    const visible = sourceCards.filter(function (card) {
+      return !card.hidden && !card.closest(".category")?.hidden;
+    });
+    visible.slice(0, 18).forEach(function (card, index) {
+      card.animate(
+        [
+          { opacity: 0.55, transform: "scale(.985) translateY(5px)" },
+          { opacity: 1, transform: "scale(1) translateY(0)" },
+        ],
+        {
+          duration: richMotion ? 260 : 170,
+          delay: Math.min(index, 8) * 18,
+          easing: "cubic-bezier(.2,.75,.25,1)",
+        }
+      );
+    });
+    pulseElement(resultCount, "motion-count");
+  }
+
+  if (!prefersReducedMotion && "IntersectionObserver" in window) {
+    const motionObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("motion-in");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -35px 0px" });
+    motionCards.concat(motionSections).forEach(function (element) {
+      motionObserver.observe(element);
+    });
+  } else {
+    motionCards.concat(motionSections).forEach(function (element) {
+      element.classList.add("motion-in");
+    });
+  }
+
+  if (richMotion) {
+    const catalogRoot = $("#main-content");
+    let activeTilt = null;
+    catalogRoot?.addEventListener("mousemove", function (event) {
+      const card = event.target.closest(".motion-card");
+      if (!card || card.hidden) return;
+      if (activeTilt && activeTilt !== card) {
+        activeTilt.style.removeProperty("--tilt-x");
+        activeTilt.style.removeProperty("--tilt-y");
+      }
+      activeTilt = card;
+      const rect = card.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width;
+      const py = (event.clientY - rect.top) / rect.height;
+      card.style.setProperty("--tilt-x", ((0.5 - py) * 4.5).toFixed(2) + "deg");
+      card.style.setProperty("--tilt-y", ((px - 0.5) * 5.5).toFixed(2) + "deg");
+      card.style.setProperty("--shine-x", (px * 100).toFixed(1) + "%");
+      card.style.setProperty("--shine-y", (py * 100).toFixed(1) + "%");
+    });
+    catalogRoot?.addEventListener("mouseleave", function () {
+      if (!activeTilt) return;
+      activeTilt.style.removeProperty("--tilt-x");
+      activeTilt.style.removeProperty("--tilt-y");
+      activeTilt = null;
+    });
+
+    $$(".hero-catalog-link, .dialog-add, .consultation-whatsapp, .card-action-primary").forEach(function (button) {
+      button.classList.add("motion-magnetic");
+      button.addEventListener("pointermove", function (event) {
+        const rect = button.getBoundingClientRect();
+        button.style.setProperty("--mag-x", ((event.clientX - rect.left - rect.width / 2) * 0.07).toFixed(1) + "px");
+        button.style.setProperty("--mag-y", ((event.clientY - rect.top - rect.height / 2) * 0.09).toFixed(1) + "px");
+      });
+      button.addEventListener("pointerleave", function () {
+        button.style.setProperty("--mag-x", "0px");
+        button.style.setProperty("--mag-y", "0px");
+      });
+    });
+  }
+
+  const heroGallery = $(".hero-gallery");
+  let parallaxFrame = 0;
+  function updateHeroParallax() {
+    parallaxFrame = 0;
+    if (!heroGallery || !richMotion) return;
+    const hero = $(".hero");
+    const rect = hero?.getBoundingClientRect();
+    if (!rect || rect.bottom < 0) return;
+    const shift = Math.max(-18, Math.min(18, window.scrollY * 0.035));
+    heroGallery.style.setProperty("--hero-parallax", shift.toFixed(1) + "px");
+  }
+  if (richMotion && heroGallery) {
+    window.addEventListener("scroll", function () {
+      if (parallaxFrame) return;
+      parallaxFrame = requestAnimationFrame(updateHeroParallax);
+    }, { passive: true });
+    updateHeroParallax();
+  }
+
+  $$(".product-photo img, #dialogProductImage").forEach(function (image) {
+    const shell = image.closest(".product-photo, .dialog-product-photo");
+    if (!shell || image.complete) return;
+    shell.classList.add("is-image-loading");
+    image.addEventListener("load", function () {
+      shell.classList.remove("is-image-loading");
+    }, { once: true });
+    image.addEventListener("error", function () {
+      shell.classList.remove("is-image-loading");
+    }, { once: true });
+  });
+
+  $$(".faq-list details").forEach(function (detail) {
+    const summary = $("summary", detail);
+    if (!summary || prefersReducedMotion) return;
+    summary.addEventListener("click", function (event) {
+      if (detail.dataset.animating === "true") return;
+      event.preventDefault();
+      const opening = !detail.open;
+      const start = detail.getBoundingClientRect().height;
+      if (opening) detail.open = true;
+      const end = opening
+        ? detail.scrollHeight
+        : summary.getBoundingClientRect().height + parseFloat(getComputedStyle(detail).paddingBlockStart || 0) + parseFloat(getComputedStyle(detail).paddingBlockEnd || 0);
+      detail.dataset.animating = "true";
+      const animation = detail.animate(
+        { height: [start + "px", end + "px"] },
+        { duration: 260, easing: "cubic-bezier(.2,.75,.25,1)" }
+      );
+      animation.onfinish = function () {
+        if (!opening) detail.open = false;
+        detail.style.height = "";
+        detail.dataset.animating = "false";
+      };
+    });
+  });
+
+  document.body.classList.add("motion-ready");
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      document.body.classList.add("motion-entered");
+    });
+  });
 
   /* ---------- Movimiento discreto ---------- */
   const revealElements = $$(".reveal");
