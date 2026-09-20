@@ -16,7 +16,7 @@
   const path = location.pathname.replace(/\/$/, '');
   const group = /\/videos(?:\.html)?$/.test(path) ? 'videos' : /\/privacidad(?:\.html)?$/.test(path) ? 'privacy' : 'catalog';
   // Never include product URLs, searches, selected items or the WhatsApp message.
-  const page = { page_group: group, page_title: 'Doctor Pep | ' + group, page_location: location.origin + location.pathname, page_referrer: '' };
+  const page = { page_group: group, page_title: 'Doctor Ecupep | ' + group, page_location: location.origin + location.pathname, page_referrer: '' };
 
   function emit(name) {
     if (!available || optedOut || choice !== 'accepted' || !started) return;

@@ -89,10 +89,13 @@ await rm(publicAssetsRoot, { recursive: true, force: true });
 await mkdir(publicAssetsRoot, { recursive: true });
 
 for (const asset of [
+  "doctor-ecupep-logo.png",
+  "og-doctor-ecupep-social.png",
+  // Legacy files remain published only so old cached pages do not break.
   "doctor-pep-logo.webp",
+  "og-doctor-pep-social.png",
   "hero-editorial-720.webp",
   "hero-editorial-1280.webp",
-  "og-doctor-pep-social.png",
 ]) {
   await cp(
     resolve(projectRoot, "assets", asset),
@@ -112,7 +115,7 @@ const productsRoot = resolve(projectRoot, 'assets/products');
 await mkdir(productsRoot, { recursive: true });
 await cp(productsRoot, resolve(publicAssetsRoot, 'products'), { recursive: true });
 await cp(
-  resolve(projectRoot, "assets", "og-doctor-pep-social.png"),
+  resolve(projectRoot, "assets", "og-doctor-ecupep-social.png"),
   resolve(projectRoot, "public", "og.png")
 );
 await import('./build-visibility.mjs');

@@ -12,20 +12,20 @@ const creatorEmbed = `<!doctype html><html lang="es"><head><meta name="viewport"
 
 export default function VideoGallery({videos, local = false}: {videos:DoctorPepVideo[]; local?:boolean}) {
   const home = local ? 'index.html' : '/';
-  const logo = local ? 'assets/doctor-pep-logo.webp' : '/assets/doctor-pep-logo.webp';
+  const logo = local ? 'assets/doctor-ecupep-logo.png' : '/assets/doctor-ecupep-logo.png';
   const gallery = local ? 'videos.html' : '/videos';
   const [filter, setFilter] = useState<'all' | SocialPlatform>('all');
   const [order, setOrder] = useState<'recent' | 'featured'>('recent');
   const [active, setActive] = useState<DoctorPepVideo | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [delayed, setDelayed] = useState(false);
-  const [wa, setWa] = useState('https://wa.me/593989009150?text=' + encodeURIComponent('Hola, quisiera consultar el catálogo Doctor Pep.'));
+  const [wa, setWa] = useState('https://wa.me/593989009150?text=' + encodeURIComponent('Hola, quisiera consultar el catálogo Doctor Ecupep.'));
   const modal = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     try {
       const saved: {name:string;presentation:string;quantity:number}[] = JSON.parse(localStorage.getItem('doctorPepConsultationV1') || '[]');
-      if (Array.isArray(saved) && saved.length) setWa('https://wa.me/593989009150?text=' + encodeURIComponent('Hola, quisiera consultar disponibilidad de estos productos Doctor Pep:\n\n' + saved.filter(x => x && x.name && x.presentation).map(x => `• ${Math.max(1, Math.min(99, Math.floor(Number(x.quantity)) || 1))} × ${x.name} — ${x.presentation}`).join('\n') + '\n\n¿Podrían confirmarme disponibilidad, entrega y forma de pago?'));
+      if (Array.isArray(saved) && saved.length) setWa('https://wa.me/593989009150?text=' + encodeURIComponent('Hola, quisiera consultar disponibilidad de estos productos Doctor Ecupep:\n\n' + saved.filter(x => x && x.name && x.presentation).map(x => `• ${Math.max(1, Math.min(99, Math.floor(Number(x.quantity)) || 1))} × ${x.name} — ${x.presentation}`).join('\n') + '\n\n¿Podrían confirmarme disponibilidad, entrega y forma de pago?'));
     } catch {}
   }, []);
   useEffect(() => {
@@ -53,26 +53,26 @@ export default function VideoGallery({videos, local = false}: {videos:DoctorPepV
     ? `https://www.tiktok.com/player/v1/${new URL(active.url).pathname.replace(/\/$/, '').split('/').pop()}?autoplay=0&loop=0`
     : `${active.url.replace(/\/$/, '')}/embed/` : undefined;
   return <div className="videos-shell">
-    <header className="video-nav"><a className="video-brand" href={home} aria-label="Doctor Pep, volver al inicio"><img src={logo} width="48" height="48" alt=""/><span>DOCTOR <strong>PEP</strong></span></a><nav aria-label="Navegación principal"><a href={home + '#catalogo-completo'}>Catálogo</a><a href={gallery} aria-current="page">Videos</a><a href={home + (local ? '#?lista=1' : '?lista=1')}>Mi lista</a></nav></header>
+    <header className="video-nav"><a className="video-brand" href={home} aria-label="Doctor Ecupep, volver al inicio"><img src={logo} width="48" height="48" alt=""/><span>DOCTOR <strong>ECUPEP</strong></span></a><nav aria-label="Navegación principal"><a href={home + '#catalogo-completo'}>Catálogo</a><a href={gallery} aria-current="page">Videos</a><a href={home + (local ? '#?lista=1' : '?lista=1')}>Mi lista</a></nav></header>
     <main className="videos-page">
       <section className="social-directory" aria-labelledby="social-title">
         <div className="videos-intro"><h1 id="social-title">En nuestras redes</h1><p>@doctor.pep.26</p></div>
         <div className="social-channel-grid">
-          <article className="social-channel tiktok-channel tiktok-feed"><span className="channel-icon"><SocialIcon platform="tiktok"/></span><h2 id="tiktok-feed-title">TikTok</h2><iframe className="tiktok-profile-frame" title="Videos recientes de Doctor Pep en TikTok" srcDoc={creatorEmbed} loading="lazy" allow="autoplay; fullscreen; encrypted-media" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="strict-origin-when-cross-origin"/><p className="social-feed-note">Los videos empiezan sin sonido. Usa el control de audio del reproductor cuando quieras escucharlos.</p><a className="channel-primary" href={socialAccounts.tiktok} target="_blank" rel="noopener noreferrer">Abrir TikTok ↗</a></article>
-          <article className="social-channel instagram-channel"><span className="channel-icon"><SocialIcon platform="instagram"/></span><h2>Instagram</h2><a className="channel-primary" href={socialAccounts.instagram} target="_blank" rel="noopener noreferrer" aria-label="Abrir el perfil de Doctor Pep en Instagram, nueva pestaña">Abrir perfil <span aria-hidden="true">↗</span></a></article>
+          <article className="social-channel tiktok-channel tiktok-feed"><span className="channel-icon"><SocialIcon platform="tiktok"/></span><h2 id="tiktok-feed-title">TikTok</h2><iframe className="tiktok-profile-frame" title="Videos recientes de Doctor Ecupep en TikTok" srcDoc={creatorEmbed} loading="lazy" allow="autoplay; fullscreen; encrypted-media" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="strict-origin-when-cross-origin"/><p className="social-feed-note">Los videos empiezan sin sonido. Usa el control de audio del reproductor cuando quieras escucharlos.</p><a className="channel-primary" href={socialAccounts.tiktok} target="_blank" rel="noopener noreferrer">Abrir TikTok ↗</a></article>
+          <article className="social-channel instagram-channel"><span className="channel-icon"><SocialIcon platform="instagram"/></span><h2>Instagram</h2><a className="channel-primary" href={socialAccounts.instagram} target="_blank" rel="noopener noreferrer" aria-label="Abrir el perfil de Doctor Ecupep en Instagram, nueva pestaña">Abrir perfil <span aria-hidden="true">↗</span></a></article>
         </div>
         <p className="video-privacy">Los videos se cargan desde la cuenta oficial de TikTok. Usa sus controles para pausar o escuchar.</p>
       </section>
       {videos.length > 0 && <section id="publicaciones" className="video-library" aria-labelledby="video-library-title">
         <div className="video-library-head"><h2 id="video-library-title">Videos</h2><div className="video-filters" role="group" aria-label="Filtrar videos por plataforma">{(['all','tiktok','instagram'] as const).map(key => <button type="button" key={key} aria-pressed={filter === key} onClick={() => setFilter(key)}>{key === 'all' ? 'Todos' : key === 'tiktok' ? 'TikTok' : 'Instagram'}</button>)}</div></div>
-          <div className="video-order"><p role="status">{filtered.length} {filtered.length === 1 ? 'publicación' : 'publicaciones'}</p><label>Mostrar <select value={order} onChange={e => setOrder(e.target.value as 'recent' | 'featured')}><option value="recent">Más recientes</option><option value="featured">Selección de Doctor Pep</option></select></label></div>
+          <div className="video-order"><p role="status">{filtered.length} {filtered.length === 1 ? 'publicación' : 'publicaciones'}</p><label>Mostrar <select value={order} onChange={e => setOrder(e.target.value as 'recent' | 'featured')}><option value="recent">Más recientes</option><option value="featured">Selección de Doctor Ecupep</option></select></label></div>
           <div className="video-grid">{filtered.map(video => <article className="video-card" key={video.id}>
             <button type="button" className="video-cover" data-video-open="publication" onClick={e => open(video,e.currentTarget)} aria-label={'Reproducir ' + video.title}>
-              {video.thumbnail ? <img src={local ? video.thumbnail.replace(/^\/(?!\/)/, '') : video.thumbnail} alt="" loading="lazy" decoding="async" width="360" height="640"/> : <div className="video-cover-brand"><img src={logo} alt="" width="140" height="140" loading="lazy"/><span>Doctor Pep</span></div>}
+              {video.thumbnail ? <img src={local ? video.thumbnail.replace(/^\/(?!\/)/, '') : video.thumbnail} alt="" loading="lazy" decoding="async" width="360" height="640"/> : <div className="video-cover-brand"><img src={logo} alt="" width="140" height="140" loading="lazy"/><span>Doctor Ecupep</span></div>}
               <span className="video-platform"><SocialIcon platform={video.platform}/>{video.platform === 'tiktok' ? 'TikTok' : 'Instagram'}</span><span className="video-play" aria-hidden="true">▷</span>
             </button>
             <div className="video-card-copy">
-              {video.featured && <span className="video-featured">Selección de Doctor Pep</span>}<h3>{video.title}</h3>
+              {video.featured && <span className="video-featured">Selección de Doctor Ecupep</span>}<h3>{video.title}</h3>
               <time dateTime={video.publishedAt}>{new Date(video.publishedAt + 'T12:00:00Z').toLocaleDateString('es-EC',{day:'numeric',month:'long',year:'numeric',timeZone:'America/Guayaquil'})}</time>
               <a href={video.url} target="_blank" rel="noopener noreferrer">Ver publicación original ↗</a>
               {(video.relatedProductIds || []).filter(id => products[id]).map(id => { const product = products[id]; return <a className="video-related-product" key={id} href={catalogLink(id, product.presentation, local)}><img src={local ? product.image.replace(/^\//, '') : '/' + product.image.replace(/^\//, '')} alt="" width="54" height="54" loading="lazy" decoding="async"/><span><small>En esta publicación</small><strong>{product.name}</strong><span>Ver ficha ↗</span></span></a>; })}
@@ -81,8 +81,8 @@ export default function VideoGallery({videos, local = false}: {videos:DoctorPepV
           {!filtered.length && <p role="status" className="video-empty">Todavía no hay publicaciones en esta selección. Prueba con otra plataforma o elige «Más recientes».</p>}
       </section>}
     </main>
-    <footer className="video-footer"><span>© 2026 Doctor Pep</span><a href={local ? 'privacidad.html' : '/privacidad'}>Privacidad y uso responsable</a></footer>
+    <footer className="video-footer"><span>© 2026 Doctor Ecupep</span><a href={local ? 'privacidad.html' : '/privacidad'}>Privacidad y uso responsable</a></footer>
     <a className="whatsapp-float" href={wa} aria-label="Consultar por WhatsApp" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" strokeWidth="1.7" d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.1-4.4A8.5 8.5 0 1 1 20 11.5Z"/><path fill="none" stroke="currentColor" strokeWidth="1.7" d="M8 7c-2 3 2 7 5 8l2-2-2-1-1 1-3-3 1-1-2-2Z"/></svg><span className="whatsapp-label">WhatsApp</span></a>
-    <dialog className="video-player-dialog" ref={modal} onClose={close} aria-label="Publicación de Doctor Pep" onClick={e => {if(e.target === e.currentTarget) e.currentTarget.close();}}><div className="video-player-head"><strong>{platform === 'tiktok' ? 'TikTok' : 'Instagram'} · Doctor Pep</strong><button type="button" onClick={() => modal.current?.close()} aria-label="Cerrar reproductor">×</button></div>{active && <><p className="player-load-status" role="status">{delayed ? 'Si no aparece la publicación, puedes abrirla en su plataforma.' : loaded ? 'Usa los controles de la plataforma para reproducir.' : 'Conectando con la plataforma…'}</p><iframe key={active.id} title={active.title} src={playerUrl} loading="lazy" allow="autoplay; fullscreen; encrypted-media" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="strict-origin-when-cross-origin" onLoad={() => setLoaded(true)} onError={() => setDelayed(true)}/><a className="player-source" href={originUrl} target="_blank" rel="noopener noreferrer">Abrir en {platform === 'tiktok' ? 'TikTok' : 'Instagram'} ↗</a></>}</dialog>
+    <dialog className="video-player-dialog" ref={modal} onClose={close} aria-label="Publicación de Doctor Ecupep" onClick={e => {if(e.target === e.currentTarget) e.currentTarget.close();}}><div className="video-player-head"><strong>{platform === 'tiktok' ? 'TikTok' : 'Instagram'} · Doctor Ecupep</strong><button type="button" onClick={() => modal.current?.close()} aria-label="Cerrar reproductor">×</button></div>{active && <><p className="player-load-status" role="status">{delayed ? 'Si no aparece la publicación, puedes abrirla en su plataforma.' : loaded ? 'Usa los controles de la plataforma para reproducir.' : 'Conectando con la plataforma…'}</p><iframe key={active.id} title={active.title} src={playerUrl} loading="lazy" allow="autoplay; fullscreen; encrypted-media" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerPolicy="strict-origin-when-cross-origin" onLoad={() => setLoaded(true)} onError={() => setDelayed(true)}/><a className="player-source" href={originUrl} target="_blank" rel="noopener noreferrer">Abrir en {platform === 'tiktok' ? 'TikTok' : 'Instagram'} ↗</a></>}</dialog>
   </div>;
 }

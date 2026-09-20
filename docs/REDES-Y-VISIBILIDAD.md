@@ -1,4 +1,4 @@
-# Redes y visibilidad de Doctor Pep
+# Redes y visibilidad de Doctor Ecupep
 
 ## Publicaciones reales
 
@@ -12,9 +12,9 @@ Añadir los enlaces permanentes aprobados a `data/publications.json`. Cada regis
 - `title`: título fiel a la publicación.
 - `publishedAt`: fecha real `AAAA-MM-DD`.
 - `ownerVerified`: `true` únicamente después de verificar autoría y datos.
-- `featured`: `true` para la selección editorial de Doctor Pep. No significa popularidad ni tendencia.
+- `featured`: `true` para la selección editorial de Doctor Ecupep. No significa popularidad ni tendencia.
 - `relatedProductIds`: opcional, identificadores que existan en `data/catalog.mjs`; por ejemplo `selank-spray-nasal` o `bac-water`.
-- `thumbnail`: opcional, imagen propia dentro de `/assets/`. Sin miniatura se usa el logo de Doctor Pep.
+- `thumbnail`: opcional, imagen propia dentro de `/assets/`. Sin miniatura se usa el logo de Doctor Ecupep.
 
 La sincronización rechaza fechas inválidas o futuras, URL incorrectas, IDs duplicados y productos desconocidos. Las publicaciones válidas se ordenan por fecha y admiten filtros de plataforma y destacados. No se han añadido publicaciones inventadas para rellenar la galería.
 

@@ -9,7 +9,7 @@ import { metadataFor, safeJson } from '../data/seo.mjs';
 export const metadata: Metadata = {
   ...(metadataFor('home') as Metadata),
   metadataBase: new URL(baseUrl(true)),
-  applicationName: "Doctor Pep",
+  applicationName: "Doctor Ecupep",
   verification: siteConfig.googleVerification ? { google: siteConfig.googleVerification } : undefined,
   robots: {
     index: true,
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <meta name="theme-color" content="#071F54" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <link rel="icon" type="image/webp" href="/assets/doctor-pep-logo.webp" />
+        <link rel="icon" type="image/png" href="/assets/doctor-ecupep-logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link

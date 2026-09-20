@@ -1,4 +1,4 @@
-# Imágenes del catálogo Doctor Pep
+# Imágenes del catálogo Doctor Ecupep
 
 Estas imágenes son maquetas ilustrativas, no fotografías de existencias ni etiquetas verificadas del fabricante.
 

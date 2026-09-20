@@ -7,14 +7,14 @@ export const dynamic = 'force-static';
 export default function PrivacyPage() {
   return <main className="privacy-page">
     <header className="privacy-nav">
-      <a className="video-brand" href="/" aria-label="Doctor Pep, volver al catálogo">
-        <img src="/assets/doctor-pep-logo.webp" width="48" height="48" alt="" />
-        <span>DOCTOR <strong>PEP</strong></span>
+      <a className="video-brand" href="/" aria-label="Doctor Ecupep, volver al catálogo">
+        <img src="/assets/doctor-ecupep-logo.png" width="48" height="48" alt="" />
+        <span>DOCTOR <strong>ECUPEP</strong></span>
       </a>
       <a className="privacy-back" href="/">← Volver al catálogo</a>
     </header>
     <article className="privacy-content">
-      <p className="section-kicker">DOCTOR PEP / INFORMACIÓN</p>
+      <p className="section-kicker">DOCTOR ECUPEP / INFORMACIÓN</p>
       <h1>Privacidad y<br /><em>uso responsable.</em></h1>
       <p className="privacy-lead">Una guía breve para entender qué hace esta página y cómo usar la información del catálogo.</p>
       <section>
@@ -24,12 +24,12 @@ export default function PrivacyPage() {
       </section>
       <section>
         <h2>Cuando abres WhatsApp</h2>
-        <p>Al usar el botón de WhatsApp, la página prepara un mensaje con los productos y presentaciones que elegiste. El envío y el tratamiento posterior del mensaje dependen de WhatsApp y de la conversación con Doctor Pep.</p>
+        <p>Al usar el botón de WhatsApp, la página prepara un mensaje con los productos y presentaciones que elegiste. El envío y el tratamiento posterior del mensaje dependen de WhatsApp y de la conversación con Doctor Ecupep.</p>
         <p>Evita compartir datos de salud sensibles en redes sociales o en espacios públicos.</p>
       </section>
       <section>
         <h2>Catálogo y uso responsable</h2>
-        <p>Las imágenes sirven como referencia visual. La presentación, disponibilidad, composición, compatibilidad, conservación y condiciones de entrega deben confirmarse directamente con Doctor Pep antes de realizar un pedido.</p>
+        <p>Las imágenes sirven como referencia visual. La presentación, disponibilidad, composición, compatibilidad, conservación y condiciones de entrega deben confirmarse directamente con Doctor Ecupep antes de realizar un pedido.</p>
         <p>El catálogo es informativo y no sustituye una valoración, diagnóstico ni indicación de un profesional de la salud. No cambies tratamientos ni utilices productos basándote únicamente en esta página.</p>
       </section>
       <section>
@@ -49,6 +49,6 @@ export default function PrivacyPage() {
       </section>
       <p className="privacy-updated">Última actualización: septiembre de 2026.</p>
     </article>
-    <footer className="video-footer"><span>© 2026 Doctor Pep · BioPeptix</span><div><a href="/">Catálogo</a><a href="/videos">Videos</a></div></footer>
+    <footer className="video-footer"><span>© 2026 Doctor Ecupep · BioPeptix</span><div><a href="/">Catálogo</a><a href="/videos">Videos</a></div></footer>
   </main>;
 }

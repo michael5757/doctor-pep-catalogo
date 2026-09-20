@@ -30,7 +30,7 @@ try {
   for (const path of checks) {
     const response = await fetch(`http://127.0.0.1:${port}${path}`);
     assert.equal(response.status, 200, `${path}: expected HTTP 200, got ${response.status}`);
-    if (path === '/') assert.match(await response.text(), /Doctor Pep/i, 'Home response is missing Doctor Pep content');
+    if (path === '/') assert.match(await response.text(), /Doctor Ecupep/i, 'Home response is missing Doctor Ecupep content');
   }
   console.log(`Production smoke verified: ${checks.length} endpoints returned HTTP 200.`);
 } finally {

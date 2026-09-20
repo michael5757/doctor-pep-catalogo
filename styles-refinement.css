@@ -1,4 +1,4 @@
-/* Doctor Pep: clear product identities, editorial hierarchy, calm interactions. */
+/* Doctor Ecupep: clear product identities, editorial hierarchy, calm interactions. */
 :root { --blue: #174fba; --navy: #102d54; --line: #d9e3ee; }
 html { scroll-padding-top: 105px; }
 body { padding-bottom: 0; }
@@ -1703,4 +1703,44 @@ body {
   .catalog-filter-row { margin-top: 2px; }
   .catalog-secondary-controls { padding-top: 12px; }
   .catalog-reset-controls { min-height: 46px; }
+}
+
+/* Doctor Ecupep brand text/monogram */
+.brand-icon.brand-logo {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg,#eef6ff,#dcecff);
+  color: #1557c8;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
+.brand-icon.brand-logo img { display: none; }
+.brand-icon.brand-logo::before { content: "DE"; }
+.hero-gallery-heading > img { display: none; }
+.hero-gallery-heading::before,
+.video-brand::before {
+  content: "DE";
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(21,87,200,.16);
+  border-radius: 50%;
+  background: linear-gradient(145deg,#eef6ff,#dcecff);
+  color: #1557c8;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+.hero-gallery-heading::before { width: 52px; height: 52px; }
+.video-brand img { display: none; }
+@media (max-width:420px) {
+  .brand-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0;
+    letter-spacing: .04em;
+  }
+  .brand-text strong { font-size: .72rem; }
 }

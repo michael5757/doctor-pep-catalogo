@@ -1,6 +1,6 @@
 // Public configuration only. Never put passwords, API secrets or tokens here.
 export const siteConfig = {
-  name: 'Doctor Pep',
+  name: 'Doctor Ecupep',
   staticUrl: 'https://michael5757.github.io/doctor-pep-catalogo/',
   hostedUrl: 'https://doctor-pep-catalogo.gremori57.chatgpt.site/',
   googleVerification: '',
@@ -8,9 +8,9 @@ export const siteConfig = {
 };
 
 export const pageInfo = {
-  home: { title: 'Doctor Pep | Péptidos, sérums y accesorios en Ecuador', description: 'Conoce los productos de Doctor Pep, compara presentaciones y prepara tu consulta por WhatsApp. Atención personalizada en Ecuador.', staticPath: '', hostedPath: '' },
-  videos: { title: 'Redes y videos de Doctor Pep | TikTok e Instagram', description: 'Videos de Doctor Pep y acceso a sus cuentas oficiales de TikTok e Instagram.', staticPath: 'videos.html', hostedPath: 'videos' },
-  privacy: { title: 'Privacidad y uso responsable | Doctor Pep', description: 'Cómo se guarda tu lista, preferencias de estadísticas y uso responsable del catálogo Doctor Pep.', staticPath: 'privacidad.html', hostedPath: 'privacidad' },
+  home: { title: 'Doctor Ecupep | Péptidos, sérums y accesorios en Ecuador', description: 'Conoce los productos de Doctor Ecupep, compara presentaciones y prepara tu consulta por WhatsApp. Atención personalizada en Ecuador.', staticPath: '', hostedPath: '' },
+  videos: { title: 'Redes y videos de Doctor Ecupep | TikTok e Instagram', description: 'Videos de Doctor Ecupep y acceso a sus cuentas oficiales de TikTok e Instagram.', staticPath: 'videos.html', hostedPath: 'videos' },
+  privacy: { title: 'Privacidad y uso responsable | Doctor Ecupep', description: 'Cómo se guarda tu lista, preferencias de estadísticas y uso responsable del catálogo Doctor Ecupep.', staticPath: 'privacidad.html', hostedPath: 'privacidad' },
 };
 
 export function baseUrl(hosted = false) {
@@ -25,7 +25,7 @@ export function pageUrl(key, hosted = false) {
 }
 
 export function socialImage(hosted = false) {
-  return new URL('assets/og-doctor-pep-social.png', baseUrl(hosted)).href;
+  return new URL('assets/og-doctor-ecupep-social.png', baseUrl(hosted)).href;
 }
 
 export function analyticsSettings() {
@@ -36,7 +36,7 @@ export function structuredData(hosted = false) {
   const url = baseUrl(hosted);
   return { '@context': 'https://schema.org', '@graph': [
     { '@type': 'Organization', '@id': url + '#organization', name: siteConfig.name, url,
-      logo: new URL('assets/doctor-pep-logo.webp', url).href,
+      logo: new URL('assets/doctor-ecupep-logo.png', url).href,
       sameAs: ['https://www.tiktok.com/@doctor.pep.26', 'https://www.instagram.com/doctor.pep.26/'],
       contactPoint: { '@type': 'ContactPoint', telephone: '+593989009150', contactType: 'customer service', availableLanguage: 'Spanish' } },
     { '@type': 'WebSite', '@id': url + '#website', name: siteConfig.name, url, inLanguage: 'es-EC', publisher: { '@id': url + '#organization' } },

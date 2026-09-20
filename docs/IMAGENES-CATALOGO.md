@@ -1,4 +1,4 @@
-# Imágenes temporales del catálogo Doctor Pep
+# Imágenes temporales del catálogo Doctor Ecupep
 
 La portada y las 36 tarjetas utilizan imágenes ilustrativas. Las 41 presentaciones del catálogo ya cuentan con un recurso propio en `assets/products/`; son referencias visuales del tipo de envase o accesorio, no fotografías de unidades en venta ni evidencia de su composición, marca, concentración o disponibilidad.
 

@@ -1,4 +1,4 @@
-DOCTOR PEP - VERSION PARA ABRIR DESDE TUS ARCHIVOS
+DOCTOR ECUPEP - VERSION PARA ABRIR DESDE TUS ARCHIVOS
 
 Haz doble clic en index.html. No necesitas instalar ni iniciar un servidor.
 La opción Videos abre videos.html, que también puedes abrir con doble clic.

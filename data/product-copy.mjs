@@ -134,14 +134,14 @@ export const productCopy = {
     ['Posible apoyo a mecanismos de protección neuronal.', 'Interés en señales de mantenimiento de las neuronas.'],
     'Beneficios potenciales del ingrediente', 'Consulta la vía de uso y el contenido por pulverización de esta formulación.'),
   'klow': copy(
-    'Conoce KLOW: presentación de 80 mg y atención personalizada de Doctor Pep.',
+    'Conoce KLOW: presentación de 80 mg y atención personalizada de Doctor Ecupep.',
     'KLOW es el nombre comercial de una referencia del catálogo presentada en 80 mg.',
-    'Sus aplicaciones dependen de los ingredientes y sus proporciones. Doctor Pep puede ayudarte a consultar la composición de esta referencia.',
+    'Sus aplicaciones dependen de los ingredientes y sus proporciones. Doctor Ecupep puede ayudarte a consultar la composición de esta referencia.',
     [], 'Sobre sus beneficios', 'Los beneficios se detallarán cuando esté disponible la composición de la fórmula.'),
   'glow': copy(
-    'Descubre la referencia GLOW de 70 mg dentro del catálogo Doctor Pep.',
+    'Descubre la referencia GLOW de 70 mg dentro del catálogo Doctor Ecupep.',
     'GLOW es el nombre comercial de una referencia del catálogo presentada en 70 mg.',
-    'Para conocer su finalidad es necesario identificar los ingredientes de esta fórmula. Puedes solicitar esa información a Doctor Pep.',
+    'Para conocer su finalidad es necesario identificar los ingredientes de esta fórmula. Puedes solicitar esa información a Doctor Ecupep.',
     [], 'Sobre sus beneficios', 'Los beneficios se detallarán cuando esté disponible la composición de la fórmula.'),
   '5-amino-1mq': copy(
     'Metabolismo celular: conoce 5-Amino-1MQ y la enzima NNMT.',

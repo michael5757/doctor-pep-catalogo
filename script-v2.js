@@ -69,7 +69,7 @@
   const whatsappFloat = $(".whatsapp-float");
   const whatsappCount = $("#whatsappCount");
   const defaultMessage =
-    "Hola, quisiera consultar la disponibilidad del catálogo Doctor Pep.";
+    "Hola, quisiera consultar la disponibilidad del catálogo Doctor Ecupep.";
 
   function whatsappUrl(message) {
     const destination = whatsappNumber
@@ -130,7 +130,7 @@
       image: productImage ? productImage.getAttribute("src") : "",
       imageAlt: productImage ? productImage.alt : "",
       imageIllustrative: Boolean($(".product-photo figcaption", card)),
-      categoryLabel: categoryNames[category] || "Catálogo Doctor Pep",
+      categoryLabel: categoryNames[category] || "Catálogo Doctor Ecupep",
       presentations: presentations.length
         ? presentations
         : ["Formato por confirmar"],
@@ -295,7 +295,7 @@
       name: item.name,
       description: "Revisa la presentación seleccionada antes de enviar tu lista.",
       category: item.categoryKey || "catalogo",
-      categoryLabel: item.categoryLabel || item.category || "Catálogo Doctor Pep",
+      categoryLabel: item.categoryLabel || item.category || "Catálogo Doctor Ecupep",
       presentations:
         Array.isArray(item.presentations) && item.presentations.length
           ? item.presentations
@@ -345,7 +345,7 @@
       return "• " + item.quantity + " × " + item.name + " — " + item.presentation;
     });
     return (
-      "Hola, quisiera consultar disponibilidad de estos productos Doctor Pep:\n\n" +
+      "Hola, quisiera consultar disponibilidad de estos productos Doctor Ecupep:\n\n" +
       lines.join("\n") +
       "\n\n¿Podrían confirmarme disponibilidad, entrega y forma de pago?"
     );
@@ -382,7 +382,7 @@
             total +
             (total === 1 ? " producto" : " productos") +
             " en la lista"
-        : "Consultar el catálogo Doctor Pep por WhatsApp"
+        : "Consultar el catálogo Doctor Ecupep por WhatsApp"
     );
     if (whatsappCount) {
       whatsappCount.textContent = String(total);

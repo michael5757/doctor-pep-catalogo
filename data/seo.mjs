@@ -8,9 +8,9 @@ export function metadataFor(key, hosted = true) {
   const image = socialImage(hosted);
   return { title, description, alternates: { canonical: url },
     openGraph: { type: 'website', locale: 'es_EC', siteName: siteConfig.name, title, description, url,
-      images: [{ url: image, width: 1200, height: 630, type: 'image/png', alt: 'Doctor Pep — Conoce, compara y consulta' }] },
+      images: [{ url: image, width: 1200, height: 630, type: 'image/png', alt: 'Doctor Ecupep — Conoce, compara y consulta' }] },
     twitter: { card: 'summary_large_image', title, description,
-      images: [{ url: image, alt: 'Doctor Pep — Conoce, compara y consulta' }] },
+      images: [{ url: image, alt: 'Doctor Ecupep — Conoce, compara y consulta' }] },
   };
 }
 
@@ -22,7 +22,7 @@ export function staticMetadata(key) {
   <link rel="canonical" href="${escape(pageUrl(key))}" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_EC" />
-  <meta property="og:site_name" content="Doctor Pep" />
+  <meta property="og:site_name" content="Doctor Ecupep" />
   <meta property="og:title" content="${escape(title)}" />
   <meta property="og:description" content="${escape(description)}" />
   <meta property="og:url" content="${escape(pageUrl(key))}" />
@@ -30,12 +30,12 @@ export function staticMetadata(key) {
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Doctor Pep — Conoce, compara y consulta" />
+  <meta property="og:image:alt" content="Doctor Ecupep — Conoce, compara y consulta" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${escape(title)}" />
   <meta name="twitter:description" content="${escape(description)}" />
   <meta name="twitter:image" content="${escape(socialImage())}" />
-  <meta name="twitter:image:alt" content="Doctor Pep — Conoce, compara y consulta" />
+  <meta name="twitter:image:alt" content="Doctor Ecupep — Conoce, compara y consulta" />
 ${siteConfig.googleVerification ? `  <meta name="google-site-verification" content="${escape(siteConfig.googleVerification)}" />\n` : ''}  <script id="siteStructuredData" type="application/ld+json">${safeJson(structuredData())}</script>`;
 }
 

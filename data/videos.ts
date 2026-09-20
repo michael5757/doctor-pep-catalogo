@@ -14,6 +14,6 @@ export type DoctorPepVideo = {
 import publications from './publications.json';
 export { socialAccounts, validVideo, selectVideos, catalogLink } from './social-content.mjs';
 
-// Only verified Doctor Pep publications. No fabricated posts, metrics or dates.
+// Only verified Doctor Ecupep publications. No fabricated posts, metrics or dates.
 // Add owner-approved permanent video/reel URLs here; newest first is automatic.
 export const videos = publications as DoctorPepVideo[];
