@@ -90,6 +90,9 @@ await mkdir(publicAssetsRoot, { recursive: true });
 
 for (const asset of [
   "doctor-ecupep-logo-oficial-v2.png",
+  "favicon-32.png",
+  "favicon-64.png",
+  "apple-touch-icon.png",
   "og-doctor-ecupep-social.png",
   // Legacy files remain published only so old cached pages do not break.
   "doctor-ecupep-logo-oficial.png",

@@ -48,7 +48,6 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 .image-dialog::backdrop { background: #071830cc; }
 .image-dialog img { width: 100%; height: min(65dvh, 650px); object-fit: contain; }
 .image-dialog p { text-align: center; font-size: .875rem; color: #435873; }
-.consultation-thumbnail { object-fit: contain; }
 .consultation-row-actions button, .quantity-button { min-width: 44px; min-height: 44px; }
 .whatsapp-float { bottom: max(22px, env(safe-area-inset-bottom)); }
 dialog .whatsapp-float { position: sticky; margin: 16px 0 0 auto; width: fit-content; bottom: 0; z-index: 2; }
@@ -1205,20 +1204,6 @@ body {
 }
 .dialog-sticky-actions .dialog-add { width: 100%; min-height: 50px; }
 .selection-summary { min-height: 24px; margin: 0; color: #536a82; }
-.consultation-whatsapp {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  margin-top: 14px;
-  padding: 12px 18px;
-  border-radius: 14px;
-  background: #0d6b4e;
-  color: #fff;
-  font-weight: 750;
-  text-decoration: none;
-  box-shadow: 0 10px 24px rgba(13,107,78,.16);
-}
 .consultation-whatsapp:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(13,107,78,.2); }
 .consultation-whatsapp[aria-disabled="true"] {
   pointer-events: none;
@@ -1810,4 +1795,189 @@ body {
   flex: 0 0 auto;
   width: 50px;
   height: 50px;
+}
+
+/* ===== Premium UX phase · Doctor Ecupep ===== */
+.hero {
+  isolation: isolate;
+  overflow: clip;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .5;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(21,87,200,.08) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 64%, rgba(46,177,209,.10) 0 3px, transparent 4px);
+  background-size: 78px 78px, 112px 112px;
+  mask-image: linear-gradient(to bottom, #000 0 72%, transparent);
+}
+.hero-gallery::before {
+  content: "";
+  position: absolute;
+  right: -54px;
+  top: -54px;
+  width: 210px;
+  aspect-ratio: 1;
+  background: url("assets/doctor-ecupep-logo-oficial-v2.png") center/contain no-repeat;
+  opacity: .055;
+  pointer-events: none;
+  transform: rotate(8deg);
+}
+.hero-gallery-heading > img {
+  width: 64px;
+  height: 64px;
+  filter: drop-shadow(0 8px 16px rgba(15,70,165,.15));
+}
+
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#55c6e9,#1557c8);
+  opacity: 0;
+  transition: left 180ms ease,right 180ms ease,opacity 180ms ease;
+}
+.nav-link.active::after,
+.nav-link:hover::after {
+  left: 15px;
+  right: 15px;
+  opacity: 1;
+}
+.product-dialog .dialog-shell {
+  background:
+    radial-gradient(circle at 12% 8%,rgba(61,132,230,.07),transparent 22%),
+    #fff;
+}
+.dialog-product-photo {
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+}
+.dialog-product-photo::after {
+  content: "Vista de referencia";
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: #5d7086;
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(83,111,145,.12);
+  font-size: .72rem;
+  font-weight: 700;
+  pointer-events: none;
+}
+.dialog-sticky-actions {
+  border-radius: 16px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 14px 34px rgba(18,48,84,.08);
+}
+.consultation-thumbnail {
+  width: 64px;
+  height: 64px;
+  padding: 4px;
+}
+.consultation-whatsapp {
+  min-height: 54px;
+  box-shadow: 0 12px 26px rgba(13,107,78,.18);
+}
+
+@media (max-width:760px) {
+  body { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .footer { padding-bottom: calc(126px + env(safe-area-inset-bottom)); }
+  .mobile-dock {
+    left: 12px;
+    right: 12px;
+    bottom: max(10px,env(safe-area-inset-bottom));
+    width: auto;
+    min-height: 68px;
+    padding: 7px;
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 4px;
+    border-radius: 20px;
+    background: rgba(7,31,84,.95);
+    box-shadow: 0 18px 44px rgba(3,16,44,.28);
+    backdrop-filter: blur(18px) saturate(145%);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+  }
+  .mobile-dock .mobile-dock-item {
+    min-width: 0;
+    min-height: 54px;
+    padding: 6px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: rgba(255,255,255,.72);
+    border: 0;
+    border-radius: 14px;
+    background: transparent;
+    font: inherit;
+    font-size: .67rem;
+    font-weight: 750;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 180ms ease,color 180ms ease,transform 180ms ease;
+  }
+  .mobile-dock .mobile-dock-item svg { width: 20px; height: 20px; }
+  .mobile-dock .mobile-dock-item.is-active {
+    color: #fff;
+    background: rgba(255,255,255,.13);
+  }
+  .mobile-dock .mobile-dock-item:active { transform: scale(.96); }
+  .mobile-dock strong {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+  }
+  .whatsapp-float {
+    right: 14px;
+    bottom: max(90px,calc(env(safe-area-inset-bottom) + 84px));
+  }
+  .catalog-toast { bottom: max(94px,calc(env(safe-area-inset-bottom) + 94px)); }
+  .dialog-sticky-actions {
+    position: sticky;
+    bottom: max(0px,env(safe-area-inset-bottom));
+    z-index: 5;
+    margin-inline: -8px;
+    padding: 10px;
+    border: 1px solid #dce6f0;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .dialog-add { min-height: 52px; }
+}
+
+@media (min-width:761px) {
+  .dialog-product-photo img { height: 360px; }
+}
+.motion-entered .hero-gallery-heading > img {
+  animation: ecupep-logo-in 720ms cubic-bezier(.18,.88,.32,1.12) 220ms both;
+}
+@keyframes ecupep-logo-in {
+  from { opacity: 0; transform: scale(.72) rotate(-7deg); }
+  70% { opacity: 1; transform: scale(1.04) rotate(1deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+.motion-rich .brand-logo img {
+  transition: transform 240ms var(--motion-ease),filter 240ms ease;
+}
+.motion-rich .brand:hover .brand-logo img {
+  transform: scale(1.06) rotate(-2deg);
+  filter: drop-shadow(0 7px 14px rgba(11,62,136,.22));
+}
+@media (prefers-reduced-motion:reduce) {
+  .motion-entered .hero-gallery-heading > img { animation: none !important; }
 }

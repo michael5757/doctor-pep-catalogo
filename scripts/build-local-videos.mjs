@@ -41,10 +41,11 @@ await writeFile(new URL('../videos.html', import.meta.url), `<!doctype html>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   ${staticMetadata('videos')}
   ${analyticsTag}
-  <link rel="icon" href="assets/doctor-ecupep-logo-oficial-v2.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="stylesheet" href="styles-v3.css" />
   <link rel="stylesheet" href="styles-storefront.css" />
-  <link rel="stylesheet" href="styles-refinement.css?v=20260920-logo-oficial" />
+  <link rel="stylesheet" href="styles-refinement.css?v=20260920-premium-v2" />
 </head>
 <body>
   <div id="videosRoot"><div class="videos-shell">

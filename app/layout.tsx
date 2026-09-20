@@ -28,7 +28,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <meta name="theme-color" content="#071F54" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <link rel="icon" type="image/png" href="/assets/doctor-ecupep-logo-oficial-v2.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon-64.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link

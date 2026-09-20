@@ -586,6 +586,10 @@
   function openConsultationDrawer(trigger) {
     if (!consultationDrawer || consultationDrawer.open) return;
     drawerTrigger = trigger || listTrigger;
+    mobileListTrigger?.classList.add("is-active");
+    mobileHomeTrigger?.classList.remove("is-active");
+    mobileSearchTrigger?.classList.remove("is-active");
+    mobileCatalogTrigger?.classList.remove("is-active");
     consultationDrawer.showModal();
     window.setTimeout(function () {
       if (consultationClose) consultationClose.focus();
@@ -611,6 +615,8 @@
       if (event.target === consultationDrawer) consultationDrawer.close();
     });
     consultationDrawer.addEventListener("close", function () {
+      mobileListTrigger?.classList.remove("is-active");
+      scheduleScrollState();
       if (drawerTrigger && document.contains(drawerTrigger)) drawerTrigger.focus();
       drawerTrigger = null;
     });
@@ -967,7 +973,9 @@
   const heroCatalogSearch = $("#heroCatalogSearch");
   const heroSearchForm = $("#heroSearchForm");
   const quickSearchButtons = $$("[data-quick-search]");
+  const mobileHomeTrigger = $("#mobileHomeTrigger");
   const mobileSearchTrigger = $("#mobileSearchTrigger");
+  const mobileCatalogTrigger = $("#mobileCatalogTrigger");
   const clearSearch = $("#clearSearch");
   const resetCatalog = $("#resetCatalog");
   const resetCatalogControls = $("#resetCatalogControls");
@@ -1154,6 +1162,7 @@
   }
 
   if (catalogSearch) {
+    catalogSearch.addEventListener("blur", scheduleScrollState);
     catalogSearch.addEventListener("input", function () {
       if (heroCatalogSearch) heroCatalogSearch.value = catalogSearch.value;
       const visible = applyCatalogFilters();
@@ -1203,6 +1212,9 @@
   });
   if (mobileSearchTrigger) {
     mobileSearchTrigger.addEventListener("click", function () {
+      mobileSearchTrigger.classList.add("is-active");
+      mobileHomeTrigger?.classList.remove("is-active");
+      mobileCatalogTrigger?.classList.remove("is-active");
       $("#catalogo-completo").scrollIntoView({
         behavior: prefersReducedMotion ? "auto" : "smooth",
         block: "start",
@@ -1308,6 +1320,20 @@
       if (active) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
     });
+    const catalogStart = $("#catalogo-completo")?.offsetTop || Infinity;
+    const inCatalog = window.scrollY + Math.min(220, window.innerHeight * .32) >= catalogStart;
+    const searchActive = document.activeElement === catalogSearch;
+    if (mobileSearchTrigger) mobileSearchTrigger.classList.toggle("is-active", searchActive);
+    if (mobileHomeTrigger) {
+      mobileHomeTrigger.classList.toggle("is-active", !searchActive && !inCatalog);
+      if (!searchActive && !inCatalog) mobileHomeTrigger.setAttribute("aria-current", "page");
+      else mobileHomeTrigger.removeAttribute("aria-current");
+    }
+    if (mobileCatalogTrigger) {
+      mobileCatalogTrigger.classList.toggle("is-active", !searchActive && inCatalog);
+      if (!searchActive && inCatalog) mobileCatalogTrigger.setAttribute("aria-current", "page");
+      else mobileCatalogTrigger.removeAttribute("aria-current");
+    }
   }
 
   let scrollFrame = 0;
