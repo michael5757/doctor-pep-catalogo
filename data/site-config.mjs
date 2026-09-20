@@ -36,7 +36,7 @@ export function structuredData(hosted = false) {
   const url = baseUrl(hosted);
   return { '@context': 'https://schema.org', '@graph': [
     { '@type': 'Organization', '@id': url + '#organization', name: siteConfig.name, url,
-      logo: new URL('assets/doctor-ecupep-logo.png', url).href,
+      logo: new URL('assets/doctor-ecupep-logo-oficial.png', url).href,
       sameAs: ['https://www.tiktok.com/@doctor.pep.26', 'https://www.instagram.com/doctor.pep.26/'],
       contactPoint: { '@type': 'ContactPoint', telephone: '+593989009150', contactType: 'customer service', availableLanguage: 'Spanish' } },
     { '@type': 'WebSite', '@id': url + '#website', name: siteConfig.name, url, inLanguage: 'es-EC', publisher: { '@id': url + '#organization' } },

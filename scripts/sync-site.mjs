@@ -89,9 +89,10 @@ await rm(publicAssetsRoot, { recursive: true, force: true });
 await mkdir(publicAssetsRoot, { recursive: true });
 
 for (const asset of [
-  "doctor-ecupep-logo.png",
+  "doctor-ecupep-logo-oficial.png",
   "og-doctor-ecupep-social.png",
   // Legacy files remain published only so old cached pages do not break.
+  "doctor-ecupep-logo.png",
   "doctor-pep-logo.webp",
   "og-doctor-pep-social.png",
   "hero-editorial-720.webp",

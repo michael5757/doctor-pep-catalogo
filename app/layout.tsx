@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <meta name="theme-color" content="#071F54" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <link rel="icon" type="image/png" href="/assets/doctor-ecupep-logo.png" />
+        <link rel="icon" type="image/png" href="/assets/doctor-ecupep-logo-oficial.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
