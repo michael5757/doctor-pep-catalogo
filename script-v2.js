@@ -408,6 +408,18 @@
         "Abrir mi lista, " + total + (total === 1 ? " producto" : " productos")
       );
     }
+    const floatLabel = $(".whatsapp-label", whatsappFloat);
+    if (floatLabel) floatLabel.textContent = total ? "Enviar lista" : "WhatsApp";
+  }
+
+  function updateProductWhatsappContext(data, presentation) {
+    if (!whatsappFloat || consultation.length || !data) return;
+    whatsappFloat.href = whatsappUrl(
+      "Hola, quisiera consultar sobre " + data.name + " — " + presentation + " del catálogo Doctor Ecupep."
+    );
+    whatsappFloat.setAttribute("aria-label", "Consultar " + data.name + " por WhatsApp");
+    const label = $(".whatsapp-label", whatsappFloat);
+    if (label) label.textContent = "Consultar";
   }
 
   function createQuantityButton(symbol, action, item) {
@@ -495,7 +507,8 @@
     consultationList.hidden = consultation.length === 0;
     if (consultationTotal) {
       consultationTotal.textContent =
-        total + (total === 1 ? " producto" : " productos");
+        consultation.length + (consultation.length === 1 ? " referencia" : " referencias") +
+        " · " + total + (total === 1 ? " envase" : " envases");
     }
     if (clearConsultationButton) {
       clearConsultationButton.hidden = consultation.length === 0;
@@ -725,6 +738,10 @@
     img.alt = activeProduct.name + ' · ' + presentation;
     $('#selectionSummary').textContent = activeProduct.name + ' · ' + presentation + ' · ' + quantity + (quantity === 1 ? ' envase' : ' envases');
     replacePageUrl(productUrl(activeProduct, presentation));
+    window.dispatchEvent(new CustomEvent("doctorecupep:product-view", {
+      detail: { id: activeProduct.id || slug(activeProduct.name), presentation }
+    }));
+    updateProductWhatsappContext(activeProduct, presentation);
   }
   function renderProductDetails(data) {
     const record = productRecord(data.name);
@@ -853,6 +870,7 @@
       const shouldReopen = reopenDrawerAfterDialog;
       const focusTarget = dialogTrigger;
       activeProduct = null;
+      updateWhatsappFloat();
       dialogTrigger = null;
       dialogMode = "add";
       editingItemId = null;
@@ -1277,6 +1295,7 @@
   } catch {}
   applyCatalogFilters();
 
+
   if (consultationWhatsapp) {
     consultationWhatsapp.addEventListener("click", function (event) {
       if (!consultation.length) {
@@ -1629,6 +1648,48 @@
     $('#shareProduct').textContent = 'Copiar enlace';
     $('#productLinkFallback')?.remove();
   });
+  const coreProductCards = new Map();
+  sourceCards.forEach(card => {
+    const data = getCardData(card);
+    if (data?.id && !coreProductCards.has(data.id)) coreProductCards.set(data.id, card);
+  });
+  window.DoctorEcupepCatalog = {
+    productIds: Array.from(coreProductCards.keys()),
+    reducedMotion: prefersReducedMotion,
+    getProduct(id) {
+      const card = coreProductCards.get(id);
+      return card ? getCardData(card) : null;
+    },
+    getActiveProduct() {
+      if (!activeProduct) return null;
+      const presentation = $("input[name='presentation']:checked", dialogPresentations)?.value || activeProduct.presentations[0];
+      return { id: activeProduct.id || slug(activeProduct.name), presentation };
+    },
+    openProduct(id, presentation, trigger) {
+      const card = coreProductCards.get(id);
+      if (!card) return;
+      const data = getCardData(card);
+      const options = { presentation: data.presentations.includes(presentation) ? presentation : data.presentations[0] };
+      const open = () => openProductDialog(data, trigger || $("[data-card-action='view']", card), options);
+      if (productDialog?.open) {
+        productDialog.close();
+        window.setTimeout(open, 30);
+      } else open();
+    },
+    track: trackEvent,
+    toast: showToast
+  };
+  const loadCatalogExtras = function () {
+    if (document.querySelector("script[data-ecupep-extras]")) return;
+    const extra = document.createElement("script");
+    extra.src = new URL("catalog-extras.min.js?v=20260920-discovery-v2", document.baseURI).href;
+    extra.defer = true;
+    extra.dataset.ecupepExtras = "true";
+    document.body.append(extra);
+  };
+  if ("requestIdleCallback" in window) requestIdleCallback(loadCatalogExtras, { timeout: 900 });
+  else window.setTimeout(loadCatalogExtras, 120);
+
   // Optional owner-selected priorities are applied inside existing categories only.
   const priority = editorial.featuredProductIds || [];
   $$('.feature-grid, .product-grid, .accessory-grid').forEach(grid => {

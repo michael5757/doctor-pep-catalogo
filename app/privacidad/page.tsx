@@ -8,7 +8,7 @@ export default function PrivacyPage() {
   return <main className="privacy-page">
     <header className="privacy-nav">
       <a className="video-brand" href="/" aria-label="Doctor Ecupep, volver al catálogo">
-        <img src="/assets/doctor-ecupep-logo-oficial-v2.png" width="48" height="48" alt="" />
+        <img src="/assets/doctor-ecupep-logo-ui.webp" width="48" height="48" alt="" />
         <span>DOCTOR <strong>ECUPEP</strong></span>
       </a>
       <a className="privacy-back" href="/">← Volver al catálogo</a>

@@ -597,7 +597,7 @@ body {
   font-weight: 580;
   letter-spacing: -.045em;
 }
-.category-head p { margin-top: 10px; color: #60758c; font-size: .92rem; line-height: 1.65; }
+.category-head p { margin-top: 10px; color: #566b82; font-size: .92rem; line-height: 1.65; }
 .category-count {
   padding: 8px 12px;
   border: 1px solid color-mix(in srgb, var(--category-accent) 20%, #dde6f0);
@@ -650,7 +650,7 @@ body {
   letter-spacing: -.025em;
 }
 .product-card > p, .acc-cat { color: #61758b; line-height: 1.62; }
-.availability-tag { color: #708196; }
+.availability-tag { color: #5c7088; }
 .availability-tag i { background: #4e9a88; }
 .card-actions {
   min-height: 52px;
@@ -862,7 +862,7 @@ body {
   background: #f7f9fc;
 }
 .purchase-facts h3 { color: #173653; }
-.purchase-facts p { color: #65788e; line-height: 1.6; }
+.purchase-facts p { color: #596d83; line-height: 1.6; }
 .legal-note {
   max-width: 1240px;
   margin-top: 20px;
@@ -1719,46 +1719,6 @@ body {
   .catalog-reset-controls { min-height: 46px; }
 }
 
-/* Doctor Ecupep brand text/monogram */
-.brand-icon.brand-logo {
-  display: grid;
-  place-items: center;
-  background: linear-gradient(145deg,#eef6ff,#dcecff);
-  color: #1557c8;
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: -.03em;
-}
-.brand-icon.brand-logo img { display: none; }
-.brand-icon.brand-logo::before { content: "DE"; }
-.hero-gallery-heading > img { display: none; }
-.hero-gallery-heading::before,
-.video-brand::before {
-  content: "DE";
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 48px;
-  height: 48px;
-  border: 1px solid rgba(21,87,200,.16);
-  border-radius: 50%;
-  background: linear-gradient(145deg,#eef6ff,#dcecff);
-  color: #1557c8;
-  font-weight: 800;
-  letter-spacing: -.04em;
-}
-.hero-gallery-heading::before { width: 52px; height: 52px; }
-.video-brand img { display: none; }
-@media (max-width:420px) {
-  .brand-text {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0;
-    letter-spacing: .04em;
-  }
-  .brand-text strong { font-size: .72rem; }
-}
-
 /* Logo oficial Doctor Ecupep: PNG transparente proporcionado por el usuario. */
 .brand-icon.brand-logo {
   display: grid;
@@ -1822,7 +1782,7 @@ body {
   top: -54px;
   width: 210px;
   aspect-ratio: 1;
-  background: url("assets/doctor-ecupep-logo-oficial-v2.png") center/contain no-repeat;
+  background: url("assets/doctor-ecupep-logo-ui.webp") center/contain no-repeat;
   opacity: .055;
   pointer-events: none;
   transform: rotate(8deg);

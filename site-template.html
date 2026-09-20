@@ -26,12 +26,14 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Doctor Ecupep" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles-v3.css" />
-  <link rel="stylesheet" href="styles-storefront.css" />
-  <link rel="stylesheet" href="styles-refinement.css?v=20260920-premium-v2" />
+  <link rel="stylesheet" href="site.min.css" />
 </head>
 <body data-whatsapp-number="593989009150">
   <a class="skip-link" href="#main-content">Saltar al contenido</a>
@@ -40,9 +42,9 @@
   <!-- ===== Barra de navegación ===== -->
   <header class="navbar" id="navbar">
     <div class="nav-inner">
-      <a href="#inicio" class="brand">
+      <a href="#inicio" class="brand" aria-label="Doctor Ecupep, inicio">
         <span class="brand-icon brand-logo" aria-hidden="true">
-          <img src="assets/doctor-ecupep-logo-oficial-v2.png" alt="" width="640" height="640" />
+          <img src="assets/doctor-ecupep-logo-ui.webp" alt="" width="640" height="640" />
         </span>
         <span class="brand-text">DOCTOR <strong>ECUPEP</strong></span>
       </a>
@@ -97,9 +99,9 @@
         </div>
 
         <div class="hero-gallery reveal">
-          <div class="hero-gallery-heading"><img src="assets/doctor-ecupep-logo-oficial-v2.png" alt="" width="52" height="52"/><div><span>EL CATÁLOGO</span><strong>Doctor Ecupep</strong></div><span class="hero-gallery-index" aria-hidden="true">01 — 03</span></div>
+          <div class="hero-gallery-heading"><img src="assets/doctor-ecupep-logo-ui.webp" alt="" width="52" height="52"/><div><span>EL CATÁLOGO</span><strong>Doctor Ecupep</strong></div><span class="hero-gallery-index" aria-hidden="true">01 — 03</span></div>
           <!-- HERO_PRODUCTS -->
-          <div class="hero-gallery-foot"><span>Encuentra tu presentación</span><a href="#catalogo-completo" aria-label="Explorar todo el catálogo">Ver todas ↗</a></div>
+          <div class="hero-gallery-foot"><span>Encuentra tu presentación</span><a href="#catalogo-completo" aria-label="Ver todas: explorar todo el catálogo">Ver todas ↗</a></div>
           <p class="hero-gallery-note">Presentaciones y envases de referencia</p>
         </div>
       </div>
@@ -117,9 +119,10 @@
           <label for="catalogSearch">Buscar en el catálogo</label>
           <div class="catalog-search-field">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 4.1 4.1"/></svg>
-            <input id="catalogSearch" type="search" placeholder="Ej. NAD, 10 mg o accesorios" autocomplete="off" />
+            <input id="catalogSearch" type="search" placeholder="Ej. NAD, 10 mg o accesorios" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="catalogSuggestions" />
             <button type="button" id="clearSearch" class="clear-search" aria-label="Limpiar búsqueda" hidden>×</button>
           </div>
+          <div class="catalog-suggestions" id="catalogSuggestions" role="listbox" aria-label="Sugerencias de productos" hidden></div>
         </div>
         <div class="catalog-filter-row reveal" role="group" aria-label="Filtrar por categoría">
           <button type="button" class="filter-chip is-active" data-category-filter="all" aria-pressed="true">Todo</button>
@@ -144,6 +147,10 @@
           <button type="button" class="catalog-reset-controls" id="resetCatalogControls">Limpiar filtros</button>
         </div>
         <p class="catalog-result-count" id="catalogResultCount" role="status" aria-live="polite"></p>
+        <div class="compare-bar" id="compareBar" hidden>
+          <div><strong id="compareCount">0 seleccionados</strong><span>Compara hasta 3 productos.</span></div>
+          <div class="compare-actions"><button type="button" id="clearCompare">Limpiar</button><button type="button" class="btn" id="openCompare">Comparar</button></div>
+        </div>
         <div class="catalog-empty" id="catalogEmpty" hidden>
           <span aria-hidden="true">⌕</span>
           <h3>No encontramos coincidencias</h3>
@@ -598,6 +605,18 @@
       </div>
     </section>
 
+    <!-- ===== Vistos recientemente ===== -->
+    <section class="section recent-section" id="vistos-recientemente" aria-labelledby="recent-title" hidden>
+      <div class="section-head section-head-split reveal">
+        <div>
+          <span class="section-kicker">Continúa explorando</span>
+          <h2 id="recent-title">Vistos recientemente</h2>
+        </div>
+        <button type="button" class="clear-list" id="clearRecent">Limpiar historial</button>
+      </div>
+      <div class="recent-grid" id="recentGrid"></div>
+    </section>
+
     <!-- ===== Preguntas frecuentes ===== -->
     <section class="section faq-section" id="preguntas" aria-labelledby="faq-title">
       <div class="section-head section-head-split reveal">
@@ -674,7 +693,11 @@
         </form>
         <p class="dialog-note">La cantidad indica envases, no una dosis. La disponibilidad se confirma antes del pedido.</p>
         <div id="productDetails" class="product-details"></div>
-        <button type="button" id="shareProduct" class="share-product">Copiar enlace</button>
+        <div class="dialog-secondary-actions">
+          <button type="button" id="dialogPrev" class="share-product">← Anterior</button>
+          <button type="button" id="shareProduct" class="share-product">Copiar enlace</button>
+          <button type="button" id="dialogNext" class="share-product">Siguiente →</button>
+        </div>
       </div>
     </dialog>
 
@@ -713,6 +736,16 @@
       <img id="largeProductImage" alt="" width="1024" height="1024" />
       <p id="largeProductCaption"></p>
     </dialog>
+    <dialog id="compareDialog" class="compare-dialog" aria-labelledby="compareTitle">
+      <div class="compare-shell">
+        <div class="consultation-heading">
+          <div><span class="drawer-eyebrow">Comparador</span><h2 id="compareTitle">Comparar productos</h2></div>
+          <button type="button" class="dialog-close" id="compareClose" aria-label="Cerrar comparador">×</button>
+        </div>
+        <p>Compara información descriptiva y presentaciones del catálogo. No sustituye orientación médica.</p>
+        <div class="compare-grid" id="compareGrid"></div>
+      </div>
+    </dialog>
   </main>
 
   <!-- ===== Pie de página ===== -->
@@ -721,7 +754,7 @@
       <div class="footer-main">
         <div class="footer-brand">
           <span class="brand-icon brand-logo footer-logo" aria-hidden="true">
-            <img src="assets/doctor-ecupep-logo-oficial-v2.png" alt="" width="640" height="640" loading="lazy" />
+            <img src="assets/doctor-ecupep-logo-ui.webp" alt="" width="640" height="640" loading="lazy" />
           </span>
           <div>
             <strong>Doctor Ecupep</strong>
@@ -740,11 +773,11 @@
       </div>
       <div class="footer-column footer-socials">
         <span class="footer-label">Síguenos</span>
-        <a class="footer-social-link" href="https://www.instagram.com/doctor.pep.26?igsh=OTlqNzY5YmN3a3Jk" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram de Doctor Ecupep">
+        <a class="footer-social-link" href="https://www.instagram.com/doctor.pep.26?igsh=OTlqNzY5YmN3a3Jk" target="_blank" rel="noopener noreferrer" aria-label="@doctor.pep.26 en Instagram de Doctor Ecupep">
           <span class="footer-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span>
           <span><strong>@doctor.pep.26</strong></span>
         </a>
-        <a class="footer-social-link" href="https://www.tiktok.com/@doctor.pep.26?_r=1&amp;_t=ZS-98mDLC5Y5Qr" target="_blank" rel="noopener noreferrer" aria-label="Abrir TikTok de Doctor Ecupep">
+        <a class="footer-social-link" href="https://www.tiktok.com/@doctor.pep.26?_r=1&amp;_t=ZS-98mDLC5Y5Qr" target="_blank" rel="noopener noreferrer" aria-label="@doctor.pep.26 en TikTok de Doctor Ecupep">
           <span class="footer-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 4v10.1a4.8 4.8 0 1 1-4.1-4.7v3.2a1.8 1.8 0 1 0 1.1 1.6V4h3Z"/><path d="M14.5 4c.6 2.5 2.2 3.9 5 4.1v3c-2-.1-3.7-.8-5-2"/></svg></span>
           <span><strong>@doctor.pep.26</strong></span>
         </a>
@@ -790,6 +823,6 @@
     <span class="whatsapp-count" id="whatsappCount" aria-hidden="true" hidden>0</span>
   </a>
   <!-- CATALOG_DATA -->
-  <script src="script-v2.js"></script>
+  <script src="script-v2.min.js"></script>
 </body>
 </html>

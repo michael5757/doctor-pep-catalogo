@@ -43,12 +43,17 @@ const publicCatalog = Object.fromEntries(Object.entries(catalog).map(([id, produ
   benefits: product.benefits, benefitsTitle: product.benefitsTitle, note: product.note,
 }]));
 html = html.replace('<!-- CATALOG_DATA -->', `<script id="catalogData" type="application/json">${JSON.stringify({products: publicCatalog, featuredProductIds}).replaceAll('<', '\\u003c')}</script>`);
-html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">' + ['tirzepatide','serum-ghk-cu','selank-spray-nasal'].map((id,index) => {
+const heroProductIds = (featuredProductIds.length ? featuredProductIds : ['tirzepatide','serum-ghk-cu','selank-spray-nasal']).slice(0, 3);
+html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">' + heroProductIds.map((id,index) => {
   const product = catalog[id]; const presentation = product.presentations[0];
-  return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${product.images[presentation]}" alt="${escape(product.name)} · ${escape(presentation)}" width="640" height="640" ${index ? 'loading="lazy" decoding="async" fetchpriority="low"' : 'decoding="async" fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
+  const optimizedHeroIds = new Set(['tirzepatide', 'serum-ghk-cu', 'selank-spray-nasal']);
+  const heroImage = optimizedHeroIds.has(id)
+    ? product.images[presentation].replace('assets/products/', 'assets/products/hero-')
+    : product.images[presentation];
+  return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${heroImage}" alt="${escape(product.name)} · ${escape(presentation)}" width="320" height="320" ${index ? 'loading="lazy" decoding="async" fetchpriority="low"' : 'decoding="async" fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
 }).join('') + '</div>');
 await writeFile(resolve(projectRoot, 'index.html'), html.replaceAll('href="/videos"', 'href="videos.html"').replaceAll('href="/privacidad"', 'href="privacidad.html"'), 'utf8');
-const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<script src="script-v2\.js"><\/script>\s*<\/body>/i);
+const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<script src="script-v2(?:\.min)?\.js"><\/script>\s*<\/body>/i);
 
 if (!bodyMatch) {
   throw new Error("No se pudo extraer el contenido principal de index.html.");
@@ -74,13 +79,43 @@ for (const stalePublicFile of [
 ]) {
   await rm(resolve(publicRoot, stalePublicFile), { force: true });
 }
+const staticCssSource = (
+  await Promise.all(
+    ['styles-v3.css', 'styles-storefront.css', 'styles-refinement.css']
+      .map(name => readFile(resolve(projectRoot, name), 'utf8'))
+  )
+).join('\n');
+const staticCssBundle = await transform(staticCssSource, {
+  loader: 'css',
+  minify: true,
+  legalComments: 'none',
+});
+await writeFile(resolve(projectRoot, 'site.min.css'), staticCssBundle.code, 'utf8');
+
 const runtimeSource = await readFile(resolve(projectRoot, 'script-v2.js'), 'utf8');
 const runtimeBundle = await transform(runtimeSource, {
   minify: true,
   target: 'es2020',
   legalComments: 'none',
 });
+await writeFile(resolve(projectRoot, 'script-v2.min.js'), runtimeBundle.code, 'utf8');
 await writeFile(resolve(publicRoot, 'script-v2.min.js'), runtimeBundle.code, 'utf8');
+const extrasSource = await readFile(resolve(projectRoot, 'catalog-extras.js'), 'utf8');
+const extrasBundle = await transform(extrasSource, {
+  minify: true,
+  target: 'es2020',
+  legalComments: 'none',
+});
+await writeFile(resolve(projectRoot, 'catalog-extras.min.js'), extrasBundle.code, 'utf8');
+await writeFile(resolve(publicRoot, 'catalog-extras.min.js'), extrasBundle.code, 'utf8');
+const extrasCssSource = await readFile(resolve(projectRoot, 'catalog-extras.css'), 'utf8');
+const extrasCssBundle = await transform(extrasCssSource, {
+  loader: 'css',
+  minify: true,
+  legalComments: 'none',
+});
+await writeFile(resolve(projectRoot, 'catalog-extras.min.css'), extrasCssBundle.code, 'utf8');
+await writeFile(resolve(publicRoot, 'catalog-extras.min.css'), extrasCssBundle.code, 'utf8');
 // analytics.js is published by build-visibility.mjs, keeping that concern in one place.
 if (dirname(publicAssetsRoot) !== publicRoot) {
   throw new Error("La carpeta pública de recursos no es segura.");
@@ -90,9 +125,12 @@ await mkdir(publicAssetsRoot, { recursive: true });
 
 for (const asset of [
   "doctor-ecupep-logo-oficial-v2.png",
+  "doctor-ecupep-logo-ui.webp",
   "favicon-32.png",
   "favicon-64.png",
   "apple-touch-icon.png",
+  "doctor-ecupep-icon-192.png",
+  "doctor-ecupep-icon-512.png",
   "og-doctor-ecupep-social.png",
   // Legacy files remain published only so old cached pages do not break.
   "doctor-ecupep-logo-oficial.png",
@@ -123,5 +161,7 @@ await cp(
   resolve(projectRoot, "assets", "og-doctor-ecupep-social.png"),
   resolve(projectRoot, "public", "og.png")
 );
+await cp(resolve(projectRoot, "manifest.webmanifest"), resolve(publicRoot, "manifest.webmanifest"));
+await cp(resolve(projectRoot, "service-worker.js"), resolve(publicRoot, "service-worker.js"));
 await import('./build-visibility.mjs');
 await import('./build-local-videos.mjs');

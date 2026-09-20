@@ -1,4 +1,6 @@
 // Public configuration only. Never put passwords, API secrets or tokens here.
+import { catalog } from './catalog.mjs';
+
 export const siteConfig = {
   name: 'Doctor Ecupep',
   staticUrl: 'https://michael5757.github.io/doctor-pep-catalogo/',
@@ -40,5 +42,13 @@ export function structuredData(hosted = false) {
       sameAs: ['https://www.tiktok.com/@doctor.pep.26', 'https://www.instagram.com/doctor.pep.26/'],
       contactPoint: { '@type': 'ContactPoint', telephone: '+593989009150', contactType: 'customer service', availableLanguage: 'Spanish' } },
     { '@type': 'WebSite', '@id': url + '#website', name: siteConfig.name, url, inLanguage: 'es-EC', publisher: { '@id': url + '#organization' } },
+    { '@type': 'ItemList', '@id': url + '#catalog', name: 'Catálogo Doctor Ecupep',
+      numberOfItems: Object.keys(catalog).length,
+      itemListElement: Object.values(catalog).map((product, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: product.name,
+        url: new URL('?producto=' + encodeURIComponent(product.id) + '&presentacion=' + encodeURIComponent(product.presentations[0]), url).href,
+      })) },
   ] };
 }

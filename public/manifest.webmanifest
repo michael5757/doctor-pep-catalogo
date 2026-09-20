@@ -1,0 +1,25 @@
+{
+  "name": "Doctor Ecupep",
+  "short_name": "Ecupep",
+  "description": "Catálogo informativo de Doctor Ecupep con productos, presentaciones y consulta por WhatsApp.",
+  "lang": "es-EC",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7faff",
+  "theme_color": "#071f54",
+  "icons": [
+    {
+      "src": "assets/doctor-ecupep-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/doctor-ecupep-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

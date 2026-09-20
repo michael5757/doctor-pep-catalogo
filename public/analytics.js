@@ -18,9 +18,16 @@
   // Never include product URLs, searches, selected items or the WhatsApp message.
   const page = { page_group: group, page_title: 'Doctor Ecupep | ' + group, page_location: location.origin + location.pathname, page_referrer: '' };
 
-  function emit(name) {
+  function emit(name, detail = {}) {
     if (!available || optedOut || choice !== 'accepted' || !started) return;
-    window.gtag('event', name, { ...page, send_to: id, transport_type: 'beacon' });
+    const allowed = ['item_count', 'result_count', 'query_length', 'presentation_count', 'sort'];
+    const metrics = {};
+    for (const key of allowed) {
+      const value = detail[key];
+      if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
+      else if (key === 'sort' && ['editorial', 'az', 'za'].includes(value)) metrics[key] = value;
+    }
+    window.gtag('event', name, { ...page, ...metrics, send_to: id, transport_type: 'beacon' });
   }
   function start() {
     if (!available || optedOut || choice !== 'accepted') return;
@@ -72,6 +79,16 @@
     box.append(copy, accept, reject); document.body.append(box);
   }
   window.doctorPepMetrics = { showSettings };
+  const catalogEvents = new Set([
+    'product_open', 'list_add', 'list_edit', 'list_clear', 'list_open',
+    'catalog_search', 'hero_search', 'presentation_filter', 'catalog_sort',
+    'category_filter', 'whatsapp_list_click', 'compare_open',
+    'search_suggestion_open', 'recent_product_open'
+  ]);
+  window.addEventListener('doctorpep:catalog', event => {
+    const detail = event.detail || {};
+    if (catalogEvents.has(detail.event)) emit(detail.event, detail);
+  });
   document.addEventListener('click', event => {
     if (event.target.closest?.('[data-analytics-settings]')) { showSettings(); return; }
     const link = event.target.closest?.('a[href]');

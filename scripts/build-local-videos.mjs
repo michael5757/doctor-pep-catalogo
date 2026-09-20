@@ -43,13 +43,13 @@ await writeFile(new URL('../videos.html', import.meta.url), `<!doctype html>
   ${analyticsTag}
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles-v3.css" />
-  <link rel="stylesheet" href="styles-storefront.css" />
-  <link rel="stylesheet" href="styles-refinement.css?v=20260920-premium-v2" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#071F54" />
+  <link rel="stylesheet" href="site.min.css" />
 </head>
 <body>
   <div id="videosRoot"><div class="videos-shell">
-    <header class="video-nav"><a class="video-brand" href="index.html" aria-label="Doctor Ecupep, volver al inicio"><img src="assets/doctor-ecupep-logo-oficial-v2.png" width="48" height="48" alt="" /><span>DOCTOR <strong>ECUPEP</strong></span></a><nav aria-label="Navegación principal"><a href="index.html#catalogo-completo">Catálogo</a><a href="videos.html" aria-current="page">Videos</a><a href="index.html#?lista=1">Mi lista</a></nav></header>
+    <header class="video-nav"><a class="video-brand" href="index.html" aria-label="Doctor Ecupep, volver al inicio"><img src="assets/doctor-ecupep-logo-ui.webp" width="48" height="48" alt="" /><span>DOCTOR <strong>ECUPEP</strong></span></a><nav aria-label="Navegación principal"><a href="index.html#catalogo-completo">Catálogo</a><a href="videos.html" aria-current="page">Videos</a><a href="index.html#?lista=1">Mi lista</a></nav></header>
     <main class="videos-page">
       <section class="social-directory" aria-labelledby="social-title">
         <div class="videos-intro"><h1 id="social-title">En nuestras redes</h1><p>@doctor.pep.26</p></div>

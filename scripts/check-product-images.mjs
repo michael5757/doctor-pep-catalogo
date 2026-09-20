@@ -44,8 +44,17 @@ for (const [block, name] of cards) {
   assert.equal(image, products[id]?.images[presentation], `${name}: incorrect default presentation image`);
   await access(new URL(image, root));
 }
+const optimizedHeroIds = new Set(['tirzepatide', 'serum-ghk-cu', 'selank-spray-nasal']);
 for (const [, id, image] of html.matchAll(/data-product-link="([^"]+)"[^>]*><img src="([^"]+)"/g)) {
   const product = products[id];
-  assert.equal(image, product.images[product.presentations[0]], `${id}: stale hero image`);
+  const source = product.images[product.presentations[0]];
+  const expected = optimizedHeroIds.has(id)
+    ? source.replace('assets/products/', 'assets/products/hero-')
+    : source;
+  assert.equal(image, expected, `${id}: stale hero image`);
+  const bytes = await readFile(new URL(image, root));
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+  assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+  assert.ok(bytes.length > 2500, `${image}: implausibly small hero image`);
 }
 console.log('Verified 41 distinct product/presentation images; no catalog card uses an accessory placeholder.');

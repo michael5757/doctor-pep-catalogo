@@ -12,7 +12,7 @@ const creatorEmbed = `<!doctype html><html lang="es"><head><meta name="viewport"
 
 export default function VideoGallery({videos, local = false}: {videos:DoctorPepVideo[]; local?:boolean}) {
   const home = local ? 'index.html' : '/';
-  const logo = local ? 'assets/doctor-ecupep-logo-oficial-v2.png' : '/assets/doctor-ecupep-logo-oficial-v2.png';
+  const logo = local ? 'assets/doctor-ecupep-logo-ui.webp' : '/assets/doctor-ecupep-logo-ui.webp';
   const gallery = local ? 'videos.html' : '/videos';
   const [filter, setFilter] = useState<'all' | SocialPlatform>('all');
   const [order, setOrder] = useState<'recent' | 'featured'>('recent');

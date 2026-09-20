@@ -62,4 +62,4 @@ export const catalog = Object.fromEntries(rows.map(([name,presentations,summary,
 }];
 }));
 // Owner-selected priority, never interpreted as sales/popularity rankings.
-export const featuredProductIds = [];
+export const featuredProductIds = ['tirzepatide', 'serum-ghk-cu', 'selank-spray-nasal'];
