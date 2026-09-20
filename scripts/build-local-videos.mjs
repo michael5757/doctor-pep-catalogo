@@ -41,14 +41,14 @@ await writeFile(new URL('../videos.html', import.meta.url), `<!doctype html>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   ${staticMetadata('videos')}
   ${analyticsTag}
-  <link rel="icon" href="assets/doctor-ecupep-logo-oficial.png" />
+  <link rel="icon" href="assets/doctor-ecupep-logo-oficial-v2.png" />
   <link rel="stylesheet" href="styles-v3.css" />
   <link rel="stylesheet" href="styles-storefront.css" />
   <link rel="stylesheet" href="styles-refinement.css?v=20260920-logo-oficial" />
 </head>
 <body>
   <div id="videosRoot"><div class="videos-shell">
-    <header class="video-nav"><a class="video-brand" href="index.html" aria-label="Doctor Ecupep, volver al inicio"><img src="assets/doctor-ecupep-logo-oficial.png" width="48" height="48" alt="" /><span>DOCTOR <strong>ECUPEP</strong></span></a><nav aria-label="Navegación principal"><a href="index.html#catalogo-completo">Catálogo</a><a href="videos.html" aria-current="page">Videos</a><a href="index.html#?lista=1">Mi lista</a></nav></header>
+    <header class="video-nav"><a class="video-brand" href="index.html" aria-label="Doctor Ecupep, volver al inicio"><img src="assets/doctor-ecupep-logo-oficial-v2.png" width="48" height="48" alt="" /><span>DOCTOR <strong>ECUPEP</strong></span></a><nav aria-label="Navegación principal"><a href="index.html#catalogo-completo">Catálogo</a><a href="videos.html" aria-current="page">Videos</a><a href="index.html#?lista=1">Mi lista</a></nav></header>
     <main class="videos-page">
       <section class="social-directory" aria-labelledby="social-title">
         <div class="videos-intro"><h1 id="social-title">En nuestras redes</h1><p>@doctor.pep.26</p></div>
