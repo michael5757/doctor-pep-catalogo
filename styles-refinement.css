@@ -1685,3 +1685,22 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .motion-entered .hero-product-stage figure { animation: none !important; }
 }
+
+/* Mobile catalog flow fix: never trap the viewport with a tall sticky filter panel. */
+@media (max-width: 760px) {
+  .catalog-tools {
+    position: static !important;
+    top: auto !important;
+    z-index: auto;
+    padding: 20px 14px 18px;
+    box-shadow: none;
+  }
+  .catalog-tools-inner {
+    gap: 12px;
+    padding: 16px;
+  }
+  .catalog-search-field { min-height: 50px; }
+  .catalog-filter-row { margin-top: 2px; }
+  .catalog-secondary-controls { padding-top: 12px; }
+  .catalog-reset-controls { min-height: 46px; }
+}
