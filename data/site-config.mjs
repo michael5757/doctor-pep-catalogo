@@ -4,7 +4,7 @@ import { catalog } from './catalog.mjs';
 export const siteConfig = {
   name: 'Doctor Ecupep',
   staticUrl: 'https://michael5757.github.io/doctor-pep-catalogo/',
-  hostedUrl: 'https://doctor-pep-catalogo.gremori57.chatgpt.site/',
+  hostedUrl: 'https://michael5757.github.io/doctor-pep-catalogo/',
   googleVerification: '',
   analytics: { measurementId: '', enhancedMeasurementDisabled: false },
 };
@@ -31,7 +31,7 @@ export function socialImage(hosted = false) {
 }
 
 export function analyticsSettings() {
-  return { ...siteConfig.analytics, origins: [new URL(baseUrl()).origin, new URL(baseUrl(true)).origin] };
+  return { ...siteConfig.analytics, origins: [...new Set([new URL(baseUrl()).origin, new URL(baseUrl(true)).origin])] };
 }
 
 export function structuredData(hosted = false) {

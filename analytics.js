@@ -1,5 +1,19 @@
 (function () {
   'use strict';
+
+  // Keep public URLs free of referral and campaign tracking parameters.
+  try {
+    const currentUrl = new URL(location.href);
+    const trackingKey = /^(?:utm_.+|source|ref|referrer|gclid|fbclid|msclkid|dclid|gbraid|wbraid|yclid|mc_cid|mc_eid)$/i;
+    let changed = false;
+    for (const key of [...currentUrl.searchParams.keys()]) {
+      if (!trackingKey.test(key)) continue;
+      currentUrl.searchParams.delete(key);
+      changed = true;
+    }
+    if (changed) history.replaceState(history.state, '', currentUrl.pathname + currentUrl.search + currentUrl.hash);
+  } catch {}
+
   if (window.doctorPepMetrics) return;
   const script = document.currentScript;
   const config = JSON.parse(script?.dataset.config || '{}');
