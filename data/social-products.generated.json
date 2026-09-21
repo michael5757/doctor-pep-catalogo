@@ -3,204 +3,204 @@
     "id": "tirzepatide",
     "name": "TIRZEPATIDE",
     "presentation": "10 mg",
-    "image": "assets/products/tirzepatide-10-mg.webp"
+    "image": "assets/products/tirzepatide-10-mg.png"
   },
   "retatrutide": {
     "id": "retatrutide",
     "name": "RETATRUTIDE",
     "presentation": "10 mg",
-    "image": "assets/products/retatrutide-10-mg.webp"
+    "image": "assets/products/retatrutide-10-mg.png"
   },
   "mots-c": {
     "id": "mots-c",
     "name": "MOTS-C",
     "presentation": "10 mg",
-    "image": "assets/products/mots-c-10-mg.webp"
+    "image": "assets/products/mots-c-10-mg.png"
   },
   "bpc-157": {
     "id": "bpc-157",
     "name": "BPC-157",
     "presentation": "10 mg",
-    "image": "assets/products/bpc-157-10-mg.webp"
+    "image": "assets/products/bpc-157-10-mg.png"
   },
   "tb-500": {
     "id": "tb-500",
     "name": "TB-500",
     "presentation": "10 mg",
-    "image": "assets/products/tb-500-10-mg.webp"
+    "image": "assets/products/tb-500-10-mg.png"
   },
   "cjc-1295-no-dac-ipamorelin": {
     "id": "cjc-1295-no-dac-ipamorelin",
     "name": "CJC 1295 NO DAC + IPAMORELIN",
     "presentation": "5 + 5 mg",
-    "image": "assets/products/cjc-1295-no-dac-ipamorelin-5-5-mg.webp"
+    "image": "assets/products/cjc-1295-no-dac-ipamorelin-5-5-mg.png"
   },
   "tesamorelin": {
     "id": "tesamorelin",
     "name": "TESAMORELIN",
     "presentation": "10 mg",
-    "image": "assets/products/tesamorelin-10-mg.webp"
+    "image": "assets/products/tesamorelin-10-mg.png"
   },
   "ipamorelin": {
     "id": "ipamorelin",
     "name": "IPAMORELIN",
     "presentation": "10 mg",
-    "image": "assets/products/ipamorelin-10-mg.webp"
+    "image": "assets/products/ipamorelin-10-mg.png"
   },
   "pt-141": {
     "id": "pt-141",
     "name": "PT-141",
     "presentation": "10 mg",
-    "image": "assets/products/pt-141-10-mg.webp"
+    "image": "assets/products/pt-141-10-mg.png"
   },
   "kiss-peptin": {
     "id": "kiss-peptin",
     "name": "KISS PEPTIN",
     "presentation": "10 mg",
-    "image": "assets/products/kiss-peptin-10-mg.webp"
+    "image": "assets/products/kiss-peptin-10-mg.png"
   },
   "ss-31": {
     "id": "ss-31",
     "name": "SS-31",
     "presentation": "10 mg",
-    "image": "assets/products/ss-31-10-mg.webp"
+    "image": "assets/products/ss-31-10-mg.png"
   },
   "ara-290": {
     "id": "ara-290",
     "name": "ARA-290",
     "presentation": "10 mg",
-    "image": "assets/products/ara-290-10-mg.webp"
+    "image": "assets/products/ara-290-10-mg.png"
   },
   "glutathione": {
     "id": "glutathione",
     "name": "GLUTATHIONE",
     "presentation": "1500 mg",
-    "image": "assets/products/glutathione-1500-mg.webp"
+    "image": "assets/products/glutathione-1500-mg.png"
   },
   "ghk-cu": {
     "id": "ghk-cu",
     "name": "GHK-CU",
     "presentation": "100 mg",
-    "image": "assets/products/ghk-cu-100-mg.webp"
+    "image": "assets/products/ghk-cu-100-mg.png"
   },
   "epitalon": {
     "id": "epitalon",
     "name": "EPITALON",
     "presentation": "10 mg",
-    "image": "assets/products/epitalon-10-mg.webp"
+    "image": "assets/products/epitalon-10-mg.png"
   },
   "nad": {
     "id": "nad",
     "name": "NAD",
     "presentation": "500 mg",
-    "image": "assets/products/nad-500-mg.webp"
+    "image": "assets/products/nad-500-mg.png"
   },
   "dsip": {
     "id": "dsip",
     "name": "DSIP",
     "presentation": "10 mg",
-    "image": "assets/products/dsip-10-mg.webp"
+    "image": "assets/products/dsip-10-mg.png"
   },
   "kpv": {
     "id": "kpv",
     "name": "KPV",
     "presentation": "10 mg",
-    "image": "assets/products/kpv-10-mg.webp"
+    "image": "assets/products/kpv-10-mg.png"
   },
   "semax": {
     "id": "semax",
     "name": "SEMAX",
     "presentation": "10 mg",
-    "image": "assets/products/semax-10-mg.webp"
+    "image": "assets/products/semax-10-mg.png"
   },
   "selank": {
     "id": "selank",
     "name": "SELANK",
     "presentation": "10 mg",
-    "image": "assets/products/selank-10-mg.webp"
+    "image": "assets/products/selank-10-mg.png"
   },
   "serum-ghk-cu": {
     "id": "serum-ghk-cu",
     "name": "SERUM GHK-CU",
     "presentation": "30 ml",
-    "image": "assets/products/serum-ghk-cu-30-ml.webp"
+    "image": "assets/products/serum-ghk-cu-30-ml.png"
   },
   "selank-spray-nasal": {
     "id": "selank-spray-nasal",
     "name": "SELANK SPRAY NASAL",
     "presentation": "10 mg",
-    "image": "assets/products/selank-spray-nasal-10-mg.webp"
+    "image": "assets/products/selank-spray-nasal-10-mg.png"
   },
   "semax-spray": {
     "id": "semax-spray",
     "name": "SEMAX SPRAY",
     "presentation": "10 mg",
-    "image": "assets/products/semax-spray-10-mg.webp"
+    "image": "assets/products/semax-spray-10-mg.png"
   },
   "klow": {
     "id": "klow",
     "name": "KLOW",
     "presentation": "80 mg",
-    "image": "assets/products/klow-80-mg.webp"
+    "image": "assets/products/klow-80-mg.png"
   },
   "glow": {
     "id": "glow",
     "name": "GLOW",
     "presentation": "70 mg",
-    "image": "assets/products/glow-70-mg.webp"
+    "image": "assets/products/glow-70-mg.png"
   },
   "5-amino-1mq": {
     "id": "5-amino-1mq",
     "name": "5 AMINO-1MQ",
     "presentation": "10 mg",
-    "image": "assets/products/5-amino-1mq-10-mg.webp"
+    "image": "assets/products/5-amino-1mq-10-mg.png"
   },
   "bac-water": {
     "id": "bac-water",
     "name": "BAC WATER",
     "presentation": "3 ml",
-    "image": "assets/products/bac-water-3-ml.webp"
+    "image": "assets/products/bac-water-3-ml.png"
   },
   "jeringa-3-ml": {
     "id": "jeringa-3-ml",
     "name": "Jeringa 3 ml",
     "presentation": "3 ml",
-    "image": "assets/products/jeringa-3-ml-3-ml.webp"
+    "image": "assets/products/jeringa-3-ml-3-ml.png"
   },
   "jeringuilla-10-ml": {
     "id": "jeringuilla-10-ml",
     "name": "Jeringuilla 10 ml",
     "presentation": "10 ml",
-    "image": "assets/products/jeringuilla-10-ml-10-ml.webp"
+    "image": "assets/products/jeringuilla-10-ml-10-ml.png"
   },
   "alcohol-pre-pad": {
     "id": "alcohol-pre-pad",
     "name": "Alcohol pre pad",
     "presentation": "Formato por confirmar",
-    "image": "assets/products/alcohol-pre-pad-formato-por-confirmar.webp"
+    "image": "assets/products/alcohol-pre-pad-formato-por-confirmar.png"
   },
   "pen-peptide": {
     "id": "pen-peptide",
     "name": "Pen Peptide",
     "presentation": "Modelo por confirmar",
-    "image": "assets/products/pen-peptide-modelo-por-confirmar.webp"
+    "image": "assets/products/pen-peptide-modelo-por-confirmar.png"
   },
   "cartucho": {
     "id": "cartucho",
     "name": "Cartucho",
     "presentation": "Capacidad por confirmar",
-    "image": "assets/products/cartucho-capacidad-por-confirmar.webp"
+    "image": "assets/products/cartucho-capacidad-por-confirmar.png"
   },
   "aguja-pen": {
     "id": "aguja-pen",
     "name": "Aguja Pen",
     "presentation": "Medidas por confirmar",
-    "image": "assets/products/aguja-pen-medidas-por-confirmar.webp"
+    "image": "assets/products/aguja-pen-medidas-por-confirmar.png"
   },
   "derma-roller": {
     "id": "derma-roller",
     "name": "Derma Roller",
     "presentation": "Medidas por confirmar",
-    "image": "assets/products/derma-roller-medidas-por-confirmar.webp"
+    "image": "assets/products/derma-roller-medidas-por-confirmar.png"
   }
 }

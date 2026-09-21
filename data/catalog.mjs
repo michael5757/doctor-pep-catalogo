@@ -57,7 +57,7 @@ export const catalog = Object.fromEntries(rows.map(([name,presentations,summary,
   id: slug(name), name, presentations, summary, evidence, detail, benefits, caution,
   sources: refs.map(key => sources[key]), reviewed: '2026-09-05',
   storage: 'Condiciones de este envase pendientes de confirmar: temperatura, luz y plazo una vez abierto. Solicita la etiqueta o ficha técnica del fabricante.',
-  images: Object.fromEntries(presentations.map(p => [p, `/assets/products/${slug(name)}-${slug(p)}.webp`])),
+  images: Object.fromEntries(presentations.map(p => [p, `/assets/products/${slug(name)}-${slug(p)}.png`])),
   ...productCopy[slug(name)],
 }];
 }));

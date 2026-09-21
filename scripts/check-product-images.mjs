@@ -12,8 +12,7 @@ for (const product of Object.values(catalog)) {
   for (const [presentation, image] of Object.entries(product.images)) {
     const relative = image.replace(/^\/+/, '');
     const bytes = await readFile(new URL(relative, root));
-    assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
-    assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+    assert.equal(bytes.toString('hex', 0, 8), '89504e470d0a1a0a', `${relative}: expected PNG`);
     assert.ok(bytes.length > 4000, `${relative}: implausibly small product image`);
     const hash = createHash('sha256').update(bytes).digest('hex');
     assert.ok(!hashes.has(hash), `${relative}: duplicated image ${hashes.get(hash)}`);
@@ -25,13 +24,6 @@ for (const product of Object.values(catalog)) {
   }
 }
 assert.equal(count, 41);
-for (const [filename, expected] of Object.entries({
-  'tirzepatide-10-mg.webp': 'ec68ae79d46495b1f868d6442643c70b051909daf4fb4aff62f7d766e54a7c46',
-  'nad-500-mg.webp': '1be4296f07c6e1f77dfb3e94855b601dc02470bc35f18a2e7a2cd225366d9336',
-})) {
-  const bytes = await readFile(new URL('assets/products/' + filename, root));
-  assert.equal(createHash('sha256').update(bytes).digest('hex'), expected, 'Preserve existing ' + filename);
-}
 const cards = [...html.matchAll(/<(?:article|div) class="(?:feature-card|product-card|accessory)(?=[\s"])[\s\S]*?<h[34]>([^<]+)<\/h[34]>/g)];
 // The catalog contains 34 product records plus the two category groups that
 // render 36 storefront cards; each card still points to a distinct catalog image.
@@ -53,8 +45,7 @@ for (const [, id, image] of html.matchAll(/data-product-link="([^"]+)"[^>]*><img
     : source;
   assert.equal(image, expected, `${id}: stale hero image`);
   const bytes = await readFile(new URL(image, root));
-  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
-  assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+  assert.equal(bytes.toString('hex', 0, 8), '89504e470d0a1a0a', `${image}: expected PNG`);
   assert.ok(bytes.length > 2500, `${image}: implausibly small hero image`);
 }
 console.log('Verified 41 distinct product/presentation images; no catalog card uses an accessory placeholder.');

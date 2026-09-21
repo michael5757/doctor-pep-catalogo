@@ -13,7 +13,7 @@ assert.ok(runtimeSize < 35 * 1024, `Interactive runtime regression: ${runtimeSiz
 // the legacy catalog views, so keep a deliberate (and still compact) CSS cap.
 assert.ok(cssSize < 100 * 1024, `CSS regression: ${cssSize} bytes`);
 await access(new URL('analytics.js', client));
-await access(new URL('assets/products/tirzepatide-10-mg.webp', client));
+await access(new URL('assets/products/tirzepatide-10-mg.png', client));
 for (const stale of ['script-v2.js', 'styles-v3.css', 'styles-storefront.css', 'styles-refinement.css']) {
   await assert.rejects(access(new URL(stale, client)), error => error?.code === 'ENOENT', `Unexpected duplicate public asset: ${stale}`);
 }

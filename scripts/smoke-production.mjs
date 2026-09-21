@@ -26,7 +26,7 @@ const ready = new Promise((resolveReady, reject) => {
 
 try {
   await ready;
-  const checks = ['/', '/privacidad', '/videos', '/script-v2.min.js', '/assets/products/tirzepatide-10-mg.webp'];
+  const checks = ['/', '/privacidad', '/videos', '/script-v2.min.js', '/assets/products/tirzepatide-10-mg.png'];
   for (const path of checks) {
     const response = await fetch(`http://127.0.0.1:${port}${path}`);
     assert.equal(response.status, 200, `${path}: expected HTTP 200, got ${response.status}`);
