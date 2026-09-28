@@ -1184,9 +1184,9 @@ body {
   text-align: center;
 }
 .dialog-sticky-actions {
-  position: sticky;
-  bottom: 0;
-  z-index: 4;
+  position: static;
+  bottom: auto;
+  z-index: auto;
   display: grid;
   grid-template-columns: minmax(190px,.9fr) 1fr;
   gap: 14px;
@@ -1908,9 +1908,9 @@ body {
   }
   .catalog-toast { bottom: max(94px,calc(env(safe-area-inset-bottom) + 94px)); }
   .dialog-sticky-actions {
-    position: sticky;
-    bottom: max(0px,env(safe-area-inset-bottom));
-    z-index: 5;
+    position: static;
+    bottom: auto;
+    z-index: auto;
     margin-inline: -8px;
     padding: 10px;
     border: 1px solid #dce6f0;
