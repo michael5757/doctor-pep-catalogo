@@ -87,6 +87,32 @@
 
   const search = $('#catalogSearch');
   const suggestions = $('#catalogSuggestions');
+
+  function searchTerms(value) {
+    return normalize(value).split(/[^a-z0-9]+/).filter(Boolean);
+  }
+
+  function suggestionMatches(card, item, query) {
+    if (!query) return true;
+    const name = normalize(item.name);
+    const presentations = (item.presentations || []).map(normalize);
+    if (name === query || name.startsWith(query)) return true;
+    if (presentations.some(value => value === query || value.startsWith(query))) return true;
+
+    const words = searchTerms(card.dataset.searchIndex || '');
+    return searchTerms(query).every(term =>
+      term.length <= 3 ? words.includes(term) : words.some(word => word.includes(term))
+    );
+  }
+
+  function suggestionRank(item, query) {
+    const name = normalize(item.name);
+    if (name === query) return 0;
+    if (name.startsWith(query)) return 1;
+    if (searchTerms(name).includes(query)) return 2;
+    return 3;
+  }
+
   function hideSuggestions() {
     if (!search || !suggestions) return;
     suggestions.hidden = true;
@@ -97,10 +123,9 @@
     if (!search || !suggestions) return;
     const query = normalize(search.value);
     if (!query) return hideSuggestions();
-    const cq = compact(query);
     const matches = ids.map(id => ({ id, item: data(id), card: cardById.get(id) }))
-      .filter(x => (x.card.dataset.searchIndex || '').includes(query) || (cq && (x.card.dataset.searchIndexCompact || '').includes(cq)))
-      .sort((a, b) => Number(!normalize(a.item.name).startsWith(query)) - Number(!normalize(b.item.name).startsWith(query)) || a.item.name.localeCompare(b.item.name, 'es'))
+      .filter(x => suggestionMatches(x.card, x.item, query))
+      .sort((a, b) => suggestionRank(a.item, query) - suggestionRank(b.item, query) || a.item.name.localeCompare(b.item.name, 'es'))
       .slice(0, 6);
     suggestions.replaceChildren();
     if (!matches.length) return hideSuggestions();
@@ -276,7 +301,9 @@
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     const registerServiceWorker = () => {
       const sw = new URL('service-worker.js', document.baseURI);
-      navigator.serviceWorker.register(sw.href, { scope: './' }).catch(() => {});
+      navigator.serviceWorker.register(sw.href, { scope: './', updateViaCache: 'none' })
+        .then(registration => registration.update())
+        .catch(() => {});
     };
     if (document.readyState === 'complete') registerServiceWorker();
     else addEventListener('load', registerServiceWorker, { once: true });

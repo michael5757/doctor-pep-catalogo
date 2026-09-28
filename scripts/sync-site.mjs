@@ -21,7 +21,13 @@ for (const match of matches.reverse()) {
   const first = product.name === 'BAC WATER' && badge ? badge.replace(/\s*ml/i, ' ml') : product.presentations[0];
   const fallback = block.match(/<img src="([^"]+)"/)?.[1];
   for (const presentation of product.presentations) {
-    if (!await imageExists(product.images[presentation])) product.images[presentation] = '/' + fallback;
+    const configuredImage = product.images[presentation];
+    const webpImage = configuredImage.replace(/\.png$/i, '.webp');
+    if (webpImage !== configuredImage && await imageExists(webpImage)) {
+      product.images[presentation] = webpImage;
+    } else if (!await imageExists(configuredImage)) {
+      product.images[presentation] = '/' + fallback;
+    }
     // Relative assets work both beside index.html (file://) and on the web.
     product.images[presentation] = product.images[presentation].replace(/^\/+/, '');
   }

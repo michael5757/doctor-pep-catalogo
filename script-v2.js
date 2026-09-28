@@ -42,7 +42,23 @@
       .trim();
   }
 
-  const compactSearch = value => String(value || "").replace(/[^a-z0-9]/g, "");
+  function searchTokens(value) {
+    return normalizeText(value).split(/[^a-z0-9]+/).filter(Boolean);
+  }
+
+  function cardMatchesQuery(card, data, query) {
+    if (!query) return true;
+    const name = normalizeText(data?.name || "");
+    const presentations = (data?.presentations || []).map(normalizeText);
+    if (name === query || name.startsWith(query)) return true;
+    if (presentations.some(value => value === query || value.startsWith(query))) return true;
+
+    const words = searchTokens(card.dataset.searchIndex || "");
+    return searchTokens(query).every(function (term) {
+      if (term.length <= 3) return words.includes(term);
+      return words.some(word => word.includes(term));
+    });
+  }
 
   function slug(value) {
     return normalizeText(value)
@@ -147,7 +163,6 @@
     card.dataset.searchIndex = normalizeText(
       [data.name, data.description, data.categoryLabel].concat(data.presentations).join(" ")
     );
-    card.dataset.searchIndexCompact = compactSearch(card.dataset.searchIndex);
     if (data.presentations.length > 1) {
       const holder = $('.fc-presentations', card) || document.createElement('div');
       holder.classList.add('variant-preview');
@@ -826,6 +841,8 @@
       productDialog.style.setProperty("--dialog-origin-y", originY + "%");
       productDialog.classList.remove("motion-dialog-open");
     }
+    const dialogShell = $(".dialog-shell", productDialog);
+    if (dialogShell) dialogShell.scrollTop = 0;
     productDialog.showModal();
     if (!prefersReducedMotion) {
       requestAnimationFrame(function () {
@@ -835,9 +852,9 @@
         if (productDialog.open) productDialog.classList.add("motion-dialog-open");
       }, 120);
     }
-    const firstOption = $("input[name='presentation']:checked", dialogPresentations);
     window.setTimeout(function () {
-      (firstOption || dialogClose).focus();
+      if (dialogShell) dialogShell.scrollTop = 0;
+      dialogClose?.focus({ preventScroll: true });
     }, 0);
     trackEvent("product_open", { presentation_count: data.presentations.length });
   }
@@ -1109,17 +1126,12 @@
 
   function applyCatalogFilters() {
     const query = normalizeText(catalogSearch ? catalogSearch.value : "");
-    const compactQuery = compactSearch(query);
     let visibleCount = 0;
     sourceCards.forEach(function (card) {
       const data = getCardData(card);
-      const haystack = card.dataset.searchIndex || "";
       const categoryMatches =
         activeCategory === "all" || data.category === activeCategory;
-      const searchMatches =
-        !query ||
-        haystack.includes(query) ||
-        (compactQuery && (card.dataset.searchIndexCompact || "").includes(compactQuery));
+      const searchMatches = cardMatchesQuery(card, data, query);
       const presentationMatches =
         activePresentation === "all" || data.presentations.includes(activePresentation);
       const visible = categoryMatches && searchMatches && presentationMatches;
