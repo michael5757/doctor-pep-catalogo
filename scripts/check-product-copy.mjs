@@ -26,15 +26,16 @@ for (const [id, product] of Object.entries(products)) {
 
 assert.ok(!html.includes('Un ensayo piloto en 22 pacientes'));
 assert.ok(/Acción GIP \/ GLP-1<\/span>\s*<\/div>\s*<h3>TIRZEPATIDE/.test(html));
-assert.ok(/Triple acción en investigación<\/span>\s*<\/div>\s*<h3>RETATRUTIDE/.test(html));
+assert.ok(/Triple acción metabólica<\/span>\s*<\/div>\s*<h3>RETATRUTIDE/.test(html));
 assert.equal(products.klow.benefits.length, 0, 'Do not invent benefits for an unknown formula');
 assert.equal(products.glow.benefits.length, 0);
 assert.match(products['ara-290'].benefitsTitle, /potenciales/);
 for (const product of Object.values(products)) {
   assert.ok(!/investiga|en estudio|precl[ií]nic/i.test(catalog[product.id].summary), `${product.id}: academic card summary`);
 }
-for (const id of ['retatrutide','mots-c','bpc-157','tb-500','cjc-1295-no-dac-ipamorelin','ipamorelin','kiss-peptin','ara-290','ghk-cu','epitalon','dsip','kpv','semax','selank','selank-spray-nasal','semax-spray','5-amino-1mq']) {
-  assert.match(products[id].usage, /experimental/, `${id}: retain the experimental context inside the fiche`);
+for (const [id, product] of Object.entries(products)) {
+  const publicCopy = [product.what, product.usage, product.benefitsTitle, product.note, ...(product.benefits || [])].join(' ');
+  assert.ok(!/experimental|investigaci[oó]n|precl[ií]nic/i.test(publicCopy), `${id}: public fiche contains research-status wording`);
 }
 assert.match(products.nad.benefitsTitle, /Funciones naturales/);
 assert.match(products.glutathione.benefitsTitle, /Funciones naturales/);

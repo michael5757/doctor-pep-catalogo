@@ -40,7 +40,7 @@ for (const match of matches.reverse()) {
   block = block.replace(/(<(?:article|div) class="[^"]+")/, `$1 data-product-id="${product.id}" data-default-presentation="${escape(first)}"`);
   block = block.replace(/(<img src=")[^"]+/, `$1${product.images[first]}`);
   block = block.replace(/alt="[^"]*"/, `alt="${escape(product.name + ' · ' + first)}"`);
-  const tag = { tirzepatide: 'Acción GIP / GLP-1', retatrutide: 'Triple acción en investigación' }[product.id];
+  const tag = { tirzepatide: 'Acción GIP / GLP-1', retatrutide: 'Triple acción metabólica' }[product.id];
   if (tag) block = block.replace(/(<span class="fc-tag">)[^<]+/, `$1${tag}`);
   if (product.evidence === 'Accesorio') block = block.replace(/(<span class="acc-icon">)[^<]+/, `$1${escape(first)}`);
   html = html.slice(0, match.index) + block + html.slice(match.index + match[0].length);

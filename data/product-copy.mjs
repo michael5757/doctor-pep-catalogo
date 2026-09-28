@@ -14,27 +14,27 @@ export const productCopy = {
   'retatrutide': copy(
     'Tres vías de acción: GIP, GLP-1 y glucagón en una misma molécula.',
     'La retatrutida es una molécula que actúa sobre tres receptores relacionados con el metabolismo: GIP, GLP-1 y glucagón.',
-    'Su potencial se centra en el manejo del peso y la glucosa. Es una opción experimental, todavía en evaluación clínica.',
+    'Su interés se centra en la acción conjunta sobre GIP, GLP-1 y glucagón, vías relacionadas con el metabolismo y la regulación de la glucosa.',
     ['Reducción del peso corporal.', 'Mejora del control de la glucosa.']),
   'mots-c': copy(
     'Mitocondrias y metabolismo: conoce este péptido de origen celular.',
     'MOTS-C es un péptido relacionado con las mitocondrias, las estructuras de las células que participan en la producción de energía.',
-    'Su interés está en cómo las células aprovechan la glucosa y responden a la insulina. Estas aplicaciones son experimentales, basadas en resultados preclínicos.',
+    'Su interés está en cómo las células aprovechan la glucosa y responden a la insulina, especialmente en relación con el metabolismo celular.',
     ['Mejor aprovechamiento de la glucosa por las células.', 'Regulación de los procesos metabólicos.']),
   'bpc-157': copy(
     'Una cadena de 15 aminoácidos vinculada a la biología de la reparación.',
     'BPC-157 es un péptido sintético formado por una cadena de 15 aminoácidos.',
-    'Su potencial se relaciona con la cicatrización y la reparación de tejidos. Son aplicaciones experimentales, con resultados principalmente preclínicos.',
-    ['Apoyo a los mecanismos de cicatrización.', 'Recuperación de tejidos lesionados en modelos experimentales.']),
+    'Su interés se relaciona con la cicatrización y los procesos biológicos de reparación de tejidos.',
+    ['Apoyo a los mecanismos de cicatrización.', 'Interés en procesos relacionados con la recuperación de tejidos.']),
   'tb-500': copy(
     'Conoce la conexión entre este péptido y la timosina beta-4.',
     'TB-500 es una denominación utilizada para un péptido relacionado con la timosina beta-4, una proteína que participa en el movimiento y la organización celular.',
-    'Su interés está en los procesos de movimiento y organización de las células. Sus aplicaciones terapéuticas son experimentales y dependen de la identidad concreta del péptido.',
+    'Su interés está en los procesos de movimiento y organización de las células y depende de la identidad concreta del péptido.',
     ['Relación con la familia de péptidos de la timosina beta-4.', 'Interés biológico en el movimiento y la organización celular.'], 'Qué lo distingue'),
   'cjc-1295-no-dac-ipamorelin': copy(
     'Dos componentes en una presentación: CJC NO DAC e ipamorelina.',
     'Es una combinación declarada de CJC 1295 NO DAC e ipamorelina, con 5 mg de cada componente.',
-    'Reúne dos componentes relacionados con las señales de liberación de hormona del crecimiento. La aplicación de esta combinación es experimental.',
+    'Reúne dos componentes relacionados con las señales de liberación de hormona del crecimiento.',
     ['Presentación combinada de 5 mg + 5 mg.', 'Dos componentes con vías de señalización hormonal diferentes.'], 'Qué lo distingue',
     'Los efectos de la combinación requieren evaluación propia; NO DAC identifica una formulación específica.'),
   'tesamorelin': copy(
@@ -47,7 +47,7 @@ export const productCopy = {
   'ipamorelin': copy(
     'Ipamorelina y su acción selectiva sobre una señal hormonal.',
     'La ipamorelina es un péptido que actúa sobre receptores relacionados con la grelina y la liberación de hormona del crecimiento.',
-    'Destaca por su capacidad de estimular la liberación de hormona del crecimiento. Su aplicación terapéutica es experimental.',
+    'Destaca por su relación con receptores vinculados a la grelina y la liberación de hormona del crecimiento.',
     ['Estimulación selectiva de la liberación de hormona del crecimiento.']),
   'pt-141': copy(
     'Deseo sexual: conoce la bremelanotida y su indicación médica.',
@@ -59,7 +59,7 @@ export const productCopy = {
   'kiss-peptin': copy(
     'Kisspeptina: una conexión entre el cerebro y las hormonas reproductivas.',
     'Las kisspeptinas son péptidos que participan en la comunicación entre el cerebro y el sistema reproductivo.',
-    'Participan en la activación de señales hormonales de la reproducción. Su aplicación en reproducción asistida, incluida la maduración de óvulos, es experimental.',
+    'Participan en la activación de señales hormonales de la reproducción y en la comunicación entre el cerebro y el sistema reproductivo.',
     ['Activación de señales hormonales de la reproducción.', 'Posibles aplicaciones en reproducción asistida.'],
     'Beneficios potenciales', 'Existen distintas formas de kisspeptina; sus aplicaciones dependen de la forma utilizada.'),
   'ss-31': copy(
@@ -71,7 +71,7 @@ export const productCopy = {
   'ara-290': copy(
     'Cibinetida: un péptido relacionado con las señales de reparación celular.',
     'ARA-290, también llamado cibinetida, es un péptido relacionado con señales de protección y reparación de tejidos.',
-    'Su potencial está en el alivio de molestias de las fibras nerviosas pequeñas y en los procesos de reparación nerviosa. Es una aplicación terapéutica experimental.',
+    'Su interés está en las fibras nerviosas pequeñas y en los procesos biológicos relacionados con la reparación nerviosa.',
     ['Posible alivio de síntomas de neuropatía de fibras pequeñas.', 'Apoyo a procesos de protección y reparación nerviosa.']),
   'glutathione': copy(
     'Conoce uno de los protagonistas de la defensa antioxidante del organismo.',
@@ -82,12 +82,12 @@ export const productCopy = {
   'ghk-cu': copy(
     'Tres aminoácidos y cobre: conoce el complejo GHK-Cu.',
     'GHK-Cu es un complejo formado por un pequeño péptido de tres aminoácidos unido a cobre.',
-    'Su interés está en la producción de colágeno y los procesos de reparación de tejidos. Estas aplicaciones se basan en resultados celulares y son experimentales para este formato.',
+    'Su interés está en la producción de colágeno y en los procesos biológicos relacionados con la reparación de tejidos.',
     ['Apoyo a la síntesis de colágeno en modelos celulares.', 'Participación en procesos relacionados con la reparación de tejidos.']),
   'epitalon': copy(
     'Cuatro aminoácidos conectados con la biología de los telómeros.',
     'Epitalon es un péptido sintético de cuatro aminoácidos, también conocido como epithalon.',
-    'Su interés está en los telómeros, estructuras que protegen los extremos de los cromosomas. Las aplicaciones relacionadas con el envejecimiento celular son experimentales.',
+    'Su interés está en los telómeros, estructuras que protegen los extremos de los cromosomas, y en su relación con la biología celular.',
     ['Estructura de cuatro aminoácidos, también llamada tetrapéptido.', 'Interés biológico en el mantenimiento de los telómeros.'], 'Qué lo distingue'),
   'nad': copy(
     'La energía empieza en las células: conoce la función natural del NAD.',
@@ -98,22 +98,22 @@ export const productCopy = {
   'dsip': copy(
     'Sueño y descanso: conoce el péptido DSIP y su identidad.',
     'DSIP es un péptido de nueve aminoácidos cuyo nombre hace referencia al sueño de ondas delta.',
-    'Su interés está en los patrones del sueño y las señales que intervienen en el descanso. Su aplicación para mejorar el sueño es experimental.',
+    'Su interés está en los patrones del sueño y en las señales biológicas que intervienen en el descanso.',
     ['Posible influencia en los patrones del sueño.', 'Comprensión de las señales relacionadas con el descanso.']),
   'kpv': copy(
     'Lisina, prolina y valina: tres aminoácidos que dan nombre a KPV.',
     'KPV es un péptido formado por tres aminoácidos: lisina, prolina y valina.',
-    'Su potencial se relaciona con la respuesta inflamatoria de la mucosa intestinal. Es una aplicación experimental basada en resultados preclínicos.',
-    ['Modulación de la respuesta inflamatoria en modelos experimentales.', 'Interés en el cuidado de la mucosa intestinal.']),
+    'Su interés se relaciona con la respuesta inflamatoria y con la biología de la mucosa intestinal.',
+    ['Relación con mecanismos de respuesta inflamatoria.', 'Interés en el cuidado de la mucosa intestinal.']),
   'semax': copy(
     'Conoce Semax y su relación con las señales de las células nerviosas.',
     'Semax es un péptido sintético relacionado con un fragmento de la hormona ACTH.',
-    'Su potencial está en las señales que participan en la protección y el mantenimiento de las neuronas. Las aplicaciones de esta presentación son experimentales.',
+    'Su interés está en las señales que participan en la protección y el mantenimiento de las neuronas.',
     ['Posible apoyo a mecanismos de protección neuronal.', 'Modulación de señales relacionadas con el mantenimiento de las neuronas.']),
   'selank': copy(
     'Siete aminoácidos: conoce Selank, un péptido relacionado con la tuftsina.',
     'Selank es un péptido sintético de siete aminoácidos, relacionado con el péptido natural tuftsina.',
-    'Su potencial está en las señales del sistema nervioso relacionadas con la ansiedad y la respuesta al estrés. Son aplicaciones experimentales.',
+    'Su interés está en las señales del sistema nervioso relacionadas con la ansiedad y la respuesta al estrés.',
     ['Posible modulación de la respuesta a la ansiedad.', 'Posible influencia en los mecanismos de adaptación al estrés.']),
   'serum-ghk-cu': copy(
     'Péptido de cobre en sérum: un formato pensado para el cuidado de tu piel.',
@@ -124,13 +124,13 @@ export const productCopy = {
   'selank-spray-nasal': copy(
     'Conoce Selank en su presentación de spray nasal de 10 mg.',
     'Es una presentación nasal del péptido Selank, formado por una cadena de siete aminoácidos.',
-    'El interés del ingrediente está en la respuesta del sistema nervioso al estrés y la ansiedad. Las aplicaciones de este formato son experimentales.',
+    'El interés del ingrediente está en la respuesta del sistema nervioso al estrés y la ansiedad.',
     ['Posible modulación de señales relacionadas con la ansiedad.', 'Posible influencia en la respuesta al estrés.'],
     'Beneficios potenciales del ingrediente', 'Los 10 mg indican contenido total, no cantidad por pulverización.'),
   'semax-spray': copy(
     'Una presentación diferente: Semax en formato spray de 10 mg.',
     'Es una presentación en spray del péptido Semax, relacionado con un fragmento de la hormona ACTH.',
-    'El interés del ingrediente está en las señales de protección y mantenimiento de las neuronas. Las aplicaciones de esta formulación son experimentales.',
+    'El interés del ingrediente está en las señales de protección y mantenimiento de las neuronas.',
     ['Posible apoyo a mecanismos de protección neuronal.', 'Interés en señales de mantenimiento de las neuronas.'],
     'Beneficios potenciales del ingrediente', 'Consulta la vía de uso y el contenido por pulverización de esta formulación.'),
   'klow': copy(
@@ -146,8 +146,8 @@ export const productCopy = {
   '5-amino-1mq': copy(
     'Metabolismo celular: conoce 5-Amino-1MQ y la enzima NNMT.',
     '5-Amino-1MQ es una pequeña molécula, distinta de un péptido, con actividad inhibidora sobre la enzima NNMT.',
-    'Su potencial está en los procesos metabólicos relacionados con la acumulación de grasa. Estas aplicaciones son experimentales, basadas en resultados preclínicos.',
-    ['Posibles cambios en la composición corporal en modelos experimentales.', 'Modulación de procesos metabólicos relacionados con NNMT.']),
+    'Su interés está en los procesos metabólicos relacionados con NNMT y la acumulación de grasa.',
+    ['Relación con procesos vinculados a la composición corporal.', 'Modulación de procesos metabólicos relacionados con NNMT.']),
   'bac-water': copy(
     'El complemento para preparaciones compatibles, en 3, 10 y 30 ml.',
     'El agua bacteriostática es un diluyente que contiene un conservante para limitar el crecimiento de bacterias en las condiciones indicadas por el fabricante.',
