@@ -14,8 +14,8 @@ for (const name of ['index.html', 'videos.html', 'privacidad.html']) {
   assert.ok(!html.includes('type="module"'), `${name}: local entry must be a classic script`);
 }
 const html = await readFile(new URL('index.html', root), 'utf8');
-assert.ok(html.includes('href="site.min.css"'), 'Static home must use the minified CSS bundle');
-assert.ok(html.includes('src="script-v2.min.js"'), 'Static home must use the minified runtime');
+assert.match(html, /href="site\.min\.css(?:\?v=[a-f0-9]{10})?"/, 'Static home must use the minified CSS bundle');
+assert.match(html, /src="script-v2\.min\.js(?:\?v=[a-f0-9]{10})?"/, 'Static home must use the minified runtime');
 assert.ok(!html.includes('href="styles-v3.css"'), 'Static home must not load source CSS');
 assert.ok(!html.includes('src="script-v2.js"'), 'Static home must not load source runtime');
 const { products } = JSON.parse(html.match(/<script id="catalogData" type="application\/json">([\s\S]*?)<\/script>/)[1]);

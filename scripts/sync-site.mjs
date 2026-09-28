@@ -1,12 +1,18 @@
 import { cp, mkdir, readFile, readdir, rm, writeFile, access } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
 import { catalog, slug, featuredProductIds } from '../data/catalog.mjs';
 import { transform } from 'esbuild';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const publicRoot = resolve(projectRoot, "public");
 const publicAssetsRoot = resolve(publicRoot, "assets");
+const assetSources = await Promise.all(
+  ['styles-v3.css', 'styles-storefront.css', 'styles-refinement.css', 'script-v2.js', 'catalog-extras.js', 'catalog-extras.css']
+    .map(name => readFile(resolve(projectRoot, name), 'utf8'))
+);
+const assetVersion = createHash('sha256').update(assetSources.join('\0')).digest('hex').slice(0, 10);
 let html = await readFile(resolve(projectRoot, "site-template.html"), "utf8");
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
 const imageExists = async path => { try { await access(resolve(projectRoot, path.replace(/^\/+/, ''))); return true; } catch { return false; } };
@@ -58,7 +64,12 @@ html = html.replace('<!-- HERO_PRODUCTS -->', '<div class="hero-product-stage">'
     : product.images[presentation];
   return `<figure><a href="?producto=${id}&presentacion=${encodeURIComponent(presentation)}" data-product-link="${id}" aria-label="Ver ficha de ${escape(product.name)}"><img src="${heroImage}" alt="${escape(product.name)} · ${escape(presentation)}" width="320" height="320" ${index ? 'loading="lazy" decoding="async" fetchpriority="low"' : 'decoding="async" fetchpriority="high"'}/></a><figcaption><strong>${escape(product.name)}</strong><small>${escape(presentation)} · Ver ficha ↗</small></figcaption></figure>`;
 }).join('') + '</div>');
-await writeFile(resolve(projectRoot, 'index.html'), html.replaceAll('href="/videos"', 'href="videos.html"').replaceAll('href="/privacidad"', 'href="privacidad.html"'), 'utf8');
+const publishedHtml = html
+  .replace('href="site.min.css"', `href="site.min.css?v=${assetVersion}"`)
+  .replace('src="script-v2.min.js"', `src="script-v2.min.js?v=${assetVersion}"`)
+  .replaceAll('href="/videos"', 'href="videos.html"')
+  .replaceAll('href="/privacidad"', 'href="privacidad.html"');
+await writeFile(resolve(projectRoot, 'index.html'), publishedHtml, 'utf8');
 const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<script src="script-v2(?:\.min)?\.js"><\/script>\s*<\/body>/i);
 
 if (!bodyMatch) {
@@ -98,7 +109,8 @@ const staticCssBundle = await transform(staticCssSource, {
 });
 await writeFile(resolve(projectRoot, 'site.min.css'), staticCssBundle.code, 'utf8');
 
-const runtimeSource = await readFile(resolve(projectRoot, 'script-v2.js'), 'utf8');
+const runtimeSource = (await readFile(resolve(projectRoot, 'script-v2.js'), 'utf8'))
+  .replaceAll('__ASSET_VERSION__', assetVersion);
 const runtimeBundle = await transform(runtimeSource, {
   minify: true,
   target: 'es2020',
@@ -106,7 +118,8 @@ const runtimeBundle = await transform(runtimeSource, {
 });
 await writeFile(resolve(projectRoot, 'script-v2.min.js'), runtimeBundle.code, 'utf8');
 await writeFile(resolve(publicRoot, 'script-v2.min.js'), runtimeBundle.code, 'utf8');
-const extrasSource = await readFile(resolve(projectRoot, 'catalog-extras.js'), 'utf8');
+const extrasSource = (await readFile(resolve(projectRoot, 'catalog-extras.js'), 'utf8'))
+  .replaceAll('__ASSET_VERSION__', assetVersion);
 const extrasBundle = await transform(extrasSource, {
   minify: true,
   target: 'es2020',

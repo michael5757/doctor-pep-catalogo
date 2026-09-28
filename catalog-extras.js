@@ -6,14 +6,13 @@
   if (!document.querySelector("link[data-ecupep-extras]")) {
     const style = document.createElement("link");
     style.rel = "stylesheet";
-    style.href = new URL("catalog-extras.min.css?v=20260920-discovery-v2", document.baseURI).href;
+    style.href = new URL("catalog-extras.min.css?v=__ASSET_VERSION__", document.baseURI).href;
     style.dataset.ecupepExtras = "true";
     document.head.append(style);
   }
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
-  const compact = value => normalize(value).replace(/[^a-z0-9]/g, '');
   const publicCatalog = JSON.parse($('#catalogData')?.textContent || '{"products":{}}').products || {};
   const cards = $$('.category .feature-card,.category .product-card,.category .accessory');
   const cardById = new Map();

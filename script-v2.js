@@ -1700,7 +1700,7 @@
   const loadCatalogExtras = function () {
     if (document.querySelector("script[data-ecupep-extras]")) return;
     const extra = document.createElement("script");
-    extra.src = new URL("catalog-extras.min.js?v=20260920-discovery-v2", document.baseURI).href;
+    extra.src = new URL("catalog-extras.min.js?v=__ASSET_VERSION__", document.baseURI).href;
     extra.defer = true;
     extra.dataset.ecupepExtras = "true";
     document.body.append(extra);
