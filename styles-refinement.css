@@ -28,8 +28,28 @@ button, a, input, summary { -webkit-tap-highlight-color: transparent; }
 .hero-product-stage figcaption { display: grid; gap: 4px; color: #102d54; }
 .hero-gallery-note { margin: 10px 0 0; color: #53667d; }
 .section.category:nth-of-type(2n + 1) { background: #f5f8fc; }
-#zoomProduct { display: block; border: 0; background: none; width: 100%; cursor: zoom-in; color: #174fba; font: inherit; }
-#zoomProduct > span { display: block; padding: 8px; font-size: .875rem; }
+#zoomProduct {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: 0;
+  background: none;
+  color: #174fba;
+  font: inherit;
+  cursor: zoom-in;
+}
+#zoomProduct > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 6px;
+  padding: 10px 12px 2px;
+  border-top: 1px solid rgba(83,111,145,.12);
+  font-size: .875rem;
+  line-height: 1.25;
+  white-space: normal;
+}
 .dialog-product-photo figcaption { padding-bottom: 4px; }
 .dialog-facts { gap: 12px; font-size: .875rem; }
 .presentation-option span { font-size: 1rem; display: inline-flex; align-items: center; }
@@ -1817,15 +1837,21 @@ body {
 .dialog-product-photo::after {
   content: "Vista de referencia";
   position: absolute;
+  z-index: 3;
+  top: 12px;
   left: 14px;
-  bottom: 12px;
-  padding: 6px 9px;
+  bottom: auto;
+  max-width: calc(100% - 28px);
+  padding: 6px 10px;
   border-radius: 999px;
   color: #5d7086;
-  background: rgba(255,255,255,.88);
+  background: rgba(255,255,255,.92);
   border: 1px solid rgba(83,111,145,.12);
+  box-shadow: 0 4px 14px rgba(18,48,84,.08);
   font-size: .72rem;
   font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
   pointer-events: none;
 }
 .dialog-sticky-actions {
