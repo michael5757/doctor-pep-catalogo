@@ -1917,6 +1917,91 @@ body {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
+
+  /* Mobile controls: keep close and quantity actions fully inside the viewport. */
+  .product-dialog {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    overflow: visible;
+  }
+  .product-dialog .dialog-shell {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding-top: max(62px, calc(52px + env(safe-area-inset-top)));
+    padding-right: max(18px, calc(14px + env(safe-area-inset-right)));
+    padding-bottom: max(24px, calc(18px + env(safe-area-inset-bottom)));
+    padding-left: max(18px, calc(14px + env(safe-area-inset-left)));
+  }
+  .dialog-close {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    flex: 0 0 48px;
+    overflow: visible;
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+  .product-dialog .dialog-close {
+    top: max(8px, env(safe-area-inset-top));
+    right: max(8px, env(safe-area-inset-right));
+    z-index: 20;
+  }
+  .quantity-field {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+  .dialog-quantity-stepper {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    grid-template-columns: 48px minmax(0,1fr) 48px;
+  }
+  .dialog-quantity-stepper button {
+    width: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    line-height: 1;
+  }
+  .dialog-quantity-stepper input {
+    min-width: 0;
+    min-height: 48px;
+    padding: 0 6px;
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  .dialog-quantity-stepper input::-webkit-inner-spin-button,
+  .dialog-quantity-stepper input::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+  .consultation-heading {
+    min-width: 0;
+  }
+  .consultation-heading > div {
+    min-width: 0;
+  }
+  .consultation-controls {
+    width: max-content;
+    max-width: 100%;
+    grid-template-columns: 48px minmax(44px,56px) 48px;
+  }
+  .consultation-controls .quantity-button {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    line-height: 1;
+  }
+  .consultation-quantity {
+    min-width: 44px;
+    padding-inline: 4px;
+  }
   .dialog-add { min-height: 52px; }
 }
 
