@@ -831,6 +831,9 @@
       requestAnimationFrame(function () {
         productDialog.classList.add("motion-dialog-open");
       });
+      window.setTimeout(function () {
+        if (productDialog.open) productDialog.classList.add("motion-dialog-open");
+      }, 120);
     }
     const firstOption = $("input[name='presentation']:checked", dialogPresentations);
     window.setTimeout(function () {
@@ -1439,6 +1442,9 @@
       }
     });
     mobileNavigation.addEventListener("change", function () {
+      closeMenu(false);
+    });
+    window.addEventListener("pageshow", function () {
       closeMenu(false);
     });
   }
