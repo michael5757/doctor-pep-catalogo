@@ -9,7 +9,7 @@ const CORE = [
   './styles-webflow-redesign.css?v=20260930-polish2',
   './ux-upgrade.css?v=20260930-1',
   './script-v2.min.js?v=b842bd161f',
-  './ux-upgrade.js?v=20260930-1',
+  './ux-upgrade.js?v=20260930-2',
   './catalog-extras.min.js?v=__ASSET_VERSION__',
   './catalog-extras.min.css?v=__ASSET_VERSION__',
   './assets/favicon-32.png',
