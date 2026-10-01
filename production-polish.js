@@ -21,6 +21,34 @@
     try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
   };
 
+
+  /* ---------- Mobile blur state guard ---------- */
+  function clearStaleMobileOverlay() {
+    const menu = document.querySelector('#navLinks');
+    const toggle = document.querySelector('#menuToggle');
+    const actuallyOpen = Boolean(menu?.classList.contains('open') && toggle?.getAttribute('aria-expanded') === 'true');
+
+    if (!actuallyOpen) {
+      document.body.classList.remove('menu-open');
+      menu?.classList.remove('open');
+      toggle?.classList.remove('open');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Abrir menú');
+      }
+    }
+
+    document.documentElement.classList.add('no-global-blur');
+  }
+
+  clearStaleMobileOverlay();
+  document.addEventListener('DOMContentLoaded', clearStaleMobileOverlay, { once: true });
+  window.addEventListener('pageshow', clearStaleMobileOverlay);
+  window.addEventListener('focus', clearStaleMobileOverlay);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) clearStaleMobileOverlay();
+  });
+
   /* ---------- Favorites ---------- */
   let favorites = new Set(
     (Array.isArray(readJson(favKey, [])) ? readJson(favKey, []) : [])
