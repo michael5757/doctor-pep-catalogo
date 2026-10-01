@@ -257,3 +257,48 @@
     transition:none!important;
   }
 }
+
+/* =========================================================
+   MOBILE BLUR FIX — Safari / iOS / Android in-app browsers
+   Never blur the whole document behind mobile UI layers.
+   ========================================================= */
+@media (max-width: 760px) {
+  body.menu-open::before,
+  body.menu-open:before {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+    background: rgba(9, 25, 44, .34) !important;
+  }
+
+  .mobile-dock,
+  .navbar,
+  .dialog-sticky-actions,
+  .hero-search-field,
+  .hero-eyebrow > span:first-child,
+  .hero-location,
+  .category-jump-inner {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Defensive reset: content itself must never inherit/stay blurred. */
+  body:not(.menu-open) main,
+  body:not(.menu-open) main *,
+  body:not(.menu-open) .hero,
+  body:not(.menu-open) .section,
+  body:not(.menu-open) .catalog-tools {
+    filter: none;
+  }
+
+  .motion-ready .hero-content > *:not(.hero-title),
+  .motion-ready .hero-gallery,
+  .motion-entered .hero-content > *,
+  .motion-entered .hero-gallery,
+  .motion-card,
+  .motion-section,
+  .motion-card.motion-in,
+  .motion-section.motion-in {
+    filter: none !important;
+  }
+}
