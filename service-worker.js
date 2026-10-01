@@ -1,15 +1,24 @@
 'use strict';
 
-const CACHE = 'doctor-ecupep-v5';
+const CACHE = 'doctor-ecupep-v6';
 const FALLBACK = './';
 const CORE = [
-  FALLBACK,
+  './',
   './manifest.webmanifest',
+  './site.min.css?v=b842bd161f',
+  './styles-webflow-redesign.css?v=20260930-polish2',
+  './ux-upgrade.css?v=20260930-1',
+  './script-v2.min.js?v=b842bd161f',
+  './ux-upgrade.js?v=20260930-1',
+  './catalog-extras.min.js?v=__ASSET_VERSION__',
+  './catalog-extras.min.css?v=__ASSET_VERSION__',
   './assets/favicon-32.png',
-  './assets/doctor-ecupep-icon-192.png'
+  './assets/doctor-ecupep-logo-ui.webp',
+  './assets/doctor-ecupep-icon-192.png',
+  './assets/doctor-ecupep-icon-512.png'
 ];
 
-async function cacheResponse(request, response) {
+async function putInCache(request, response) {
   if (response && response.ok) {
     const cache = await caches.open(CACHE);
     await cache.put(request, response.clone());
@@ -20,7 +29,7 @@ async function cacheResponse(request, response) {
 async function networkFirst(request, fallbackUrl) {
   try {
     const response = await fetch(request, { cache: 'no-cache' });
-    return await cacheResponse(request, response);
+    return await putInCache(request, response);
   } catch {
     return (await caches.match(request)) ||
       (fallbackUrl ? await caches.match(fallbackUrl) : Response.error());
@@ -31,7 +40,7 @@ async function cacheFirst(request) {
   const cached = await caches.match(request);
   if (cached) return cached;
   try {
-    return await cacheResponse(request, await fetch(request));
+    return await putInCache(request, await fetch(request));
   } catch {
     return Response.error();
   }
@@ -53,6 +62,10 @@ self.addEventListener('activate', event => {
   );
 });
 
+self.addEventListener('message', event => {
+  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('fetch', event => {
   const request = event.request;
   if (request.method !== 'GET') return;
@@ -60,18 +73,18 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  const extensionNeedsFreshness = /\.(?:html|css|js|json|webmanifest)$/i.test(url.pathname);
-  const mutableResource =
-    request.mode === 'navigate' ||
+  const isNavigation = request.mode === 'navigate';
+  const needsFreshness =
+    isNavigation ||
     ['script', 'style', 'manifest', 'document'].includes(request.destination) ||
-    extensionNeedsFreshness;
+    /\.(?:html|css|js|json|webmanifest)$/i.test(url.pathname);
 
-  if (mutableResource) {
-    event.respondWith(networkFirst(request, request.mode === 'navigate' ? FALLBACK : null));
+  if (needsFreshness) {
+    event.respondWith(networkFirst(request, isNavigation ? FALLBACK : null));
     return;
   }
 
-  if (request.destination === 'image') {
+  if (request.destination === 'image' || /\.(?:png|jpg|jpeg|webp|avif|svg)$/i.test(url.pathname)) {
     event.respondWith(cacheFirst(request));
     return;
   }
