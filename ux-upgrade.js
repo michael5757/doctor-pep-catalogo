@@ -304,9 +304,24 @@
 
       try {
         if (navigator.share && location.protocol !== 'file:') {
-          await navigator.share({ title, text, url });
+          const shareData = { title, text, url };
+          if (item?.image && navigator.canShare) {
+            try {
+              const imageUrl = new URL(item.image, location.href);
+              const response = await fetch(imageUrl);
+              if (response.ok) {
+                const blob = await response.blob();
+                const extension = (blob.type.split('/')[1] || 'webp').replace('jpeg', 'jpg');
+                const file = new File([blob], (active?.id || 'doctor-ecupep') + '.' + extension, {
+                  type: blob.type || 'image/webp'
+                });
+                if (navigator.canShare({ files: [file] })) shareData.files = [file];
+              }
+            } catch {}
+          }
+          await navigator.share(shareData);
           shareButton.textContent = 'Compartido ✓';
-          api.track?.('product_share_native', { product_id: active?.id });
+          api.track?.('product_share_native', { item_count: shareData.files?.length || 0 });
         } else {
           await navigator.clipboard.writeText(url);
           shareButton.textContent = 'Enlace copiado ✓';
