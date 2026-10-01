@@ -1,0 +1,391 @@
+/* Doctor Ecupep — UX upgrade layer
+   Complements the original visual system without replacing it. */
+
+/* Category counts */
+.filter-count{
+  display:inline-grid;
+  place-items:center;
+  min-width:22px;
+  height:22px;
+  margin-left:5px;
+  padding:0 6px;
+  border-radius:999px;
+  color:inherit;
+  background:rgba(16,35,63,.055);
+  font-size:.68rem;
+  font-weight:800;
+}
+.filter-chip.is-active .filter-count{
+  background:rgba(255,255,255,.16);
+}
+
+/* Sticky category navigation — desktop/tablet */
+.category-jump-nav{
+  position:sticky;
+  z-index:72;
+  top:92px;
+  width:min(calc(100% - 32px),var(--wf-content));
+  margin:0 auto 18px;
+  pointer-events:none;
+}
+.category-jump-inner{
+  width:max-content;
+  max-width:100%;
+  margin:0 auto;
+  padding:6px;
+  display:flex;
+  gap:5px;
+  overflow-x:auto;
+  border:1px solid rgba(204,216,232,.84);
+  border-radius:999px;
+  background:rgba(255,255,255,.90);
+  box-shadow:0 10px 30px rgba(16,35,63,.08);
+  backdrop-filter:blur(16px) saturate(145%);
+  -webkit-backdrop-filter:blur(16px) saturate(145%);
+  scrollbar-width:none;
+  pointer-events:auto;
+}
+.category-jump-inner::-webkit-scrollbar{display:none}
+.category-jump-inner button{
+  flex:0 0 auto;
+  min-height:38px;
+  padding:7px 11px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border:0;
+  border-radius:999px;
+  color:var(--wf-ink-soft);
+  background:transparent;
+  font:inherit;
+  font-size:.78rem;
+  font-weight:750;
+  cursor:pointer;
+}
+.category-jump-inner button small{
+  min-width:21px;
+  height:21px;
+  padding:0 5px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  color:var(--wf-muted);
+  background:var(--wf-surface-soft);
+  font-size:.64rem;
+  font-weight:800;
+}
+.category-jump-inner button:hover{
+  color:var(--wf-blue);
+  background:var(--wf-surface-blue);
+}
+.category-jump-inner button.is-active{
+  color:#fff;
+  background:linear-gradient(135deg,var(--wf-navy),var(--wf-blue));
+  box-shadow:0 7px 18px rgba(33,88,212,.17);
+}
+.category-jump-inner button.is-active small{
+  color:var(--wf-navy);
+  background:#fff;
+}
+.section.category,
+.catalog-tools{
+  scroll-margin-top:150px;
+}
+
+/* Product fiche */
+.product-dialog .dialog-shell{
+  scrollbar-gutter:stable;
+}
+.dialog-product-photo{
+  position:relative;
+  isolation:isolate;
+}
+.dialog-product-photo::before{
+  content:"";
+  position:absolute;
+  inset:8%;
+  z-index:-1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(45,106,227,.10),rgba(83,199,194,.06) 45%,transparent 70%);
+  filter:blur(5px);
+}
+.dialog-product-photo img{
+  filter:drop-shadow(0 16px 20px rgba(16,35,63,.11));
+}
+.dialog-facts{
+  gap:7px;
+}
+.dialog-facts li{
+  border-radius:12px;
+  background:#f8fbff;
+}
+.presentation-options label,
+.presentation-options button{
+  min-height:44px;
+}
+.dialog-sticky-actions{
+  border-radius:16px;
+}
+.dialog-add{
+  min-height:48px;
+  font-weight:800;
+}
+.dialog-secondary-actions .share-product{
+  min-height:42px;
+  border-radius:11px;
+}
+#shareProduct{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--wf-navy),var(--wf-blue));
+  box-shadow:0 8px 20px rgba(33,88,212,.14);
+}
+
+/* Drawer */
+.consultation-summary-card{
+  margin:12px 0 4px;
+  padding:12px 13px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid rgba(83,199,194,.26);
+  border-radius:14px;
+  background:linear-gradient(135deg,#f1fbfa,#f4f8ff);
+}
+.consultation-summary-card[hidden]{display:none!important}
+.consultation-summary-icon{
+  flex:0 0 auto;
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#087e77;
+  background:rgba(83,199,194,.18);
+  font-weight:900;
+}
+.consultation-summary-card>div{
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+.consultation-summary-card strong{
+  color:var(--wf-ink);
+  font-size:.84rem;
+}
+.consultation-summary-card small{
+  color:var(--wf-muted);
+  font-size:.72rem;
+}
+.consultation-item{
+  border-radius:15px;
+  transition:border-color .18s ease,box-shadow .18s ease;
+}
+.consultation-item:hover{
+  border-color:#cad9e8;
+  box-shadow:0 9px 22px rgba(16,35,63,.05);
+}
+.consultation-thumbnail{
+  box-shadow:inset 0 0 0 1px var(--wf-line);
+}
+.consultation-footer{
+  position:sticky;
+  bottom:0;
+  z-index:2;
+  margin-inline:-1px;
+  padding-top:14px;
+  background:linear-gradient(to top,#fff 82%,rgba(255,255,255,.90),transparent);
+}
+.consultation-whatsapp{
+  min-height:50px;
+  border-radius:14px;
+}
+
+/* Compare */
+.compare-grid{
+  align-items:stretch;
+}
+.compare-item{
+  position:relative;
+  overflow:hidden;
+}
+.compare-item::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:3px;
+  background:linear-gradient(90deg,var(--wf-blue),var(--wf-aqua));
+}
+.compare-item>img{
+  transition:transform .22s ease;
+}
+.compare-item:hover>img{
+  transform:scale(1.025);
+}
+.compare-category{
+  display:inline-flex;
+  align-self:flex-start;
+  padding:4px 7px;
+  border-radius:999px;
+  background:var(--wf-surface-blue);
+}
+
+/* Recent */
+.recent-card{
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.recent-card:hover{
+  box-shadow:0 14px 28px rgba(18,48,84,.08);
+}
+
+/* Image skeletons */
+.product-photo.is-image-loading,
+.dialog-product-photo.is-image-loading{
+  position:relative;
+  overflow:hidden;
+}
+.product-photo.is-image-loading::after,
+.dialog-product-photo.is-image-loading::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:5;
+  background:
+    linear-gradient(100deg,transparent 20%,rgba(255,255,255,.72) 42%,transparent 65%),
+    #eef4fa;
+  background-size:200% 100%,100% 100%;
+  animation:uxSkeleton 1.25s linear infinite;
+  pointer-events:none;
+}
+@keyframes uxSkeleton{
+  to{background-position:-200% 0,0 0}
+}
+
+/* Render optimization */
+@supports (content-visibility:auto){
+  .ux-render-optimized{
+    content-visibility:auto;
+    contain-intrinsic-size:900px;
+  }
+}
+
+/* PWA install */
+.pwa-install-button{
+  margin-top:8px;
+  min-height:42px;
+  padding:8px 12px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:11px;
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  font:inherit;
+  font-size:.76rem;
+  font-weight:750;
+  cursor:pointer;
+}
+.pwa-install-button[hidden]{display:none!important}
+.pwa-install-button:hover{
+  border-color:rgba(83,199,194,.42);
+  background:rgba(83,199,194,.10);
+}
+.pwa-install-button span{
+  color:var(--wf-aqua);
+  font-size:1rem;
+}
+
+/* Better touch behavior */
+.quantity-button,
+.dialog-quantity-stepper button,
+.consultation-edit,
+.consultation-remove{
+  min-width:40px;
+  min-height:40px;
+}
+
+/* Responsive */
+@media(max-width:1080px){
+  .category-jump-nav{
+    top:84px;
+    width:calc(100% - 24px);
+  }
+}
+
+@media(max-width:760px){
+  .category-jump-nav{
+    display:none;
+  }
+  .section.category,
+  .catalog-tools{
+    scroll-margin-top:118px;
+  }
+  .filter-count{
+    min-width:20px;
+    height:20px;
+    font-size:.64rem;
+  }
+  .product-dialog .dialog-shell{
+    padding-bottom:max(14px,env(safe-area-inset-bottom));
+  }
+  .dialog-product-photo{
+    max-height:38dvh;
+  }
+  .dialog-product-photo img{
+    max-height:35dvh;
+  }
+  .dialog-sticky-actions{
+    position:sticky;
+    bottom:0;
+    z-index:8;
+    margin:14px -12px -2px;
+    padding:10px 12px max(10px,env(safe-area-inset-bottom));
+    border:1px solid var(--wf-line);
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(14px);
+    box-shadow:0 -12px 30px rgba(16,35,63,.08);
+  }
+  .consultation-drawer{
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .consultation-footer{
+    padding-bottom:max(10px,env(safe-area-inset-bottom));
+  }
+  .compare-grid{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  .compare-grid::-webkit-scrollbar{display:none}
+  .compare-item{
+    flex:0 0 min(84vw,360px);
+    scroll-snap-align:start;
+  }
+}
+
+@media(max-width:430px){
+  .dialog-secondary-actions{
+    gap:6px;
+  }
+  .dialog-secondary-actions .share-product{
+    font-size:.74rem;
+  }
+  .consultation-summary-card{
+    padding:10px 11px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .product-photo.is-image-loading::after,
+  .dialog-product-photo.is-image-loading::after{
+    animation:none;
+  }
+  .compare-item>img,
+  .consultation-item,
+  .recent-card{
+    transition:none!important;
+  }
+}
