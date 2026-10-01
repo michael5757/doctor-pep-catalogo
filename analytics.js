@@ -97,7 +97,12 @@
     'product_open', 'list_add', 'list_edit', 'list_clear', 'list_open',
     'catalog_search', 'hero_search', 'presentation_filter', 'catalog_sort',
     'category_filter', 'whatsapp_list_click', 'compare_open',
-    'search_suggestion_open', 'recent_product_open'
+    'search_suggestion_open', 'recent_product_open',
+    'product_share_native', 'product_share_copy',
+    'favorite_add', 'favorite_remove', 'favorite_filter',
+    'recent_search_use', 'recent_search_clear',
+    'pwa_install_prompt', 'ios_install_guide_open',
+    'offline_fallback_view'
   ]);
   window.addEventListener('doctorpep:catalog', event => {
     const detail = event.detail || {};
