@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE = 'doctor-ecupep-v7';
+const CACHE = 'doctor-ecupep-v8-blurfix';
 const ROOT = './';
 const OFFLINE = './offline.html';
 const CORE = [
@@ -10,10 +10,10 @@ const CORE = [
   './site.min.css?v=b842bd161f',
   './styles-webflow-redesign.css?v=20260930-polish2',
   './ux-upgrade.css?v=20260930-1',
-  './production-polish.css?v=20260930-1',
+  './production-polish.css?v=20261001-blurfix1',
   './script-v2.min.js?v=b842bd161f',
   './ux-upgrade.js?v=20260930-3',
-  './production-polish.js?v=20260930-1',
+  './production-polish.js?v=20261001-blurfix1',
   './analytics.js?v=20260930-prod1',
   './assets/favicon-32.png',
   './assets/doctor-ecupep-logo-ui.webp',
