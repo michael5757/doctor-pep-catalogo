@@ -1,0 +1,259 @@
+/* Doctor Ecupep — production polish layer */
+
+/* Favorites */
+.product-photo{position:relative}
+.favorite-toggle{
+  position:absolute;
+  z-index:5;
+  top:10px;
+  left:10px;
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(16,35,63,.10);
+  border-radius:50%;
+  color:#536a82;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 7px 18px rgba(16,35,63,.09);
+  backdrop-filter:blur(8px);
+  font:inherit;
+  font-size:1.18rem;
+  cursor:pointer;
+}
+.favorite-toggle:hover{
+  color:#d64269;
+  transform:translateY(-1px);
+}
+.favorite-toggle.is-active{
+  color:#d64269;
+  border-color:rgba(214,66,105,.18);
+  background:#fff3f6;
+}
+.favorite-filter{
+  gap:4px;
+}
+.favorite-filter small{
+  min-width:20px;
+  height:20px;
+  padding:0 5px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:999px;
+  background:rgba(16,35,63,.07);
+  font-size:.66rem;
+  font-weight:800;
+}
+.favorite-filter.is-active small{
+  color:var(--wf-navy);
+  background:#fff;
+}
+.favorite-filter:disabled{
+  opacity:.52;
+  cursor:not-allowed;
+}
+
+/* Recent searches */
+.recent-searches{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.recent-searches[hidden]{display:none!important}
+.recent-searches>span{
+  color:var(--wf-muted);
+  font-size:.72rem;
+  font-weight:700;
+}
+.recent-searches button{
+  min-height:30px;
+  padding:5px 8px;
+  border:1px solid var(--wf-line);
+  border-radius:999px;
+  color:var(--wf-ink-soft);
+  background:#fff;
+  font:inherit;
+  font-size:.7rem;
+  font-weight:650;
+  cursor:pointer;
+}
+.recent-searches button:hover{
+  color:var(--wf-blue);
+  border-color:rgba(45,106,227,.30);
+  background:var(--wf-surface-blue);
+}
+.recent-searches .recent-search-clear{
+  color:var(--wf-muted);
+  border-color:transparent;
+  background:transparent;
+}
+
+/* Drawer wording */
+.consultation-edit{
+  min-width:max-content;
+}
+
+/* iOS install */
+.ios-install-button{
+  margin-top:8px;
+  min-height:42px;
+  padding:8px 12px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:11px;
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  font:inherit;
+  font-size:.76rem;
+  font-weight:750;
+  cursor:pointer;
+}
+.ios-install-button:hover{
+  border-color:rgba(83,199,194,.42);
+  background:rgba(83,199,194,.10);
+}
+.ios-install-button span{
+  color:var(--wf-aqua);
+  font-size:1rem;
+}
+.ios-install-dialog{
+  width:min(460px,calc(100% - 24px));
+  padding:0;
+  border:0;
+  border-radius:24px;
+  background:transparent;
+}
+.ios-install-dialog::backdrop{
+  background:rgba(7,24,48,.50);
+  backdrop-filter:blur(6px);
+}
+.ios-install-shell{
+  position:relative;
+  padding:28px 24px 24px;
+  border:1px solid var(--wf-line);
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 28px 80px rgba(5,23,47,.25);
+}
+.ios-install-shell h2{
+  margin:8px 0 8px;
+  color:var(--wf-ink);
+  font-size:1.45rem;
+  letter-spacing:-.035em;
+}
+.ios-install-shell>p,
+.ios-install-shell>small{
+  color:var(--wf-muted);
+  line-height:1.55;
+}
+.ios-install-icon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  color:var(--wf-blue);
+  background:var(--wf-surface-blue);
+  font-size:1.2rem;
+  font-weight:900;
+}
+.ios-install-shell ol{
+  margin:20px 0;
+  padding:0;
+  display:grid;
+  gap:10px;
+  list-style:none;
+}
+.ios-install-shell li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 12px;
+  border:1px solid var(--wf-line);
+  border-radius:14px;
+  background:#fbfdff;
+}
+.ios-install-shell li strong{
+  flex:0 0 auto;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--wf-navy),var(--wf-blue));
+  font-size:.74rem;
+}
+.ios-install-shell li span{
+  color:var(--wf-ink-soft);
+  font-size:.84rem;
+}
+.ios-install-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+}
+
+/* Compare mobile guidance */
+.compare-mobile-hint{
+  display:none;
+  margin:10px 0 0!important;
+  color:var(--wf-muted)!important;
+  font-size:.75rem!important;
+}
+
+/* Broken image state */
+.image-error-note{
+  min-height:90px;
+  width:100%;
+  display:grid;
+  place-items:center;
+  padding:12px;
+  color:var(--wf-muted);
+  background:linear-gradient(145deg,#f7faff,#edf3f9);
+  font-size:.75rem;
+  font-weight:700;
+  text-align:center;
+}
+
+/* Slightly tighter touch feedback */
+.favorite-toggle,
+.recent-searches button,
+.ios-install-button{
+  transition:transform .18s ease,border-color .18s ease,background-color .18s ease,color .18s ease;
+}
+
+@media(max-width:760px){
+  .favorite-toggle{
+    top:7px;
+    left:7px;
+    width:34px;
+    height:34px;
+    font-size:1.05rem;
+  }
+  .recent-searches{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    padding-bottom:3px;
+    scrollbar-width:none;
+  }
+  .recent-searches::-webkit-scrollbar{display:none}
+  .recent-searches>*{flex:0 0 auto}
+  .compare-mobile-hint{display:block}
+  .consultation-edit{
+    width:100%;
+    justify-content:center;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .favorite-toggle,
+  .recent-searches button,
+  .ios-install-button{
+    transition:none!important;
+  }
+}
